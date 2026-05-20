@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { Candidate, School, SchoolsPayload, StatisticsPayload, SyntheticMapPoint } from "./types";
+import type { AppSummaryPayload, Candidate, School, SchoolsPayload, StatisticsPayload, SyntheticMapPoint } from "./types";
 
 type ViewMode = "overview" | "detail" | "simulation";
 
@@ -52,8 +52,11 @@ async function loadJson<T>(path: string): Promise<T> {
 export default function App() {
   const [schoolsPayload, setSchoolsPayload] = useState<SchoolsPayload | null>(null);
   const [statistics, setStatistics] = useState<StatisticsPayload | null>(null);
+  const [appSummary, setAppSummary] = useState<AppSummaryPayload | null>(null);
   const [selectedCode, setSelectedCode] = useState<string>("");
   const [view, setView] = useState<ViewMode>("overview");
+  const [showCover, setShowCover] = useState(true);
+  const [showGuide, setShowGuide] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedGu, setSelectedGu] = useState("전체");
   const [error, setError] = useState<string | null>(null);
@@ -62,10 +65,12 @@ export default function App() {
     Promise.all([
       loadJson<SchoolsPayload>("./data/schools_anon.json"),
       loadJson<StatisticsPayload>("./data/statistics_anon.json"),
+      loadJson<AppSummaryPayload>("./data/app_summary_anon.json"),
     ])
-      .then(([schools, stats]) => {
+      .then(([schools, stats, summary]) => {
         setSchoolsPayload(schools);
         setStatistics(stats);
+        setAppSummary(summary);
         setSelectedCode(schools.schools[0]?.anon_code ?? "");
       })
       .catch((loadError) => setError(loadError instanceof Error ? loadError.message : "데이터 로딩 실패"));
@@ -95,12 +100,27 @@ export default function App() {
     return <div className="app-error">{error}</div>;
   }
 
-  if (!schoolsPayload || !statistics || !selectedSchool) {
+  if (!schoolsPayload || !statistics || !appSummary || !selectedSchool) {
     return <div className="app-error">비식별 데이터를 불러오는 중입니다.</div>;
   }
 
   return (
     <main className="app-shell">
+      {showCover ? (
+        <IntroCover
+          summary={appSummary}
+          onStart={() => {
+            setShowCover(false);
+            setView("overview");
+          }}
+          onGuide={() => setShowGuide(true)}
+          onReport={() => {
+            setShowCover(false);
+            setView("detail");
+          }}
+        />
+      ) : null}
+      {showGuide ? <GuideModal summary={appSummary} onClose={() => setShowGuide(false)} /> : null}
       <aside className="sidebar">
         <div className="brand-block">
           <p className="eyebrow">Anonymized Submission</p>
@@ -113,6 +133,9 @@ export default function App() {
           <button className={view === "detail" ? "active" : ""} onClick={() => setView("detail")}>상세</button>
           <button className={view === "simulation" ? "active" : ""} onClick={() => setView("simulation")}>시뮬레이션</button>
         </div>
+        <button className="guide-button" type="button" onClick={() => setShowGuide(true)}>
+          앱 요약 보기
+        </button>
 
         <label className="control-label">
           구 선택
@@ -159,6 +182,82 @@ export default function App() {
         )}
       </section>
     </main>
+  );
+}
+
+function IntroCover({
+  summary,
+  onStart,
+  onGuide,
+  onReport,
+}: {
+  summary: AppSummaryPayload;
+  onStart: () => void;
+  onGuide: () => void;
+  onReport: () => void;
+}) {
+  return (
+    <section className="intro-cover" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+      <div className="intro-shell">
+        <div className="intro-main">
+          <p className="cover-kicker">Anonymized Outdoor Equity</p>
+          <h1 id="introTitle">{summary.title}</h1>
+          <p className="cover-statement">{summary.subtitle}</p>
+          <p className="cover-copy">
+            학교명과 실제 좌표를 공개하지 않고, 현재 격차와 미래 수요, 접근 마찰, 후보지 추천을 하나의 판단 흐름으로 연결합니다.
+          </p>
+          <div className="cover-tags" aria-label="핵심 분석 기준">
+            {summary.flow.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+          <div className="cover-actions">
+            <button className="primary" type="button" onClick={onStart}>지도에서 시작하기</button>
+            <button type="button" onClick={onGuide}>정책 흐름 보기</button>
+            <button className="ghost" type="button" onClick={onReport}>학교 진단 보기</button>
+          </div>
+        </div>
+        <div className="intro-visual" aria-label="앱 요약">
+          <div className="visual-map">
+            <span className="node school">학교</span>
+            <span className="node park">A</span>
+            <span className="node candidate">B</span>
+            <span className="node barrier" />
+          </div>
+          <p>도식지도는 실제 지도가 아니라 학교 중심 상대거리만 보여줍니다.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GuideModal({ summary, onClose }: { summary: AppSummaryPayload; onClose: () => void }) {
+  return (
+    <div className="guide-overlay" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+      <section className="guide-dialog">
+        <button className="close-button" type="button" onClick={onClose} aria-label="닫기">×</button>
+        <p className="eyebrow">Policy Flow</p>
+        <h2 id="guideTitle">비식별 정책지원 흐름</h2>
+        <div className="guide-flow">
+          {summary.flow.map((item, index) => (
+            <article key={item}>
+              <span>{index + 1}</span>
+              <strong>{item}</strong>
+            </article>
+          ))}
+        </div>
+        <div className="principle-grid">
+          {summary.principles.map((item) => (
+            <div key={item}>{item}</div>
+          ))}
+        </div>
+        <div className="guide-stats">
+          <Kpi title="분석 학교" value={metricLabel(summary.statistics_summary.school_count, "개교")} />
+          <Kpi title="즉시 개선" value={metricLabel(summary.statistics_summary.urgent_count, "개교")} tone="danger" />
+          <Kpi title="우선 검토" value={metricLabel(summary.statistics_summary.priority_count, "개교")} />
+        </div>
+      </section>
+    </div>
   );
 }
 

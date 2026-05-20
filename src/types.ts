@@ -95,3 +95,12 @@ export type StatisticsPayload = {
     }>;
   }>;
 };
+
+export type AppSummaryPayload = {
+  generated_at: string;
+  title: string;
+  subtitle: string;
+  principles: string[];
+  flow: string[];
+  statistics_summary: StatisticsPayload["summary"];
+};
