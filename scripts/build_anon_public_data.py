@@ -138,17 +138,41 @@ def synthetic_barriers(row: dict[str, Any], anon_code: str) -> list[dict[str, An
     return barriers
 
 
-def abstract_index_position(anon_code: str, gu: str) -> dict[str, float]:
-    district_order = ["강화군", "계양구", "남동구", "동구", "미추홀구", "부평구", "서구", "연수구", "옹진군", "중구"]
-    district_index = district_order.index(gu) if gu in district_order else len(district_order)
-    col = district_index % 5
-    row = district_index // 5
-    jitter_x = (deterministic_unit(anon_code, "index-x") - 0.5) * 130
-    jitter_y = (deterministic_unit(anon_code, "index-y") - 0.5) * 130
-    return {
-        "x": round(col * 220 + jitter_x, 1),
-        "y": round(row * 220 + jitter_y, 1),
-    }
+def global_relative_index_positions(rows: list[dict[str, Any]]) -> dict[str, dict[str, float]]:
+    valid_rows = [
+        row
+        for row in rows
+        if math.isfinite(row["lat"]) and math.isfinite(row["lng"])
+    ]
+    if not valid_rows:
+        return {}
+
+    center_lat = sum(row["lat"] for row in valid_rows) / len(valid_rows)
+    center_lng = sum(row["lng"] for row in valid_rows) / len(valid_rows)
+    angle = math.radians(31.0)
+    transformed = []
+    for row in valid_rows:
+        x, y = local_xy_m(center_lat, center_lng, row["lat"], row["lng"])
+        xr = -(x * math.cos(angle) - y * math.sin(angle))
+        yr = x * math.sin(angle) + y * math.cos(angle)
+        transformed.append((row["anon_code"], xr, yr))
+
+    min_x = min(x for _, x, _ in transformed)
+    max_x = max(x for _, x, _ in transformed)
+    min_y = min(y for _, _, y in transformed)
+    max_y = max(y for _, _, y in transformed)
+    mid_x = (min_x + max_x) / 2
+    mid_y = (min_y + max_y) / 2
+    scale = max((max_x - min_x) / 700, (max_y - min_y) / 460, 1.0)
+    positions: dict[str, dict[str, float]] = {}
+    for anon_code, x, y in transformed:
+        jitter_x = (deterministic_unit(anon_code, "global-index-x") - 0.5) * 12
+        jitter_y = (deterministic_unit(anon_code, "global-index-y") - 0.5) * 12
+        positions[anon_code] = {
+            "x": round(min(760, max(40, 400 + (x - mid_x) / scale + jitter_x)), 1),
+            "y": round(min(500, max(40, 270 - (y - mid_y) / scale + jitter_y)), 1),
+        }
+    return positions
 
 
 def anon_label(index: int, prefix: str) -> str:
@@ -312,7 +336,7 @@ def route_meta(candidate_routes: dict[str, Any], sid: str, grid_id: str) -> dict
     }
 
 
-def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, dict[str, float]]]:
     by_id, by_name = load_anon_mapping()
     priority_rows = read_csv(DATA_DIR / "school_priority_with_functional_park_layer.csv")
     coord_rows = read_csv(DATA_DIR / "schools.csv")
@@ -332,6 +356,7 @@ def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any]]:
     candidates_by_school = load_candidate_features(by_name)
 
     schools: list[dict[str, Any]] = []
+    global_coord_rows: list[dict[str, Any]] = []
     for priority in priority_rows:
         sid = school_id(priority)
         mapping = by_id.get(sid)
@@ -343,6 +368,7 @@ def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any]]:
         lng = n(coords.get("경도"), float("nan"))
         if not math.isfinite(lat) or not math.isfinite(lng):
             continue
+        global_coord_rows.append({"anon_code": anon_code, "lat": lat, "lng": lng})
 
         forecast = forecast_by_id.get(sid, {})
         similar = similar_by_id.get(sid, {})
@@ -465,6 +491,7 @@ def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any]]:
         schools.append(school_payload)
 
     schools.sort(key=lambda item: (item["gu"], item["short_label"]))
+    map_positions = global_relative_index_positions(global_coord_rows)
 
     by_gu: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for item in schools:
@@ -501,10 +528,14 @@ def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any]]:
         ],
     }
 
-    return schools, statistics
+    return schools, statistics, map_positions
 
 
-def build_split_payloads(schools: list[dict[str, Any]], statistics: dict[str, Any]) -> dict[str, Any]:
+def build_split_payloads(
+    schools: list[dict[str, Any]],
+    statistics: dict[str, Any],
+    map_positions: dict[str, dict[str, float]],
+) -> dict[str, Any]:
     map_index = {
         "schools": [
             {
@@ -514,7 +545,7 @@ def build_split_payloads(schools: list[dict[str, Any]], statistics: dict[str, An
                 "gu": school["gu"],
                 "case_type": school["case_type"],
                 "case_policy_label": school["case_policy_label"],
-                **abstract_index_position(school["anon_code"], school["gu"]),
+                **map_positions.get(school["anon_code"], {"x": 400.0, "y": 270.0}),
             }
             for school in schools
         ]
@@ -600,12 +631,12 @@ def main() -> None:
         if not path.exists():
             raise SystemExit(f"Missing local input: {path}")
 
-    schools, statistics = build_school_payloads()
+    schools, statistics, map_positions = build_school_payloads()
     generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
 
     write_json(OUT_DIR / "schools_anon.json", {"generated_at": generated_at, "schools": schools})
     write_json(OUT_DIR / "statistics_anon.json", {"generated_at": generated_at, **statistics})
-    split_payloads = build_split_payloads(schools, statistics)
+    split_payloads = build_split_payloads(schools, statistics, map_positions)
     for file_name, payload in split_payloads.items():
         write_json(OUT_DIR / file_name, {"generated_at": generated_at, **payload})
     files = ["schools_anon.json", "statistics_anon.json", *sorted(split_payloads)]

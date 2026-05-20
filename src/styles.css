@@ -366,7 +366,7 @@ button {
 
 .map-surface {
   display: grid;
-  grid-template-rows: auto minmax(360px, 1fr) auto;
+  grid-template-rows: auto auto minmax(360px, 1fr) auto;
   gap: 14px;
   padding: 18px;
 }
@@ -418,6 +418,14 @@ button {
   width: 100%;
   min-height: 420px;
   border-radius: 14px;
+}
+
+.map-note {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.6;
 }
 
 .city-point {
