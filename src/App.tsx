@@ -201,7 +201,7 @@ export default function App() {
         ) : view === "simulation" ? (
           <Simulation school={selectedSchool} />
         ) : (
-          <Detail school={selectedSchool} />
+          <Detail school={selectedSchool} onOpenSimulation={() => setView("simulation")} />
         )}
       </section>
     </main>
@@ -484,8 +484,15 @@ function Overview({ statistics, onSelect }: { statistics: StatisticsPayload; onS
   );
 }
 
-function Detail({ school }: { school: School }) {
+function Detail({ school, onOpenSimulation }: { school: School; onOpenSimulation: () => void }) {
   const metrics = school.metrics;
+  const barrierCount = school.synthetic_map.barriers.length;
+  const candidateCount = school.candidates.length;
+  const latestTrend = school.trend[school.trend.length - 1]?.students ?? metrics.current_students_2025;
+  const firstTrend = school.trend[0]?.students ?? latestTrend;
+  const trendDelta = latestTrend - firstTrend;
+  const topCandidate = [...school.candidates].sort((left, right) => getCandidateScore(right) - getCandidateScore(left))[0];
+
   return (
     <div className="page-grid">
       <section className="hero-band compact">
@@ -502,6 +509,52 @@ function Detail({ school }: { school: School }) {
         <Kpi title="녹지 비율" value={`${formatDecimal(metrics.green_ratio)}%`} />
         <Kpi title="도보권 놀이터" value={metricLabel(metrics.playground_count_500m, "개")} />
         <Kpi title="2029 잠재 수요" value={metricLabel(metrics.potential_demand_2029, "명")} />
+      </section>
+
+      <section className="report-grid">
+        <article className="report-card danger-line">
+          <p className="eyebrow">Current Gap</p>
+          <h3>현재 생활권 격차</h3>
+          <div className="report-metric-list">
+            <MetricLine label="최근접 공원" value={`${formatDecimal(metrics.nearest_park_dist_m)}m`} alert={metrics.nearest_park_dist_m >= 500} />
+            <MetricLine label="공식 공원 수" value={`${metrics.official_park_count_500m}개`} alert={metrics.official_park_count_500m === 0} />
+            <MetricLine label="활동규모 공원 수" value={`${metrics.functional_park_count_500m}개`} alert={metrics.functional_park_count_500m === 0} />
+            <MetricLine label="도보권 놀이터" value={`${metrics.playground_count_500m}개`} alert={metrics.playground_count_500m === 0} />
+          </div>
+        </article>
+
+        <article className="report-card blue-line">
+          <p className="eyebrow">Future Demand</p>
+          <h3>미래 수요 신호</h3>
+          <div className="demand-compare">
+            <div>
+              <span>현재</span>
+              <strong>{formatNumber(metrics.current_students_2025)}명</strong>
+            </div>
+            <div>
+              <span>2029</span>
+              <strong>{formatNumber(metrics.potential_demand_2029)}명</strong>
+            </div>
+            <div>
+              <span>2031</span>
+              <strong>{formatNumber(metrics.potential_demand_2031)}명</strong>
+            </div>
+          </div>
+          <p className="report-note">
+            최근 추세 변화는 {trendDelta >= 0 ? "+" : ""}{formatNumber(trendDelta)}명이며, 현재 부족 지표와 미래 잠재 수요를 함께 검토합니다.
+          </p>
+        </article>
+
+        <article className="report-card orange-line">
+          <p className="eyebrow">Access Friction</p>
+          <h3>접근 마찰과 단절요소</h3>
+          <div className="report-metric-list">
+            <MetricLine label="도식 단절요소" value={`${barrierCount}개`} alert={barrierCount > 0} />
+            <MetricLine label="추천 후보지" value={`${candidateCount}곳`} alert={candidateCount === 0} />
+            <MetricLine label="상위 후보" value={topCandidate ? topCandidate.label : "없음"} alert={!topCandidate} />
+            <MetricLine label="상위 후보 경로" value={topCandidate ? `${formatDecimal(topCandidate.route_length_m)}m` : "-"} />
+          </div>
+        </article>
       </section>
 
       <section className="two-column">
@@ -523,10 +576,42 @@ function Detail({ school }: { school: School }) {
         </article>
       </section>
 
-      <section className="panel-card">
-        <h3>학생 수 추세</h3>
-        <TrendBar trend={school.trend} />
+      <section className="two-column">
+        <article className="panel-card">
+          <h3>학생 수 추세</h3>
+          <TrendBar trend={school.trend} />
+        </article>
+        <article className="panel-card policy-card">
+          <p className="eyebrow">Policy Interpretation</p>
+          <h3>정책 판단 흐름</h3>
+          <div className="policy-flow">
+            <div>
+              <strong>1. 현재 격차</strong>
+              <span>공원 거리, 녹지, 놀이터를 분리해 부족 요인을 확인합니다.</span>
+            </div>
+            <div>
+              <strong>2. 미래 수요</strong>
+              <span>현재 학생 수와 2029/2031 잠재 수요가 함께 높은지 확인합니다.</span>
+            </div>
+            <div>
+              <strong>3. 접근 마찰</strong>
+              <span>단절요소와 후보지 경로 부담을 현장 검토 전 보조 신호로 사용합니다.</span>
+            </div>
+          </div>
+          <button className="primary-action" type="button" onClick={onOpenSimulation}>
+            후보지 시뮬레이션 열기
+          </button>
+        </article>
       </section>
+    </div>
+  );
+}
+
+function MetricLine({ label, value, alert = false }: { label: string; value: string; alert?: boolean }) {
+  return (
+    <div className={alert ? "metric-line alert" : "metric-line"}>
+      <span>{label}</span>
+      <strong>{value}</strong>
     </div>
   );
 }

@@ -248,6 +248,101 @@ button {
   gap: 16px;
 }
 
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.report-card {
+  border: 1px solid #dbe4ef;
+  border-left: 4px solid #64748b;
+  border-radius: 14px;
+  padding: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+}
+
+.report-card h3 {
+  margin: 6px 0 14px;
+  font-size: 22px;
+}
+
+.danger-line {
+  border-left-color: #dc2626;
+}
+
+.blue-line {
+  border-left-color: #2563eb;
+}
+
+.orange-line {
+  border-left-color: #f97316;
+}
+
+.report-metric-list,
+.policy-flow {
+  display: grid;
+  gap: 10px;
+}
+
+.metric-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: #f8fafc;
+}
+
+.metric-line span {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.metric-line strong {
+  color: #0f172a;
+}
+
+.metric-line.alert strong {
+  color: #dc2626;
+}
+
+.demand-compare {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.demand-compare div {
+  border-radius: 12px;
+  padding: 12px;
+  background: #eff6ff;
+}
+
+.demand-compare span {
+  display: block;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.demand-compare strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 22px;
+  color: #0f172a;
+}
+
+.report-note {
+  margin: 14px 0 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
 .map-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(360px, 0.46fr);
@@ -477,6 +572,40 @@ button {
   border-radius: 12px;
   padding: 12px;
   background: #f8fafc;
+}
+
+.policy-card {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.policy-flow div {
+  border-radius: 12px;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.policy-flow strong,
+.policy-flow span {
+  display: block;
+}
+
+.policy-flow span {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.primary-action {
+  min-height: 44px;
+  border: 0;
+  border-radius: 12px;
+  padding: 11px 14px;
+  background: #0f172a;
+  color: #fff;
+  font-weight: 900;
 }
 
 .trend-bars {
@@ -844,6 +973,7 @@ button {
   }
 
   .kpi-grid,
+  .report-grid,
   .two-column,
   .map-layout {
     grid-template-columns: 1fr;
