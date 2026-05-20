@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { AppSummaryPayload, Candidate, MapIndexPayload, School, SchoolsPayload, StatisticsPayload, SyntheticMapPoint } from "./types";
 
 type ViewMode = "map" | "statistics" | "detail" | "simulation";
+type SimulationMode = "ai" | "manual";
 type LayerState = {
   radius: boolean;
   walk: boolean;
@@ -10,6 +11,29 @@ type LayerState = {
   redevelopment: boolean;
   apartments: boolean;
   barriers: boolean;
+};
+
+type SimulationFilters = {
+  excludePrimary: boolean;
+  excludeSecondary: boolean;
+  excludeTertiary: boolean;
+  excludeRedev: boolean;
+  excludeLowFeasibility: boolean;
+};
+
+type SimulationWeights = {
+  benefit: number;
+  route: number;
+  parkGap: number;
+};
+
+type SimulationWeightToggles = Record<keyof SimulationWeights, boolean>;
+
+type ScoredCandidate = Candidate & {
+  final_score: number;
+  benefit_score: number;
+  route_score: number;
+  park_gap_score: number;
 };
 
 const CASE_COLORS: Record<number, string> = {
@@ -48,6 +72,148 @@ function getCandidateScore(candidate: Candidate) {
   const route = candidate.route_length_m || 9999;
   const gap = candidate.nearest_park_dist_m || 0;
   return demand * 1.3 + gap * 0.22 - route * 0.5;
+}
+
+const DEFAULT_SIMULATION_FILTERS: SimulationFilters = {
+  excludePrimary: false,
+  excludeSecondary: false,
+  excludeTertiary: false,
+  excludeRedev: false,
+  excludeLowFeasibility: false,
+};
+
+const AI_SIMULATION_FILTERS: SimulationFilters = {
+  excludePrimary: true,
+  excludeSecondary: true,
+  excludeTertiary: false,
+  excludeRedev: false,
+  excludeLowFeasibility: false,
+};
+
+const DEFAULT_SIMULATION_WEIGHTS: SimulationWeights = {
+  benefit: 45,
+  route: 30,
+  parkGap: 25,
+};
+
+const AI_SIMULATION_WEIGHTS: SimulationWeights = {
+  benefit: 20,
+  route: 70,
+  parkGap: 10,
+};
+
+const DEFAULT_WEIGHT_TOGGLES: SimulationWeightToggles = {
+  benefit: true,
+  route: true,
+  parkGap: true,
+};
+
+const FILTER_OPTIONS: Array<{ key: keyof SimulationFilters; title: string; description: string }> = [
+  { key: "excludePrimary", title: "도시 대로 횡단 제외", description: "후보 경로의 주 단절요소가 1회 이상이면 제외" },
+  { key: "excludeSecondary", title: "중간급 도로 횡단 제외", description: "중간급 단절요소가 있는 후보 제외" },
+  { key: "excludeTertiary", title: "일반 도로 횡단 제외", description: "일반 단절요소까지 보수적으로 제외" },
+  { key: "excludeRedev", title: "재개발 영향권 제외", description: "재개발 영향 신호가 있는 후보 제외" },
+  { key: "excludeLowFeasibility", title: "낮은 실행가능성 제외", description: "토지 실행가능성 low 후보 제외" },
+];
+
+const WEIGHT_OPTIONS: Array<{ key: keyof SimulationWeights; title: string; description: string }> = [
+  { key: "benefit", title: "잠재수혜학생수", description: "후보 도보권의 2029 수요가 높을수록 가점" },
+  { key: "route", title: "학교 접근성", description: "학교에서 후보지까지 경로가 짧을수록 가점" },
+  { key: "parkGap", title: "기존 공원 공백", description: "기존 공원과 멀수록 신규 공급 필요성 가점" },
+];
+
+function minmaxScore(values: number[], reverse = false) {
+  if (!values.length) return [];
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  if (max === min) return values.map(() => 1);
+  return values.map((value) => {
+    const normalized = (value - min) / (max - min);
+    return reverse ? 1 - normalized : normalized;
+  });
+}
+
+function normalizeSimulationWeights(weights: SimulationWeights): SimulationWeights {
+  const total = weights.benefit + weights.route + weights.parkGap;
+  if (total <= 0) {
+    return { benefit: 1 / 3, route: 1 / 3, parkGap: 1 / 3 };
+  }
+  return {
+    benefit: weights.benefit / total,
+    route: weights.route / total,
+    parkGap: weights.parkGap / total,
+  };
+}
+
+function applyWeightToggles(weights: SimulationWeights, toggles: SimulationWeightToggles): SimulationWeights {
+  return {
+    benefit: toggles.benefit ? weights.benefit : 0,
+    route: toggles.route ? weights.route : 0,
+    parkGap: toggles.parkGap ? weights.parkGap : 0,
+  };
+}
+
+function passesSimulationFilters(candidate: Candidate, filters: SimulationFilters) {
+  if (filters.excludePrimary && candidate.barrier_counts.primary > 0) return false;
+  if (filters.excludeSecondary && candidate.barrier_counts.secondary > 0) return false;
+  if (filters.excludeTertiary && candidate.barrier_counts.tertiary > 0) return false;
+  if (filters.excludeRedev && candidate.redev_flag) return false;
+  if (filters.excludeLowFeasibility && candidate.land_feasibility_level === "low") return false;
+  return true;
+}
+
+function scoreCandidates(candidates: Candidate[], weights: SimulationWeights): ScoredCandidate[] {
+  if (!candidates.length) return [];
+  const normalizedWeights = normalizeSimulationWeights(weights);
+  const benefitScores = minmaxScore(candidates.map((candidate) => candidate.walkshed_beneficiary_2029));
+  const validRouteValues = candidates.map((candidate) => candidate.route_length_m).filter((value) => value > 0);
+  const routeMin = validRouteValues.length ? Math.min(...validRouteValues) : 0;
+  const routeMax = validRouteValues.length ? Math.max(...validRouteValues) : 0;
+  const routeScores = candidates.map((candidate) => {
+    if (candidate.route_length_m <= 0 || !validRouteValues.length) return 0;
+    if (routeMax === routeMin) return 1;
+    return 1 - ((candidate.route_length_m - routeMin) / (routeMax - routeMin));
+  });
+  const parkGapScores = minmaxScore(candidates.map((candidate) => candidate.nearest_park_dist_m));
+
+  return candidates
+    .map((candidate, index) => {
+      const finalScore =
+        benefitScores[index] * normalizedWeights.benefit +
+        routeScores[index] * normalizedWeights.route +
+        parkGapScores[index] * normalizedWeights.parkGap;
+      return {
+        ...candidate,
+        benefit_score: benefitScores[index],
+        route_score: routeScores[index],
+        park_gap_score: parkGapScores[index],
+        final_score: finalScore,
+      };
+    })
+    .sort((left, right) => right.final_score - left.final_score);
+}
+
+function buildFilterSummary(filters: SimulationFilters) {
+  return FILTER_OPTIONS.filter((option) => filters[option.key]).map((option) => option.title);
+}
+
+function buildCandidateReasons(candidate: ScoredCandidate) {
+  const reasons: string[] = [];
+  if (candidate.benefit_score >= 0.65) reasons.push("수요 규모 우수");
+  if (candidate.route_score >= 0.65) reasons.push("학교 접근성 우수");
+  if (candidate.park_gap_score >= 0.65) reasons.push("기존 공원 공백 큼");
+  if (candidate.barrier_counts.primary > 0 || candidate.barrier_counts.secondary > 0) reasons.push("주요 단절요소 검토 필요");
+  if (candidate.redev_flag) reasons.push("재개발 영향권 현장 확인 필요");
+  return reasons.length ? reasons.slice(0, 3) : ["복합 조건 균형"];
+}
+
+function formatScore(value: number) {
+  return `${Math.round(value * 100)}점`;
+}
+
+function formatDistance(value: number) {
+  if (!Number.isFinite(value) || value <= 0 || value >= 9999) return "정보 없음";
+  return `${formatDecimal(value)}m`;
 }
 
 async function loadJson<T>(path: string): Promise<T> {
@@ -617,7 +783,57 @@ function MetricLine({ label, value, alert = false }: { label: string; value: str
 }
 
 function Simulation({ school }: { school: School }) {
-  const ranked = [...school.candidates].sort((left, right) => getCandidateScore(right) - getCandidateScore(left));
+  const [mode, setMode] = useState<SimulationMode>("manual");
+  const [filters, setFilters] = useState<SimulationFilters>(DEFAULT_SIMULATION_FILTERS);
+  const [weights, setWeights] = useState<SimulationWeights>(DEFAULT_SIMULATION_WEIGHTS);
+  const [weightToggles, setWeightToggles] = useState<SimulationWeightToggles>(DEFAULT_WEIGHT_TOGGLES);
+  const [selectedLabel, setSelectedLabel] = useState<string>("");
+  const effectiveWeights = applyWeightToggles(weights, weightToggles);
+  const filteredCandidates = school.candidates.filter((candidate) => passesSimulationFilters(candidate, filters));
+  const rankedCandidates = scoreCandidates(filteredCandidates, effectiveWeights);
+  const aiCandidates = scoreCandidates(
+    school.candidates.filter((candidate) => passesSimulationFilters(candidate, AI_SIMULATION_FILTERS)),
+    AI_SIMULATION_WEIGHTS,
+  ).slice(0, 3);
+  const displayedCandidates = mode === "ai" ? aiCandidates : rankedCandidates;
+  const selectedCandidate = displayedCandidates.find((candidate) => candidate.label === selectedLabel) ?? displayedCandidates[0] ?? null;
+  const normalizedWeights = normalizeSimulationWeights(effectiveWeights);
+  const activeFilterSummary = buildFilterSummary(mode === "ai" ? AI_SIMULATION_FILTERS : filters);
+
+  const setFilter = (key: keyof SimulationFilters, value: boolean) => {
+    setFilters((current) => ({ ...current, [key]: value }));
+    setMode("manual");
+    setSelectedLabel("");
+  };
+
+  const setWeight = (key: keyof SimulationWeights, value: number) => {
+    setWeights((current) => ({ ...current, [key]: value }));
+    setMode("manual");
+    setSelectedLabel("");
+  };
+
+  const setWeightToggle = (key: keyof SimulationWeights, value: boolean) => {
+    setWeightToggles((current) => ({ ...current, [key]: value }));
+    setMode("manual");
+    setSelectedLabel("");
+  };
+
+  const applyAiMode = () => {
+    setMode("ai");
+    setFilters(AI_SIMULATION_FILTERS);
+    setWeights(AI_SIMULATION_WEIGHTS);
+    setWeightToggles(DEFAULT_WEIGHT_TOGGLES);
+    setSelectedLabel("");
+  };
+
+  const applyManualMode = () => {
+    setMode("manual");
+    setFilters(DEFAULT_SIMULATION_FILTERS);
+    setWeights(DEFAULT_SIMULATION_WEIGHTS);
+    setWeightToggles(DEFAULT_WEIGHT_TOGGLES);
+    setSelectedLabel("");
+  };
+
   return (
     <div className="page-grid">
       <section className="hero-band compact">
@@ -626,25 +842,130 @@ function Simulation({ school }: { school: School }) {
         <p>후보지는 실제 좌표 대신 학교 중심 상대거리와 보행 부담만 표시합니다.</p>
       </section>
 
-      <section className="two-column">
+      <section className="simulation-grid">
+        <article className="panel-card simulation-controls">
+          <div className="mode-toggle" role="group" aria-label="시뮬레이션 모드">
+            <button className={mode === "ai" ? "active" : ""} type="button" onClick={applyAiMode}>AI 추천</button>
+            <button className={mode === "manual" ? "active" : ""} type="button" onClick={applyManualMode}>직접 설정</button>
+          </div>
+          <div className="simulation-note">
+            <strong>{mode === "ai" ? "AI 추천 기준" : "직접 설정 기준"}</strong>
+            <span>{activeFilterSummary.length ? activeFilterSummary.join(" · ") : "제외 조건 없음"} · 가중치 {Math.round(normalizedWeights.benefit * 100)}/{Math.round(normalizedWeights.route * 100)}/{Math.round(normalizedWeights.parkGap * 100)}</span>
+          </div>
+
+          <div className="control-section">
+            <h3>제외 조건</h3>
+            <div className="filter-list">
+              {FILTER_OPTIONS.map((option) => (
+                <label key={option.key} className="filter-option">
+                  <input
+                    type="checkbox"
+                    checked={filters[option.key]}
+                    onChange={(event) => setFilter(option.key, event.target.checked)}
+                  />
+                  <span>
+                    <strong>{option.title}</strong>
+                    <small>{option.description}</small>
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className="control-section">
+            <h3>가중치</h3>
+            <div className="weight-list">
+              {WEIGHT_OPTIONS.map((option) => (
+                <div key={option.key} className="weight-option">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={weightToggles[option.key]}
+                      onChange={(event) => setWeightToggle(option.key, event.target.checked)}
+                    />
+                    <span>{option.title}</span>
+                    <strong>{weights[option.key]}</strong>
+                  </label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={weights[option.key]}
+                    disabled={!weightToggles[option.key]}
+                    onChange={(event) => setWeight(option.key, Number(event.target.value))}
+                    aria-label={option.title}
+                  />
+                  <small>{option.description}</small>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+
         <article className="panel-card">
           <h3>후보지 도식지도</h3>
-          <SyntheticMap mapData={school.synthetic_map} highlightCandidates />
+          <SyntheticMap mapData={school.synthetic_map} highlightCandidates selectedCandidateLabel={selectedCandidate?.label} />
         </article>
+      </section>
+
+      <section className="simulation-grid">
         <article className="panel-card">
-          <h3>추천 후보</h3>
+          <div className="panel-title-row">
+            <h3>{mode === "ai" ? "AI 추천 후보" : "후보 순위"}</h3>
+            <span>{displayedCandidates.length}/{school.candidates.length}곳 표시</span>
+          </div>
           <div className="candidate-list">
-            {ranked.length ? ranked.slice(0, 5).map((candidate, index) => (
-              <div className="candidate-card" key={candidate.label}>
+            {displayedCandidates.length ? displayedCandidates.slice(0, 6).map((candidate, index) => (
+              <button
+                className={selectedCandidate?.label === candidate.label ? "candidate-card selected" : "candidate-card"}
+                key={candidate.label}
+                type="button"
+                onClick={() => setSelectedLabel(candidate.label)}
+              >
                 <div className="rank-badge">{index + 1}</div>
                 <div>
-                  <strong>{candidate.label}</strong>
-                  <p>2029 잠재수혜 {formatNumber(candidate.walkshed_beneficiary_2029)}명 · 경로 {formatDecimal(candidate.route_length_m)}m</p>
-                  <small>{candidate.barrier_label} · 기존 공원 {formatDecimal(candidate.nearest_park_dist_m)}m</small>
+                  <div className="candidate-heading">
+                    <strong>{candidate.label}</strong>
+                    <span>{formatScore(candidate.final_score)}</span>
+                  </div>
+                  <p>2029 잠재수혜 {formatNumber(candidate.walkshed_beneficiary_2029)}명 · 경로 {formatDistance(candidate.route_length_m)}</p>
+                  <small>단절요소 {candidate.barrier_label} · 기존 공원 {formatDistance(candidate.nearest_park_dist_m)}</small>
+                  <div className="score-pills">
+                    <span>수요 {formatScore(candidate.benefit_score)}</span>
+                    <span>접근 {formatScore(candidate.route_score)}</span>
+                    <span>공백 {formatScore(candidate.park_gap_score)}</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             )) : <p className="note">표시 가능한 비식별 후보지가 없습니다.</p>}
           </div>
+        </article>
+
+        <article className="panel-card candidate-detail">
+          <h3>후보 상세</h3>
+          {selectedCandidate ? (
+            <>
+              <div className="detail-head">
+                <span>{selectedCandidate.label}</span>
+                <strong>{formatScore(selectedCandidate.final_score)}</strong>
+              </div>
+              <div className="detail-metrics">
+                <MetricLine label="2029 잠재수혜" value={`${formatNumber(selectedCandidate.walkshed_beneficiary_2029)}명`} />
+                <MetricLine label="2031 잠재수혜" value={`${formatNumber(selectedCandidate.walkshed_beneficiary_2031)}명`} />
+                <MetricLine label="학교 경로거리" value={formatDistance(selectedCandidate.route_length_m)} alert={selectedCandidate.route_score < 0.35} />
+                <MetricLine label="기존 공원 거리" value={formatDistance(selectedCandidate.nearest_park_dist_m)} />
+                <MetricLine label="놀이터 거리" value={formatDistance(selectedCandidate.nearest_playground_dist_m)} />
+                <MetricLine label="실행가능성" value={selectedCandidate.land_feasibility_level} alert={selectedCandidate.land_feasibility_level === "low"} />
+                <MetricLine label="단절요소" value={`주 ${selectedCandidate.barrier_counts.primary} · 중 ${selectedCandidate.barrier_counts.secondary} · 일반 ${selectedCandidate.barrier_counts.tertiary}`} alert={selectedCandidate.barrier_counts.primary + selectedCandidate.barrier_counts.secondary > 0} />
+                <MetricLine label="재개발 영향" value={selectedCandidate.redev_flag ? "있음" : "없음"} alert={selectedCandidate.redev_flag} />
+              </div>
+              <div className="reason-list">
+                {buildCandidateReasons(selectedCandidate).map((reason) => <span key={reason}>{reason}</span>)}
+              </div>
+            </>
+          ) : (
+            <p className="note">후보를 선택하면 수요, 학교 거리, 기존 공원 거리, 단절요소 요약을 표시합니다.</p>
+          )}
         </article>
       </section>
     </div>
@@ -663,6 +984,7 @@ function Kpi({ title, value, tone = "default" }: { title: string; value: string;
 function SyntheticMap({
   mapData,
   highlightCandidates = false,
+  selectedCandidateLabel,
   layers = {
     radius: true,
     walk: true,
@@ -675,6 +997,7 @@ function SyntheticMap({
 }: {
   mapData: School["synthetic_map"];
   highlightCandidates?: boolean;
+  selectedCandidateLabel?: string;
   layers?: LayerState;
 }) {
   const points = mapData.points.filter((point) => {
@@ -723,9 +1046,9 @@ function SyntheticMap({
             y1="300"
             x2={toSvg(point.x_m)}
             y2={toSvg(-point.y_m)}
-            stroke="#94a3b8"
-            strokeWidth="3"
-            strokeDasharray="8 8"
+            stroke={point.label === selectedCandidateLabel ? "#1d4ed8" : "#94a3b8"}
+            strokeWidth={point.label === selectedCandidateLabel ? "5" : "3"}
+            strokeDasharray={point.label === selectedCandidateLabel ? "0" : "8 8"}
           />
         ))}
         {points.map((point) => {
@@ -735,7 +1058,13 @@ function SyntheticMap({
           const isSchool = point.kind === "school";
           return (
             <g key={`${point.kind}-${point.label}`} transform={`translate(${x} ${y})`}>
-              <circle r={isSchool ? 18 : 13} fill={color} opacity={point.kind === "redevelopment" ? 0.82 : 1} />
+              <circle
+                r={point.label === selectedCandidateLabel ? 18 : isSchool ? 18 : 13}
+                fill={color}
+                opacity={point.kind === "redevelopment" ? 0.82 : 1}
+                stroke={point.label === selectedCandidateLabel ? "#f8fafc" : "none"}
+                strokeWidth={point.label === selectedCandidateLabel ? 4 : 0}
+              />
               <text y={isSchool ? 5 : 4} textAnchor="middle" fill="#fff" fontSize={isSchool ? 10 : 8} fontWeight="800">
                 {isSchool ? "학교" : point.label.replace(/^(후보지|공원|단지|구역) /, "")}
               </text>
