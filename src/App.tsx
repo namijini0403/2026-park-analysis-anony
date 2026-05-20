@@ -440,7 +440,7 @@ function MapWorkspace({
           </div>
         </div>
         <p className="map-note">
-          전체 지도 점 위치는 실제 좌표가 아니라 학교 간 전체 상대거리 구조를 회전·반전·정규화한 비식별 화면 좌표입니다.
+          전체 지도 점 위치는 원본 좌표의 전체 방향감과 상대 배치를 유지하되, 정확한 지점은 변위 처리한 비식별 화면 좌표입니다.
         </p>
         <AbstractCityMap rows={rows} selectedCode={selectedSchool.anon_code} onSelect={onSelect} />
         <div className="layer-controls">

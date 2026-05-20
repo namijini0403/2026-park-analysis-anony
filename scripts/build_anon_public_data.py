@@ -149,13 +149,14 @@ def global_relative_index_positions(rows: list[dict[str, Any]]) -> dict[str, dic
 
     center_lat = sum(row["lat"] for row in valid_rows) / len(valid_rows)
     center_lng = sum(row["lng"] for row in valid_rows) / len(valid_rows)
-    angle = math.radians(31.0)
     transformed = []
     for row in valid_rows:
         x, y = local_xy_m(center_lat, center_lng, row["lat"], row["lng"])
-        xr = -(x * math.cos(angle) - y * math.sin(angle))
-        yr = x * math.sin(angle) + y * math.cos(angle)
-        transformed.append((row["anon_code"], xr, yr))
+        mask_angle = deterministic_unit(row["anon_code"], "public-map-mask-angle") * math.pi * 2
+        mask_distance = 650 + deterministic_unit(row["anon_code"], "public-map-mask-distance") * 600
+        masked_x = x + math.cos(mask_angle) * mask_distance
+        masked_y = y + math.sin(mask_angle) * mask_distance
+        transformed.append((row["anon_code"], masked_x, masked_y))
 
     min_x = min(x for _, x, _ in transformed)
     max_x = max(x for _, x, _ in transformed)
@@ -166,11 +167,9 @@ def global_relative_index_positions(rows: list[dict[str, Any]]) -> dict[str, dic
     scale = max((max_x - min_x) / 700, (max_y - min_y) / 460, 1.0)
     positions: dict[str, dict[str, float]] = {}
     for anon_code, x, y in transformed:
-        jitter_x = (deterministic_unit(anon_code, "global-index-x") - 0.5) * 12
-        jitter_y = (deterministic_unit(anon_code, "global-index-y") - 0.5) * 12
         positions[anon_code] = {
-            "x": round(min(760, max(40, 400 + (x - mid_x) / scale + jitter_x)), 1),
-            "y": round(min(500, max(40, 270 - (y - mid_y) / scale + jitter_y)), 1),
+            "x": round(min(760, max(40, 400 + (x - mid_x) / scale)), 1),
+            "y": round(min(500, max(40, 270 - (y - mid_y) / scale)), 1),
         }
     return positions
 
