@@ -1,0 +1,462 @@
+{
+  "generated_at": "2026-05-20T22:39:13+00:00",
+  "summary": {
+    "school_count": 272,
+    "district_count": 10,
+    "urgent_count": 17,
+    "priority_count": 68,
+    "potential_demand_2029": 120035
+  },
+  "districts": [
+    {
+      "gu": "강화군",
+      "school_count": 20,
+      "urgent_count": 0,
+      "priority_count": 0,
+      "avg_nearest_park_dist_m": 3705.3,
+      "avg_green_ratio": 0.41,
+      "top_priority": [
+        {
+          "anon_code": "S-ALRQWLD5",
+          "display_name": "학교 S-ALRQWLD5",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 4242.4,
+          "potential_demand_2029": 64
+        },
+        {
+          "anon_code": "S-UT6TVDGU",
+          "display_name": "학교 S-UT6TVDGU",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 4242.4,
+          "potential_demand_2029": 38
+        },
+        {
+          "anon_code": "S-CZCZZQ2Q",
+          "display_name": "학교 S-CZCZZQ2Q",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 4242.4,
+          "potential_demand_2029": 31
+        },
+        {
+          "anon_code": "S-C77MXMVA",
+          "display_name": "학교 S-C77MXMVA",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 385.5,
+          "potential_demand_2029": 8
+        },
+        {
+          "anon_code": "S-B9GJ7UL5",
+          "display_name": "학교 S-B9GJ7UL5",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 4687.0,
+          "potential_demand_2029": 91
+        }
+      ]
+    },
+    {
+      "gu": "계양구",
+      "school_count": 27,
+      "urgent_count": 0,
+      "priority_count": 8,
+      "avg_nearest_park_dist_m": 266.6,
+      "avg_green_ratio": 2.33,
+      "top_priority": [
+        {
+          "anon_code": "S-E883G26P",
+          "display_name": "학교 S-E883G26P",
+          "case_policy_label": "모니터링 대상",
+          "nearest_park_dist_m": 342.8,
+          "potential_demand_2029": 2
+        },
+        {
+          "anon_code": "S-26MJ52AG",
+          "display_name": "학교 S-26MJ52AG",
+          "case_policy_label": "모니터링 대상",
+          "nearest_park_dist_m": 437.0,
+          "potential_demand_2029": 275
+        },
+        {
+          "anon_code": "S-F82M535D",
+          "display_name": "학교 S-F82M535D",
+          "case_policy_label": "모니터링 대상",
+          "nearest_park_dist_m": 244.0,
+          "potential_demand_2029": 229
+        },
+        {
+          "anon_code": "S-UM4NYYV5",
+          "display_name": "학교 S-UM4NYYV5",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 478.0,
+          "potential_demand_2029": 186
+        },
+        {
+          "anon_code": "S-TMWLARHE",
+          "display_name": "학교 S-TMWLARHE",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 300.0,
+          "potential_demand_2029": 161
+        }
+      ]
+    },
+    {
+      "gu": "남동구",
+      "school_count": 39,
+      "urgent_count": 0,
+      "priority_count": 9,
+      "avg_nearest_park_dist_m": 219.9,
+      "avg_green_ratio": 4.4,
+      "top_priority": [
+        {
+          "anon_code": "S-YVN9F6TM",
+          "display_name": "학교 S-YVN9F6TM",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 434.0,
+          "potential_demand_2029": 371
+        },
+        {
+          "anon_code": "S-43YZWR92",
+          "display_name": "학교 S-43YZWR92",
+          "case_policy_label": "모니터링 대상",
+          "nearest_park_dist_m": 185.4,
+          "potential_demand_2029": 417
+        },
+        {
+          "anon_code": "S-P5VW34HW",
+          "display_name": "학교 S-P5VW34HW",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 384.0,
+          "potential_demand_2029": 296
+        },
+        {
+          "anon_code": "S-4WPQELB6",
+          "display_name": "학교 S-4WPQELB6",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 21.6,
+          "potential_demand_2029": 189
+        },
+        {
+          "anon_code": "S-HJRL3THF",
+          "display_name": "학교 S-HJRL3THF",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 277.8,
+          "potential_demand_2029": 158
+        }
+      ]
+    },
+    {
+      "gu": "동구",
+      "school_count": 8,
+      "urgent_count": 1,
+      "priority_count": 4,
+      "avg_nearest_park_dist_m": 286.3,
+      "avg_green_ratio": 1.35,
+      "top_priority": [
+        {
+          "anon_code": "S-U9VS5UUN",
+          "display_name": "학교 S-U9VS5UUN",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 208.0,
+          "potential_demand_2029": 162
+        },
+        {
+          "anon_code": "S-QJHJL6ZK",
+          "display_name": "학교 S-QJHJL6ZK",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 728.0,
+          "potential_demand_2029": 303
+        },
+        {
+          "anon_code": "S-KBFLU7FW",
+          "display_name": "학교 S-KBFLU7FW",
+          "case_policy_label": "모니터링 대상",
+          "nearest_park_dist_m": 281.0,
+          "potential_demand_2029": 454
+        },
+        {
+          "anon_code": "S-MY4VJ5MK",
+          "display_name": "학교 S-MY4VJ5MK",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 432.0,
+          "potential_demand_2029": 408
+        },
+        {
+          "anon_code": "S-ZXAMMWQE",
+          "display_name": "학교 S-ZXAMMWQE",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 182.0,
+          "potential_demand_2029": 151
+        }
+      ]
+    },
+    {
+      "gu": "미추홀구",
+      "school_count": 23,
+      "urgent_count": 1,
+      "priority_count": 10,
+      "avg_nearest_park_dist_m": 234.1,
+      "avg_green_ratio": 3.5,
+      "top_priority": [
+        {
+          "anon_code": "S-5PBBANXC",
+          "display_name": "학교 S-5PBBANXC",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 947.1,
+          "potential_demand_2029": 940
+        },
+        {
+          "anon_code": "S-4J8NDXDV",
+          "display_name": "학교 S-4J8NDXDV",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 279.4,
+          "potential_demand_2029": 309
+        },
+        {
+          "anon_code": "S-4MLHF3S9",
+          "display_name": "학교 S-4MLHF3S9",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 249.1,
+          "potential_demand_2029": 1467
+        },
+        {
+          "anon_code": "S-T3U3Q5VU",
+          "display_name": "학교 S-T3U3Q5VU",
+          "case_policy_label": "모니터링 대상",
+          "nearest_park_dist_m": 222.5,
+          "potential_demand_2029": 251
+        },
+        {
+          "anon_code": "S-B8N8MPM6",
+          "display_name": "학교 S-B8N8MPM6",
+          "case_policy_label": "모니터링 대상",
+          "nearest_park_dist_m": 201.4,
+          "potential_demand_2029": 283
+        }
+      ]
+    },
+    {
+      "gu": "부평구",
+      "school_count": 42,
+      "urgent_count": 4,
+      "priority_count": 13,
+      "avg_nearest_park_dist_m": 313.4,
+      "avg_green_ratio": 3.81,
+      "top_priority": [
+        {
+          "anon_code": "S-FXJHQ3MN",
+          "display_name": "학교 S-FXJHQ3MN",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 477.0,
+          "potential_demand_2029": 173
+        },
+        {
+          "anon_code": "S-MCGRKF3N",
+          "display_name": "학교 S-MCGRKF3N",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 113.7,
+          "potential_demand_2029": 1107
+        },
+        {
+          "anon_code": "S-YZAFKPXL",
+          "display_name": "학교 S-YZAFKPXL",
+          "case_policy_label": "모니터링 대상",
+          "nearest_park_dist_m": 152.1,
+          "potential_demand_2029": 209
+        },
+        {
+          "anon_code": "S-EF75FETE",
+          "display_name": "학교 S-EF75FETE",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 408.0,
+          "potential_demand_2029": 456
+        },
+        {
+          "anon_code": "S-57LZXWDS",
+          "display_name": "학교 S-57LZXWDS",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 342.5,
+          "potential_demand_2029": 543
+        }
+      ]
+    },
+    {
+      "gu": "서구",
+      "school_count": 53,
+      "urgent_count": 3,
+      "priority_count": 16,
+      "avg_nearest_park_dist_m": 235.0,
+      "avg_green_ratio": 4.09,
+      "top_priority": [
+        {
+          "anon_code": "S-ABWVENSA",
+          "display_name": "학교 S-ABWVENSA",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 1323.0,
+          "potential_demand_2029": 94
+        },
+        {
+          "anon_code": "S-UECEL3YC",
+          "display_name": "학교 S-UECEL3YC",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 663.1,
+          "potential_demand_2029": 548
+        },
+        {
+          "anon_code": "S-6MBRDUDL",
+          "display_name": "학교 S-6MBRDUDL",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 453.0,
+          "potential_demand_2029": 288
+        },
+        {
+          "anon_code": "S-ZTDPPHQV",
+          "display_name": "학교 S-ZTDPPHQV",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 608.2,
+          "potential_demand_2029": 222
+        },
+        {
+          "anon_code": "S-Y7LJ8PX3",
+          "display_name": "학교 S-Y7LJ8PX3",
+          "case_policy_label": "모니터링 대상",
+          "nearest_park_dist_m": 65.0,
+          "potential_demand_2029": 508
+        }
+      ]
+    },
+    {
+      "gu": "연수구",
+      "school_count": 34,
+      "urgent_count": 2,
+      "priority_count": 8,
+      "avg_nearest_park_dist_m": 232.1,
+      "avg_green_ratio": 8.62,
+      "top_priority": [
+        {
+          "anon_code": "S-UDZXSDYN",
+          "display_name": "학교 S-UDZXSDYN",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 373.0,
+          "potential_demand_2029": 183
+        },
+        {
+          "anon_code": "S-J3KWD6SK",
+          "display_name": "학교 S-J3KWD6SK",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 1575.0,
+          "potential_demand_2029": 1606
+        },
+        {
+          "anon_code": "S-MCEUT96C",
+          "display_name": "학교 S-MCEUT96C",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 716.0,
+          "potential_demand_2029": 654
+        },
+        {
+          "anon_code": "S-FW89ASQA",
+          "display_name": "학교 S-FW89ASQA",
+          "case_policy_label": "우선 검토 대상",
+          "nearest_park_dist_m": 122.0,
+          "potential_demand_2029": 1050
+        },
+        {
+          "anon_code": "S-FAUMNSM2",
+          "display_name": "학교 S-FAUMNSM2",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 489.0,
+          "potential_demand_2029": 1558
+        }
+      ]
+    },
+    {
+      "gu": "옹진군",
+      "school_count": 10,
+      "urgent_count": 0,
+      "priority_count": 0,
+      "avg_nearest_park_dist_m": 16553.3,
+      "avg_green_ratio": 0.0,
+      "top_priority": [
+        {
+          "anon_code": "S-HTZK97E4",
+          "display_name": "학교 S-HTZK97E4",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 16479.1,
+          "potential_demand_2029": 5
+        },
+        {
+          "anon_code": "S-R5P8S72A",
+          "display_name": "학교 S-R5P8S72A",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 16479.1,
+          "potential_demand_2029": 3
+        },
+        {
+          "anon_code": "S-RGNM32EK",
+          "display_name": "학교 S-RGNM32EK",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 19637.4,
+          "potential_demand_2029": 54
+        },
+        {
+          "anon_code": "S-2YX5KUYB",
+          "display_name": "학교 S-2YX5KUYB",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 18983.5,
+          "potential_demand_2029": 3
+        },
+        {
+          "anon_code": "S-ZEUWN373",
+          "display_name": "학교 S-ZEUWN373",
+          "case_policy_label": "별도 정책 필요",
+          "nearest_park_dist_m": 16479.1,
+          "potential_demand_2029": 21
+        }
+      ]
+    },
+    {
+      "gu": "중구",
+      "school_count": 16,
+      "urgent_count": 6,
+      "priority_count": 0,
+      "avg_nearest_park_dist_m": 1259.5,
+      "avg_green_ratio": 7.23,
+      "top_priority": [
+        {
+          "anon_code": "S-F43AUELF",
+          "display_name": "학교 S-F43AUELF",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 13471.8,
+          "potential_demand_2029": 26
+        },
+        {
+          "anon_code": "S-9G9TL7MU",
+          "display_name": "학교 S-9G9TL7MU",
+          "case_policy_label": "유지·관리 대상",
+          "nearest_park_dist_m": 186.0,
+          "potential_demand_2029": 408
+        },
+        {
+          "anon_code": "S-BKABU3B4",
+          "display_name": "학교 S-BKABU3B4",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 1587.3,
+          "potential_demand_2029": 43
+        },
+        {
+          "anon_code": "S-LLL27LXS",
+          "display_name": "학교 S-LLL27LXS",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 796.8,
+          "potential_demand_2029": 202
+        },
+        {
+          "anon_code": "S-95HAUXLS",
+          "display_name": "학교 S-95HAUXLS",
+          "case_policy_label": "즉시 개선 대상",
+          "nearest_park_dist_m": 620.0,
+          "potential_demand_2029": 42
+        }
+      ]
+    }
+  ]
+}

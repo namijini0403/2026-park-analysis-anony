@@ -1,0 +1,41 @@
+# Secrets and local runtime
+.env
+.env.*
+!.env.example
+*.local
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+vercel_public/
+*.tsbuildinfo
+*.log
+vite.config.js
+vite.config.d.ts
+
+# Raw/private source data. Do not publish these.
+private_data/
+raw_data/
+source_data/
+data_processed/
+outputs/
+output/
+models/
+*.xlsx
+*.xls
+*.csv
+*.geojson
+*.pkl
+*.joblib
+
+# Allow only sanitized app payloads under public/data.
+!public/
+!public/data/
+!public/data/*.json
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
