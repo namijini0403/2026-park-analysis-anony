@@ -363,7 +363,13 @@ export default function App() {
             onOpenSimulation={() => setView("simulation")}
           />
         ) : view === "statistics" ? (
-          <Overview statistics={statistics} onSelect={(code) => { setSelectedCode(code); setView("detail"); }} />
+          <Overview
+            statistics={statistics}
+            schools={schools}
+            selectedGu={selectedGu}
+            onSelectGu={setSelectedGu}
+            onSelect={(code) => { setSelectedCode(code); setView("detail"); }}
+          />
         ) : view === "simulation" ? (
           <Simulation school={selectedSchool} />
         ) : (
@@ -605,7 +611,30 @@ function GuideModal({ summary, onClose }: { summary: AppSummaryPayload; onClose:
   );
 }
 
-function Overview({ statistics, onSelect }: { statistics: StatisticsPayload; onSelect: (code: string) => void }) {
+function Overview({
+  statistics,
+  schools,
+  selectedGu,
+  onSelectGu,
+  onSelect,
+}: {
+  statistics: StatisticsPayload;
+  schools: School[];
+  selectedGu: string;
+  onSelectGu: (gu: string) => void;
+  onSelect: (code: string) => void;
+}) {
+  const selectedDistrict = statistics.districts.find((district) => district.gu === selectedGu) ?? statistics.districts[0];
+  const maxPressure = Math.max(...statistics.districts.map((district) => district.urgent_count * 1.4 + district.priority_count), 1);
+  const maxDemand = Math.max(...statistics.districts.map((district) => district.top_priority.reduce((sum, school) => sum + school.potential_demand_2029, 0)), 1);
+  const cityTopSchools = [...schools]
+    .sort((left, right) => {
+      const leftClass = left.case_type === 1 ? 0 : left.case_type === 2 ? 1 : left.case_type === 3 ? 2 : 3;
+      const rightClass = right.case_type === 1 ? 0 : right.case_type === 2 ? 1 : right.case_type === 3 ? 2 : 3;
+      return leftClass - rightClass || left.priority_rank - right.priority_rank;
+    })
+    .slice(0, 10);
+
   return (
     <div className="page-grid">
       <section className="hero-band">
@@ -618,33 +647,128 @@ function Overview({ statistics, onSelect }: { statistics: StatisticsPayload; onS
         <Kpi title="분석 학교" value={metricLabel(statistics.summary.school_count, "개교")} />
         <Kpi title="분석 구·군" value={metricLabel(statistics.summary.district_count, "개")} />
         <Kpi title="즉시 개선" value={metricLabel(statistics.summary.urgent_count, "개교")} tone="danger" />
+        <Kpi title="우선 검토" value={metricLabel(statistics.summary.priority_count, "개교")} />
         <Kpi title="2029 잠재 수요" value={metricLabel(statistics.summary.potential_demand_2029, "명")} />
       </section>
 
-      <section className="district-grid">
-        {statistics.districts.map((district) => (
-          <article className="district-card" key={district.gu}>
-            <div className="card-head">
+      <section className="statistics-grid">
+        <article className="panel-card">
+          <div className="panel-title-row">
+            <div>
+              <p className="eyebrow">District Pressure</p>
+              <h3>구별 우선 지원 압력</h3>
+            </div>
+            <span>즉시 개선 + 우선 검토</span>
+          </div>
+          <div className="pressure-list">
+            {statistics.districts.map((district) => {
+              const pressure = district.urgent_count * 1.4 + district.priority_count;
+              const isActive = selectedDistrict?.gu === district.gu;
+              return (
+                <button
+                  className={isActive ? "pressure-row active" : "pressure-row"}
+                  key={district.gu}
+                  type="button"
+                  onClick={() => onSelectGu(district.gu)}
+                >
+                  <span>{district.gu}</span>
+                  <strong>{district.urgent_count + district.priority_count}개교</strong>
+                  <i style={{ width: `${Math.max(8, (pressure / maxPressure) * 100)}%` }} />
+                </button>
+              );
+            })}
+          </div>
+        </article>
+
+        <article className="panel-card">
+          <div className="panel-title-row">
+            <div>
+              <p className="eyebrow">District Mix</p>
+              <h3>구별 2029 잠재 수요</h3>
+            </div>
+            <span>Top 학교 합계 기준</span>
+          </div>
+          <div className="demand-bars">
+            {statistics.districts.map((district) => {
+              const demand = district.top_priority.reduce((sum, school) => sum + school.potential_demand_2029, 0);
+              return (
+                <button
+                  className={selectedDistrict?.gu === district.gu ? "demand-bar active" : "demand-bar"}
+                  key={district.gu}
+                  type="button"
+                  onClick={() => onSelectGu(district.gu)}
+                >
+                  <span>{district.gu}</span>
+                  <i style={{ height: `${Math.max(10, (demand / maxDemand) * 100)}%` }} />
+                  <strong>{formatNumber(demand)}명</strong>
+                </button>
+              );
+            })}
+          </div>
+        </article>
+      </section>
+
+      {selectedDistrict ? (
+        <section className="statistics-grid">
+          <article className="panel-card">
+            <div className="panel-title-row">
               <div>
-                <p className="eyebrow">{district.gu}</p>
-                <h3>{district.school_count}개교</h3>
+                <p className="eyebrow">District Detail</p>
+                <h3>{selectedDistrict.gu} 상세 통계</h3>
               </div>
-              <span>{district.urgent_count + district.priority_count}개 검토</span>
+              <span>{selectedDistrict.school_count}개교</span>
             </div>
-            <div className="mini-metrics">
-              <span>평균 공원 {formatDecimal(district.avg_nearest_park_dist_m)}m</span>
-              <span>평균 녹지 {formatDecimal(district.avg_green_ratio)}%</span>
+            <div className="district-stat-grid">
+              <MetricLine label="즉시 개선" value={`${selectedDistrict.urgent_count}개교`} alert={selectedDistrict.urgent_count > 0} />
+              <MetricLine label="우선 검토" value={`${selectedDistrict.priority_count}개교`} alert={selectedDistrict.priority_count > 0} />
+              <MetricLine label="평균 최근접 공원" value={`${formatDecimal(selectedDistrict.avg_nearest_park_dist_m)}m`} />
+              <MetricLine label="평균 녹지" value={`${formatDecimal(selectedDistrict.avg_green_ratio)}%`} />
             </div>
-            <div className="top-list">
-              {district.top_priority.map((school) => (
-                <button key={school.anon_code} onClick={() => onSelect(school.anon_code)}>
-                  <strong>{school.display_name}</strong>
-                  <small>{school.case_policy_label} · 2029 {formatNumber(school.potential_demand_2029)}명</small>
+          </article>
+
+          <article className="panel-card">
+            <div className="panel-title-row">
+              <div>
+                <p className="eyebrow">Top 5</p>
+                <h3>{selectedDistrict.gu} 우선 지원 학교</h3>
+              </div>
+              <span>비식별 코드</span>
+            </div>
+            <div className="top-list rich">
+              {selectedDistrict.top_priority.map((school, index) => (
+                <button key={school.anon_code} type="button" onClick={() => onSelect(school.anon_code)}>
+                  <span className="rank-badge">{index + 1}</span>
+                  <span>
+                    <strong>{school.display_name}</strong>
+                    <small>{school.case_policy_label} · 공원 {formatDecimal(school.nearest_park_dist_m)}m · 2029 {formatNumber(school.potential_demand_2029)}명</small>
+                  </span>
                 </button>
               ))}
             </div>
           </article>
-        ))}
+        </section>
+      ) : null}
+
+      <section className="panel-card">
+        <div className="panel-title-row">
+          <div>
+            <p className="eyebrow">City Top 10</p>
+            <h3>시 전체 우선 지원 학교</h3>
+          </div>
+          <span>상세 이동 가능</span>
+        </div>
+        <div className="city-top-list">
+          {cityTopSchools.map((school, index) => (
+            <button key={school.anon_code} type="button" onClick={() => onSelect(school.anon_code)}>
+              <span className="rank-badge">{index + 1}</span>
+              <span>
+                <strong>{school.display_name}</strong>
+                <small>{school.gu} · {school.case_policy_label} · 공원 {formatDecimal(school.metrics.nearest_park_dist_m)}m · 2029 {formatNumber(school.metrics.potential_demand_2029)}명</small>
+              </span>
+              <em>{school.case_status_label}</em>
+            </button>
+          ))}
+        </div>
       </section>
     </div>
   );
