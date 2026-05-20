@@ -499,40 +499,65 @@ function AbstractCityMap({
   selectedCode: string;
   onSelect: (code: string) => void;
 }) {
+  const [zoom, setZoom] = useState(1);
   const toX = (value: number) => Math.min(760, Math.max(40, value));
   const toY = (value: number) => Math.min(500, Math.max(40, value));
+  const selectedRow = rows.find((row) => row.anon_code === selectedCode);
+  const fallbackCenter = rows.length
+    ? {
+        x: rows.reduce((sum, row) => sum + toX(row.x), 0) / rows.length,
+        y: rows.reduce((sum, row) => sum + toY(row.y), 0) / rows.length,
+      }
+    : { x: 400, y: 270 };
+  const center = selectedRow ? { x: toX(selectedRow.x), y: toY(selectedRow.y) } : fallbackCenter;
+  const viewWidth = 800 / zoom;
+  const viewHeight = 540 / zoom;
+  const viewX = Math.min(Math.max(center.x - viewWidth / 2, 0), 800 - viewWidth);
+  const viewY = Math.min(Math.max(center.y - viewHeight / 2, 0), 540 - viewHeight);
+  const viewBox = `${viewX} ${viewY} ${viewWidth} ${viewHeight}`;
+  const markerScale = 1 / zoom;
+
   return (
-    <svg className="city-map" viewBox="0 0 800 540" role="img" aria-label="비식별 학교 전체 지도">
-      <rect width="800" height="540" rx="18" fill="#081421" />
-      <g opacity="0.2">
-        {Array.from({ length: 11 }).map((_, index) => (
-          <line key={`v-${index}`} x1={60 + index * 68} y1="40" x2={60 + index * 68} y2="500" stroke="#e2e8f0" />
-        ))}
-        {Array.from({ length: 7 }).map((_, index) => (
-          <line key={`h-${index}`} x1="40" y1={58 + index * 68} x2="760" y2={58 + index * 68} stroke="#e2e8f0" />
-        ))}
-      </g>
-      {rows.map((row) => {
-        const active = row.anon_code === selectedCode;
-        return (
-          <g key={row.anon_code} onClick={() => onSelect(row.anon_code)} className="city-point">
-            <circle
-              cx={toX(row.x)}
-              cy={toY(row.y)}
-              r={active ? 11 : 7}
-              fill={CASE_COLORS[row.case_type] ?? "#64748b"}
-              stroke={active ? "#fff" : "rgba(255,255,255,0.45)"}
-              strokeWidth={active ? 3 : 1}
-            />
-            {active ? (
-              <text x={toX(row.x) + 14} y={toY(row.y) + 4} fill="#f8fafc" fontSize="12" fontWeight="800">
-                {row.short_label}
-              </text>
-            ) : null}
-          </g>
-        );
-      })}
-    </svg>
+    <div className="city-map-wrap">
+      <div className="zoom-controls" aria-label="전체 지도 확대 축소">
+        <button type="button" onClick={() => setZoom((value) => Math.min(4, Number((value + 0.5).toFixed(1))))}>+</button>
+        <button type="button" onClick={() => setZoom((value) => Math.max(1, Number((value - 0.5).toFixed(1))))}>-</button>
+        <button type="button" onClick={() => setZoom(1)}>{zoom.toFixed(1)}x</button>
+      </div>
+      <svg className="city-map" viewBox={viewBox} role="img" aria-label="비식별 학교 전체 지도">
+        <rect width="800" height="540" rx="18" fill="#081421" />
+        <g opacity="0.2">
+          {Array.from({ length: 11 }).map((_, index) => (
+            <line key={`v-${index}`} x1={60 + index * 68} y1="40" x2={60 + index * 68} y2="500" stroke="#e2e8f0" strokeWidth={markerScale} />
+          ))}
+          {Array.from({ length: 7 }).map((_, index) => (
+            <line key={`h-${index}`} x1="40" y1={58 + index * 68} x2="760" y2={58 + index * 68} stroke="#e2e8f0" strokeWidth={markerScale} />
+          ))}
+        </g>
+        {rows.map((row) => {
+          const active = row.anon_code === selectedCode;
+          const x = toX(row.x);
+          const y = toY(row.y);
+          return (
+            <g key={row.anon_code} onClick={() => onSelect(row.anon_code)} className="city-point">
+              <circle
+                cx={x}
+                cy={y}
+                r={(active ? 11 : 7) * markerScale}
+                fill={CASE_COLORS[row.case_type] ?? "#64748b"}
+                stroke={active ? "#fff" : "rgba(255,255,255,0.45)"}
+                strokeWidth={(active ? 3 : 1) * markerScale}
+              />
+              {active ? (
+                <text x={x + 14 * markerScale} y={y + 4 * markerScale} fill="#f8fafc" fontSize={12 * markerScale} fontWeight="800">
+                  {row.short_label}
+                </text>
+              ) : null}
+            </g>
+          );
+        })}
+      </svg>
+    </div>
   );
 }
 

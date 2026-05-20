@@ -414,10 +414,45 @@ button {
   color: #fff;
 }
 
+.city-map-wrap {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #081421;
+}
+
 .city-map {
   width: 100%;
-  min-height: 420px;
-  border-radius: 14px;
+  height: 100%;
+  min-height: inherit;
+  display: block;
+}
+
+.zoom-controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+  padding: 5px;
+  border: 1px solid rgba(226, 232, 240, 0.26);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(6px);
+}
+
+.zoom-controls button {
+  min-width: 34px;
+  min-height: 30px;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .map-note {
