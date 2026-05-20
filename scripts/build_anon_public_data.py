@@ -88,6 +88,69 @@ def rotate_and_flip(x: float, y: float, anon_code: str) -> tuple[float, float]:
     return round(xr * flip, 1), round(yr, 1)
 
 
+def deterministic_unit(anon_code: str, salt: str) -> float:
+    digest = hashlib.sha256(f"{anon_code}:{salt}".encode("utf-8")).digest()
+    return int.from_bytes(digest[:4], "big") / 0xFFFFFFFF
+
+
+def synthetic_walk_shape(anon_code: str) -> list[dict[str, float]]:
+    points = []
+    for index in range(12):
+        angle = (math.pi * 2 * index) / 12
+        factor = 0.72 + deterministic_unit(anon_code, f"walk-{index}") * 0.28
+        radius = 500 * factor
+        points.append(
+            {
+                "x_m": round(math.cos(angle) * radius, 1),
+                "y_m": round(math.sin(angle) * radius, 1),
+            }
+        )
+    return points
+
+
+def synthetic_barriers(row: dict[str, Any], anon_code: str) -> list[dict[str, Any]]:
+    count = max(
+        safe_int(row.get("nearest_official_major_road_crossing_count")),
+        safe_int(row.get("nearest_functional_major_road_crossing_count")),
+    )
+    if count <= 0:
+        return []
+    barriers = []
+    for index in range(min(count, 3)):
+        angle = deterministic_unit(anon_code, f"barrier-angle-{index}") * math.pi * 2
+        offset = 130 + deterministic_unit(anon_code, f"barrier-offset-{index}") * 260
+        length = 160 + deterministic_unit(anon_code, f"barrier-length-{index}") * 160
+        cx = math.cos(angle) * offset
+        cy = math.sin(angle) * offset
+        dx = math.cos(angle + math.pi / 2) * length / 2
+        dy = math.sin(angle + math.pi / 2) * length / 2
+        barriers.append(
+            {
+                "label": anon_label(index, "단절요소"),
+                "kind": "road_barrier",
+                "x1_m": round(cx - dx, 1),
+                "y1_m": round(cy - dy, 1),
+                "x2_m": round(cx + dx, 1),
+                "y2_m": round(cy + dy, 1),
+                "crossing_count": index + 1,
+            }
+        )
+    return barriers
+
+
+def abstract_index_position(anon_code: str, gu: str) -> dict[str, float]:
+    district_order = ["강화군", "계양구", "남동구", "동구", "미추홀구", "부평구", "서구", "연수구", "옹진군", "중구"]
+    district_index = district_order.index(gu) if gu in district_order else len(district_order)
+    col = district_index % 5
+    row = district_index // 5
+    jitter_x = (deterministic_unit(anon_code, "index-x") - 0.5) * 130
+    jitter_y = (deterministic_unit(anon_code, "index-y") - 0.5) * 130
+    return {
+        "x": round(col * 220 + jitter_x, 1),
+        "y": round(row * 220 + jitter_y, 1),
+    }
+
+
 def anon_label(index: int, prefix: str) -> str:
     if index < len(LETTERS):
         return f"{prefix} {LETTERS[index]}"
@@ -393,6 +456,9 @@ def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any]]:
             "candidates": school_candidates,
             "synthetic_map": {
                 "note": "실제 좌표가 아닌 학교 중심 상대거리 도식입니다. 학교별 고정 난수 회전/반전을 적용했습니다.",
+                "radius_500m": 500,
+                "walk_500m_shape": synthetic_walk_shape(anon_code),
+                "barriers": synthetic_barriers(priority, anon_code),
                 "points": map_points,
             },
         }
@@ -438,6 +504,97 @@ def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any]]:
     return schools, statistics
 
 
+def build_split_payloads(schools: list[dict[str, Any]], statistics: dict[str, Any]) -> dict[str, Any]:
+    map_index = {
+        "schools": [
+            {
+                "anon_code": school["anon_code"],
+                "display_name": school["display_name"],
+                "short_label": school["short_label"],
+                "gu": school["gu"],
+                "case_type": school["case_type"],
+                "case_policy_label": school["case_policy_label"],
+                **abstract_index_position(school["anon_code"], school["gu"]),
+            }
+            for school in schools
+        ]
+    }
+
+    school_detail = {
+        "schools": [
+            {
+                "anon_code": school["anon_code"],
+                "display_name": school["display_name"],
+                "short_label": school["short_label"],
+                "gu": school["gu"],
+                "case_type": school["case_type"],
+                "case_policy_label": school["case_policy_label"],
+                "case_status_label": school["case_status_label"],
+                "priority_rank": school["priority_rank"],
+                "metrics": school["metrics"],
+                "trend": school["trend"],
+                "similar_schools": school["similar_schools"],
+                "interpretation": {
+                    "current_gap": "공원 접근, 녹지 비율, 놀이터 수를 분리해 검토합니다.",
+                    "future_demand": "현재 학생 수와 2029/2031 잠재 수요를 함께 봅니다.",
+                    "access_friction": "보행 부담과 단절요소는 후보지 판단의 보조 신호입니다.",
+                },
+            }
+            for school in schools
+        ]
+    }
+
+    candidate_anon = {
+        "schools": [
+            {
+                "anon_code": school["anon_code"],
+                "display_name": school["display_name"],
+                "candidates": school["candidates"],
+            }
+            for school in schools
+        ]
+    }
+
+    synthetic_map = {
+        "schools": [
+            {
+                "anon_code": school["anon_code"],
+                "display_name": school["display_name"],
+                "gu": school["gu"],
+                "case_type": school["case_type"],
+                "synthetic_map": school["synthetic_map"],
+            }
+            for school in schools
+        ]
+    }
+
+    app_summary = {
+        "title": "반경 너머, 도달 가능성으로",
+        "subtitle": "비식별 학교 단위 야외활동 환경 정책지원 시스템",
+        "principles": [
+            "학교명과 실제 좌표를 공개하지 않습니다.",
+            "현재 격차, 미래 수요, 접근 마찰, 후보지 추천을 분리해 설명합니다.",
+            "AI는 자동 결정이 아니라 조정 가능한 보조 신호로 사용합니다.",
+        ],
+        "flow": [
+            "첫 화면",
+            "비식별 도식지도",
+            "학교 상세 리포트",
+            "후보지 시뮬레이션",
+            "전체 통계",
+        ],
+        "statistics_summary": statistics["summary"],
+    }
+
+    return {
+        "map_index_anon.json": map_index,
+        "school_detail_anon.json": school_detail,
+        "candidate_anon.json": candidate_anon,
+        "synthetic_map_anon.json": synthetic_map,
+        "app_summary_anon.json": app_summary,
+    }
+
+
 def main() -> None:
     for path in [ANON_XLSX, DATA_DIR / "school_priority_with_functional_park_layer.csv"]:
         if not path.exists():
@@ -448,12 +605,16 @@ def main() -> None:
 
     write_json(OUT_DIR / "schools_anon.json", {"generated_at": generated_at, "schools": schools})
     write_json(OUT_DIR / "statistics_anon.json", {"generated_at": generated_at, **statistics})
+    split_payloads = build_split_payloads(schools, statistics)
+    for file_name, payload in split_payloads.items():
+        write_json(OUT_DIR / file_name, {"generated_at": generated_at, **payload})
+    files = ["schools_anon.json", "statistics_anon.json", *sorted(split_payloads)]
     write_json(
         OUT_DIR / "manifest.json",
         {
             "generated_at": generated_at,
             "source_policy": "Local private source data was transformed into anonymized JSON only.",
-            "files": ["schools_anon.json", "statistics_anon.json"],
+            "files": files,
         },
     )
     print(f"Wrote {len(schools)} anonymized schools to {OUT_DIR}")

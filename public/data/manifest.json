@@ -1,8 +1,13 @@
 {
-  "generated_at": "2026-05-20T22:39:13+00:00",
+  "generated_at": "2026-05-20T23:06:21+00:00",
   "source_policy": "Local private source data was transformed into anonymized JSON only.",
   "files": [
     "schools_anon.json",
-    "statistics_anon.json"
+    "statistics_anon.json",
+    "app_summary_anon.json",
+    "candidate_anon.json",
+    "map_index_anon.json",
+    "school_detail_anon.json",
+    "synthetic_map_anon.json"
   ]
 }

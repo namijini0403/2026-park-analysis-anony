@@ -1,0 +1,2725 @@
+{
+  "generated_at": "2026-05-20T23:06:21+00:00",
+  "schools": [
+    {
+      "anon_code": "S-ALRQWLD5",
+      "display_name": "학교 S-ALRQWLD5",
+      "short_label": "A218",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 46.3,
+      "y": -36.9
+    },
+    {
+      "anon_code": "S-UT6TVDGU",
+      "display_name": "학교 S-UT6TVDGU",
+      "short_label": "A219",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -43.9,
+      "y": 57.2
+    },
+    {
+      "anon_code": "S-CZCZZQ2Q",
+      "display_name": "학교 S-CZCZZQ2Q",
+      "short_label": "A220",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -30.0,
+      "y": 10.8
+    },
+    {
+      "anon_code": "S-C77MXMVA",
+      "display_name": "학교 S-C77MXMVA",
+      "short_label": "A221",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -23.4,
+      "y": -24.7
+    },
+    {
+      "anon_code": "S-B9GJ7UL5",
+      "display_name": "학교 S-B9GJ7UL5",
+      "short_label": "A222",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 1.6,
+      "y": -55.5
+    },
+    {
+      "anon_code": "S-HDEB68V2",
+      "display_name": "학교 S-HDEB68V2",
+      "short_label": "A223",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -48.2,
+      "y": 59.6
+    },
+    {
+      "anon_code": "S-PE2SA32K",
+      "display_name": "학교 S-PE2SA32K",
+      "short_label": "A224",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 43.7,
+      "y": -37.0
+    },
+    {
+      "anon_code": "S-BEXLZ7M9",
+      "display_name": "학교 S-BEXLZ7M9",
+      "short_label": "A225",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 4.1,
+      "y": -3.6
+    },
+    {
+      "anon_code": "S-2G5WGACL",
+      "display_name": "학교 S-2G5WGACL",
+      "short_label": "A226",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -53.6,
+      "y": 60.5
+    },
+    {
+      "anon_code": "S-CNXUEF2A",
+      "display_name": "학교 S-CNXUEF2A",
+      "short_label": "A227",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 47.3,
+      "y": 5.2
+    },
+    {
+      "anon_code": "S-BQDH73ER",
+      "display_name": "학교 S-BQDH73ER",
+      "short_label": "A228",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 50.8,
+      "y": 24.4
+    },
+    {
+      "anon_code": "S-XHJP98RR",
+      "display_name": "학교 S-XHJP98RR",
+      "short_label": "A229",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -1.1,
+      "y": 38.7
+    },
+    {
+      "anon_code": "S-XVQ257WB",
+      "display_name": "학교 S-XVQ257WB",
+      "short_label": "A230",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -23.3,
+      "y": 35.8
+    },
+    {
+      "anon_code": "S-XXC6BKHJ",
+      "display_name": "학교 S-XXC6BKHJ",
+      "short_label": "A231",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 61.5,
+      "y": -15.8
+    },
+    {
+      "anon_code": "S-FCAQHQ88",
+      "display_name": "학교 S-FCAQHQ88",
+      "short_label": "A232",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 52.8,
+      "y": -62.1
+    },
+    {
+      "anon_code": "S-LV6JDYFM",
+      "display_name": "학교 S-LV6JDYFM",
+      "short_label": "A233",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 57.9,
+      "y": -64.5
+    },
+    {
+      "anon_code": "S-M3PP5NT6",
+      "display_name": "학교 S-M3PP5NT6",
+      "short_label": "A234",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -59.6,
+      "y": -12.0
+    },
+    {
+      "anon_code": "S-KKZZJPK3",
+      "display_name": "학교 S-KKZZJPK3",
+      "short_label": "A235",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -8.3,
+      "y": -17.7
+    },
+    {
+      "anon_code": "S-M3WAK7ZB",
+      "display_name": "학교 S-M3WAK7ZB",
+      "short_label": "A236",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -37.9,
+      "y": 25.7
+    },
+    {
+      "anon_code": "S-5L3LTZZ9",
+      "display_name": "학교 S-5L3LTZZ9",
+      "short_label": "A237",
+      "gu": "강화군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": -49.7,
+      "y": -34.6
+    },
+    {
+      "anon_code": "S-RLSEF29G",
+      "display_name": "학교 S-RLSEF29G",
+      "short_label": "A152",
+      "gu": "계양구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 258.2,
+      "y": -26.8
+    },
+    {
+      "anon_code": "S-7S87R4US",
+      "display_name": "학교 S-7S87R4US",
+      "short_label": "A153",
+      "gu": "계양구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 193.2,
+      "y": 2.1
+    },
+    {
+      "anon_code": "S-8NRULQDR",
+      "display_name": "학교 S-8NRULQDR",
+      "short_label": "A154",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 170.3,
+      "y": -19.1
+    },
+    {
+      "anon_code": "S-CPK7HS3N",
+      "display_name": "학교 S-CPK7HS3N",
+      "short_label": "A155",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 204.9,
+      "y": 44.3
+    },
+    {
+      "anon_code": "S-F84QJ4UA",
+      "display_name": "학교 S-F84QJ4UA",
+      "short_label": "A156",
+      "gu": "계양구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 242.0,
+      "y": -31.4
+    },
+    {
+      "anon_code": "S-JM43BZYT",
+      "display_name": "학교 S-JM43BZYT",
+      "short_label": "A157",
+      "gu": "계양구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 240.3,
+      "y": -10.8
+    },
+    {
+      "anon_code": "S-N7LFBX7U",
+      "display_name": "학교 S-N7LFBX7U",
+      "short_label": "A158",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 237.3,
+      "y": 7.1
+    },
+    {
+      "anon_code": "S-J9DPVRJ9",
+      "display_name": "학교 S-J9DPVRJ9",
+      "short_label": "A159",
+      "gu": "계양구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 177.1,
+      "y": 32.7
+    },
+    {
+      "anon_code": "S-8VUBM77X",
+      "display_name": "학교 S-8VUBM77X",
+      "short_label": "A160",
+      "gu": "계양구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 268.4,
+      "y": 55.2
+    },
+    {
+      "anon_code": "S-REVCZDW8",
+      "display_name": "학교 S-REVCZDW8",
+      "short_label": "A161",
+      "gu": "계양구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 178.0,
+      "y": -62.2
+    },
+    {
+      "anon_code": "S-HY9DLUU3",
+      "display_name": "학교 S-HY9DLUU3",
+      "short_label": "A162",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 273.5,
+      "y": 49.2
+    },
+    {
+      "anon_code": "S-LR38SLNS",
+      "display_name": "학교 S-LR38SLNS",
+      "short_label": "A163",
+      "gu": "계양구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 282.1,
+      "y": -48.7
+    },
+    {
+      "anon_code": "S-L43DDG67",
+      "display_name": "학교 S-L43DDG67",
+      "short_label": "A164",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 186.1,
+      "y": 25.5
+    },
+    {
+      "anon_code": "S-F82M535D",
+      "display_name": "학교 S-F82M535D",
+      "short_label": "A165",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 171.9,
+      "y": -33.1
+    },
+    {
+      "anon_code": "S-NYXN8SDS",
+      "display_name": "학교 S-NYXN8SDS",
+      "short_label": "A166",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 240.5,
+      "y": -46.8
+    },
+    {
+      "anon_code": "S-ZWSA62A7",
+      "display_name": "학교 S-ZWSA62A7",
+      "short_label": "A167",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 215.7,
+      "y": 48.5
+    },
+    {
+      "anon_code": "S-Z6JWV963",
+      "display_name": "학교 S-Z6JWV963",
+      "short_label": "A168",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 281.2,
+      "y": 16.8
+    },
+    {
+      "anon_code": "S-YZCAYTKP",
+      "display_name": "학교 S-YZCAYTKP",
+      "short_label": "A169",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 235.5,
+      "y": 61.8
+    },
+    {
+      "anon_code": "S-TMWLARHE",
+      "display_name": "학교 S-TMWLARHE",
+      "short_label": "A170",
+      "gu": "계양구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 246.8,
+      "y": -28.0
+    },
+    {
+      "anon_code": "S-QYYFFFUY",
+      "display_name": "학교 S-QYYFFFUY",
+      "short_label": "A171",
+      "gu": "계양구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 238.1,
+      "y": 38.1
+    },
+    {
+      "anon_code": "S-VRBPVQ8D",
+      "display_name": "학교 S-VRBPVQ8D",
+      "short_label": "A172",
+      "gu": "계양구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 214.9,
+      "y": 38.1
+    },
+    {
+      "anon_code": "S-L8JZJLF2",
+      "display_name": "학교 S-L8JZJLF2",
+      "short_label": "A173",
+      "gu": "계양구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 280.2,
+      "y": 8.0
+    },
+    {
+      "anon_code": "S-H3P32AJB",
+      "display_name": "학교 S-H3P32AJB",
+      "short_label": "A174",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 264.8,
+      "y": -24.3
+    },
+    {
+      "anon_code": "S-26MJ52AG",
+      "display_name": "학교 S-26MJ52AG",
+      "short_label": "A175",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 183.6,
+      "y": -43.3
+    },
+    {
+      "anon_code": "S-MSDVBRCL",
+      "display_name": "학교 S-MSDVBRCL",
+      "short_label": "A176",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 183.6,
+      "y": -30.5
+    },
+    {
+      "anon_code": "S-UM4NYYV5",
+      "display_name": "학교 S-UM4NYYV5",
+      "short_label": "A177",
+      "gu": "계양구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 174.4,
+      "y": -50.6
+    },
+    {
+      "anon_code": "S-E883G26P",
+      "display_name": "학교 S-E883G26P",
+      "short_label": "A178",
+      "gu": "계양구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 164.4,
+      "y": 33.5
+    },
+    {
+      "anon_code": "S-SRTPABF7",
+      "display_name": "학교 S-SRTPABF7",
+      "short_label": "A117",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 383.6,
+      "y": -9.1
+    },
+    {
+      "anon_code": "S-Z8YGRW7G",
+      "display_name": "학교 S-Z8YGRW7G",
+      "short_label": "A118",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 465.4,
+      "y": 44.9
+    },
+    {
+      "anon_code": "S-S9L2RJS2",
+      "display_name": "학교 S-S9L2RJS2",
+      "short_label": "A119",
+      "gu": "남동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 406.5,
+      "y": 28.7
+    },
+    {
+      "anon_code": "S-43YZWR92",
+      "display_name": "학교 S-43YZWR92",
+      "short_label": "A120",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 476.7,
+      "y": -28.2
+    },
+    {
+      "anon_code": "S-JC5TYY5C",
+      "display_name": "학교 S-JC5TYY5C",
+      "short_label": "A121",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 451.9,
+      "y": -24.5
+    },
+    {
+      "anon_code": "S-YVN9F6TM",
+      "display_name": "학교 S-YVN9F6TM",
+      "short_label": "A122",
+      "gu": "남동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 452.3,
+      "y": -21.5
+    },
+    {
+      "anon_code": "S-8BLEW9LR",
+      "display_name": "학교 S-8BLEW9LR",
+      "short_label": "A123",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 417.3,
+      "y": 20.7
+    },
+    {
+      "anon_code": "S-XU5U2JVP",
+      "display_name": "학교 S-XU5U2JVP",
+      "short_label": "A124",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 412.2,
+      "y": 28.5
+    },
+    {
+      "anon_code": "S-P5VW34HW",
+      "display_name": "학교 S-P5VW34HW",
+      "short_label": "A125",
+      "gu": "남동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 417.6,
+      "y": 42.2
+    },
+    {
+      "anon_code": "S-QZ542PMK",
+      "display_name": "학교 S-QZ542PMK",
+      "short_label": "A126",
+      "gu": "남동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 472.0,
+      "y": -32.3
+    },
+    {
+      "anon_code": "S-A3ARRQZA",
+      "display_name": "학교 S-A3ARRQZA",
+      "short_label": "A127",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 490.7,
+      "y": 60.0
+    },
+    {
+      "anon_code": "S-ZQCKTH7C",
+      "display_name": "학교 S-ZQCKTH7C",
+      "short_label": "A128",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 406.4,
+      "y": -38.9
+    },
+    {
+      "anon_code": "S-QJMQLTMB",
+      "display_name": "학교 S-QJMQLTMB",
+      "short_label": "A129",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 387.2,
+      "y": 38.9
+    },
+    {
+      "anon_code": "S-SKLLH9XS",
+      "display_name": "학교 S-SKLLH9XS",
+      "short_label": "A130",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 461.4,
+      "y": -42.5
+    },
+    {
+      "anon_code": "S-NXFK5Z4D",
+      "display_name": "학교 S-NXFK5Z4D",
+      "short_label": "A131",
+      "gu": "남동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 386.5,
+      "y": -56.3
+    },
+    {
+      "anon_code": "S-4FE35HXA",
+      "display_name": "학교 S-4FE35HXA",
+      "short_label": "A132",
+      "gu": "남동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 491.2,
+      "y": 6.8
+    },
+    {
+      "anon_code": "S-WBCTMYCE",
+      "display_name": "학교 S-WBCTMYCE",
+      "short_label": "A133",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 433.7,
+      "y": -36.2
+    },
+    {
+      "anon_code": "S-6N3EQGU8",
+      "display_name": "학교 S-6N3EQGU8",
+      "short_label": "A134",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 431.3,
+      "y": 2.7
+    },
+    {
+      "anon_code": "S-FCV3CP6D",
+      "display_name": "학교 S-FCV3CP6D",
+      "short_label": "A135",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 487.5,
+      "y": 45.3
+    },
+    {
+      "anon_code": "S-988C3BRP",
+      "display_name": "학교 S-988C3BRP",
+      "short_label": "A136",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 391.8,
+      "y": -20.4
+    },
+    {
+      "anon_code": "S-Z7HDUEHA",
+      "display_name": "학교 S-Z7HDUEHA",
+      "short_label": "A137",
+      "gu": "남동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 395.6,
+      "y": -63.4
+    },
+    {
+      "anon_code": "S-CKXNFMWE",
+      "display_name": "학교 S-CKXNFMWE",
+      "short_label": "A138",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 398.1,
+      "y": 23.2
+    },
+    {
+      "anon_code": "S-5MV76NJE",
+      "display_name": "학교 S-5MV76NJE",
+      "short_label": "A139",
+      "gu": "남동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 454.8,
+      "y": 64.2
+    },
+    {
+      "anon_code": "S-78PLZ9FW",
+      "display_name": "학교 S-78PLZ9FW",
+      "short_label": "A140",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 441.6,
+      "y": -1.9
+    },
+    {
+      "anon_code": "S-HJRL3THF",
+      "display_name": "학교 S-HJRL3THF",
+      "short_label": "A141",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 390.2,
+      "y": -26.2
+    },
+    {
+      "anon_code": "S-N9ULSXWW",
+      "display_name": "학교 S-N9ULSXWW",
+      "short_label": "A142",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 498.4,
+      "y": -57.3
+    },
+    {
+      "anon_code": "S-69FGQQM8",
+      "display_name": "학교 S-69FGQQM8",
+      "short_label": "A143",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 467.6,
+      "y": -61.1
+    },
+    {
+      "anon_code": "S-S5YHH72T",
+      "display_name": "학교 S-S5YHH72T",
+      "short_label": "A144",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 430.8,
+      "y": -40.1
+    },
+    {
+      "anon_code": "S-JFXHWBCP",
+      "display_name": "학교 S-JFXHWBCP",
+      "short_label": "A145",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 376.3,
+      "y": -5.4
+    },
+    {
+      "anon_code": "S-66QPF65Z",
+      "display_name": "학교 S-66QPF65Z",
+      "short_label": "A146",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 412.7,
+      "y": -43.6
+    },
+    {
+      "anon_code": "S-B66APF3V",
+      "display_name": "학교 S-B66APF3V",
+      "short_label": "A147",
+      "gu": "남동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 457.7,
+      "y": 45.9
+    },
+    {
+      "anon_code": "S-6NGVEP93",
+      "display_name": "학교 S-6NGVEP93",
+      "short_label": "A148",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 406.2,
+      "y": 7.3
+    },
+    {
+      "anon_code": "S-4WPQELB6",
+      "display_name": "학교 S-4WPQELB6",
+      "short_label": "A149",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 435.1,
+      "y": -58.3
+    },
+    {
+      "anon_code": "S-KLNNCALW",
+      "display_name": "학교 S-KLNNCALW",
+      "short_label": "A150",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 394.8,
+      "y": 16.8
+    },
+    {
+      "anon_code": "S-J7L4GCY7",
+      "display_name": "학교 S-J7L4GCY7",
+      "short_label": "A151",
+      "gu": "남동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 411.2,
+      "y": 24.1
+    },
+    {
+      "anon_code": "S-JJHJJ89V",
+      "display_name": "학교 S-JJHJJ89V",
+      "short_label": "A238",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 459.9,
+      "y": -22.3
+    },
+    {
+      "anon_code": "S-HYGUJPDL",
+      "display_name": "학교 S-HYGUJPDL",
+      "short_label": "A243",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 441.1,
+      "y": -7.2
+    },
+    {
+      "anon_code": "S-XD4YV9LP",
+      "display_name": "학교 S-XD4YV9LP",
+      "short_label": "A244",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 405.2,
+      "y": 12.1
+    },
+    {
+      "anon_code": "S-XBFPSL38",
+      "display_name": "학교 S-XBFPSL38",
+      "short_label": "A245",
+      "gu": "남동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 388.9,
+      "y": 38.7
+    },
+    {
+      "anon_code": "S-4FNSZHBS",
+      "display_name": "학교 S-4FNSZHBS",
+      "short_label": "A014",
+      "gu": "동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 605.4,
+      "y": -56.4
+    },
+    {
+      "anon_code": "S-ZXAMMWQE",
+      "display_name": "학교 S-ZXAMMWQE",
+      "short_label": "A015",
+      "gu": "동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 635.1,
+      "y": -8.9
+    },
+    {
+      "anon_code": "S-GEG3H4EH",
+      "display_name": "학교 S-GEG3H4EH",
+      "short_label": "A016",
+      "gu": "동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 680.6,
+      "y": -6.8
+    },
+    {
+      "anon_code": "S-KBFLU7FW",
+      "display_name": "학교 S-KBFLU7FW",
+      "short_label": "A017",
+      "gu": "동구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 693.9,
+      "y": 22.3
+    },
+    {
+      "anon_code": "S-U9VS5UUN",
+      "display_name": "학교 S-U9VS5UUN",
+      "short_label": "A018",
+      "gu": "동구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 597.1,
+      "y": -25.3
+    },
+    {
+      "anon_code": "S-QJHJL6ZK",
+      "display_name": "학교 S-QJHJL6ZK",
+      "short_label": "A019",
+      "gu": "동구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 614.0,
+      "y": 42.7
+    },
+    {
+      "anon_code": "S-MY4VJ5MK",
+      "display_name": "학교 S-MY4VJ5MK",
+      "short_label": "A020",
+      "gu": "동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 721.1,
+      "y": 5.4
+    },
+    {
+      "anon_code": "S-TDX4SVDY",
+      "display_name": "학교 S-TDX4SVDY",
+      "short_label": "A021",
+      "gu": "동구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 680.5,
+      "y": 1.2
+    },
+    {
+      "anon_code": "S-78RAL8QV",
+      "display_name": "학교 S-78RAL8QV",
+      "short_label": "A022",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 923.6,
+      "y": 7.4
+    },
+    {
+      "anon_code": "S-XP9USA2J",
+      "display_name": "학교 S-XP9USA2J",
+      "short_label": "A023",
+      "gu": "미추홀구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 940.3,
+      "y": -2.9
+    },
+    {
+      "anon_code": "S-3HR64VBZ",
+      "display_name": "학교 S-3HR64VBZ",
+      "short_label": "A024",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 860.9,
+      "y": 26.4
+    },
+    {
+      "anon_code": "S-EJWVMU2H",
+      "display_name": "학교 S-EJWVMU2H",
+      "short_label": "A025",
+      "gu": "미추홀구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 942.1,
+      "y": 49.9
+    },
+    {
+      "anon_code": "S-RQ8Y8WVG",
+      "display_name": "학교 S-RQ8Y8WVG",
+      "short_label": "A026",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 820.0,
+      "y": 48.4
+    },
+    {
+      "anon_code": "S-TWYERK49",
+      "display_name": "학교 S-TWYERK49",
+      "short_label": "A027",
+      "gu": "미추홀구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 852.1,
+      "y": -44.9
+    },
+    {
+      "anon_code": "S-HCHH23TJ",
+      "display_name": "학교 S-HCHH23TJ",
+      "short_label": "A028",
+      "gu": "미추홀구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 816.3,
+      "y": 32.0
+    },
+    {
+      "anon_code": "S-SAM7PYFR",
+      "display_name": "학교 S-SAM7PYFR",
+      "short_label": "A029",
+      "gu": "미추홀구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 886.6,
+      "y": -38.5
+    },
+    {
+      "anon_code": "S-2U5L3A7N",
+      "display_name": "학교 S-2U5L3A7N",
+      "short_label": "A030",
+      "gu": "미추홀구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 833.0,
+      "y": 42.1
+    },
+    {
+      "anon_code": "S-B8N8MPM6",
+      "display_name": "학교 S-B8N8MPM6",
+      "short_label": "A031",
+      "gu": "미추홀구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 838.3,
+      "y": -30.0
+    },
+    {
+      "anon_code": "S-HKKAR9AH",
+      "display_name": "학교 S-HKKAR9AH",
+      "short_label": "A032",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 928.6,
+      "y": 19.7
+    },
+    {
+      "anon_code": "S-5PBBANXC",
+      "display_name": "학교 S-5PBBANXC",
+      "short_label": "A033",
+      "gu": "미추홀구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 855.7,
+      "y": -32.4
+    },
+    {
+      "anon_code": "S-7NV7KCMT",
+      "display_name": "학교 S-7NV7KCMT",
+      "short_label": "A034",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 895.3,
+      "y": 22.7
+    },
+    {
+      "anon_code": "S-Q3MMZ8F3",
+      "display_name": "학교 S-Q3MMZ8F3",
+      "short_label": "A035",
+      "gu": "미추홀구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 888.5,
+      "y": -46.1
+    },
+    {
+      "anon_code": "S-4MLHF3S9",
+      "display_name": "학교 S-4MLHF3S9",
+      "short_label": "A036",
+      "gu": "미추홀구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 937.4,
+      "y": -0.1
+    },
+    {
+      "anon_code": "S-CHBK7CNA",
+      "display_name": "학교 S-CHBK7CNA",
+      "short_label": "A037",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 926.0,
+      "y": 60.9
+    },
+    {
+      "anon_code": "S-4J8NDXDV",
+      "display_name": "학교 S-4J8NDXDV",
+      "short_label": "A038",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 900.2,
+      "y": 40.3
+    },
+    {
+      "anon_code": "S-FM8U6GGH",
+      "display_name": "학교 S-FM8U6GGH",
+      "short_label": "A039",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 893.5,
+      "y": -38.8
+    },
+    {
+      "anon_code": "S-DWCPZKFB",
+      "display_name": "학교 S-DWCPZKFB",
+      "short_label": "A040",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 880.5,
+      "y": -63.5
+    },
+    {
+      "anon_code": "S-T3U3Q5VU",
+      "display_name": "학교 S-T3U3Q5VU",
+      "short_label": "A041",
+      "gu": "미추홀구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 860.5,
+      "y": -37.9
+    },
+    {
+      "anon_code": "S-BGQ6B6EE",
+      "display_name": "학교 S-BGQ6B6EE",
+      "short_label": "A042",
+      "gu": "미추홀구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 816.4,
+      "y": 8.9
+    },
+    {
+      "anon_code": "S-UDVRB5DE",
+      "display_name": "학교 S-UDVRB5DE",
+      "short_label": "A256",
+      "gu": "미추홀구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 876.3,
+      "y": -13.4
+    },
+    {
+      "anon_code": "S-5RDPRQ3C",
+      "display_name": "학교 S-5RDPRQ3C",
+      "short_label": "A257",
+      "gu": "미추홀구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 889.4,
+      "y": -1.1
+    },
+    {
+      "anon_code": "S-9NVVJFJG",
+      "display_name": "학교 S-9NVVJFJG",
+      "short_label": "A053",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -2.5,
+      "y": 253.8
+    },
+    {
+      "anon_code": "S-2TQVFW5E",
+      "display_name": "학교 S-2TQVFW5E",
+      "short_label": "A054",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -57.5,
+      "y": 200.6
+    },
+    {
+      "anon_code": "S-8PTVDAXY",
+      "display_name": "학교 S-8PTVDAXY",
+      "short_label": "A055",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": -13.3,
+      "y": 194.9
+    },
+    {
+      "anon_code": "S-GE9YUTZ2",
+      "display_name": "학교 S-GE9YUTZ2",
+      "short_label": "A056",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -34.4,
+      "y": 213.5
+    },
+    {
+      "anon_code": "S-MCGRKF3N",
+      "display_name": "학교 S-MCGRKF3N",
+      "short_label": "A057",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": -8.6,
+      "y": 202.5
+    },
+    {
+      "anon_code": "S-US26R2KZ",
+      "display_name": "학교 S-US26R2KZ",
+      "short_label": "A058",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 13.9,
+      "y": 245.0
+    },
+    {
+      "anon_code": "S-WRQBKMM4",
+      "display_name": "학교 S-WRQBKMM4",
+      "short_label": "A059",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 52.6,
+      "y": 237.4
+    },
+    {
+      "anon_code": "S-C4J8UJRE",
+      "display_name": "학교 S-C4J8UJRE",
+      "short_label": "A060",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": -46.9,
+      "y": 235.1
+    },
+    {
+      "anon_code": "S-NBQZM7A2",
+      "display_name": "학교 S-NBQZM7A2",
+      "short_label": "A061",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": -34.0,
+      "y": 245.3
+    },
+    {
+      "anon_code": "S-BKZZX6B7",
+      "display_name": "학교 S-BKZZX6B7",
+      "short_label": "A062",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": -41.0,
+      "y": 218.7
+    },
+    {
+      "anon_code": "S-PUGKV9Y4",
+      "display_name": "학교 S-PUGKV9Y4",
+      "short_label": "A063",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 18.7,
+      "y": 216.6
+    },
+    {
+      "anon_code": "S-TXGDP9SR",
+      "display_name": "학교 S-TXGDP9SR",
+      "short_label": "A064",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": -43.7,
+      "y": 230.6
+    },
+    {
+      "anon_code": "S-QWHQDLKS",
+      "display_name": "학교 S-QWHQDLKS",
+      "short_label": "A065",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -10.7,
+      "y": 230.0
+    },
+    {
+      "anon_code": "S-88YNE3SN",
+      "display_name": "학교 S-88YNE3SN",
+      "short_label": "A066",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 47.0,
+      "y": 219.5
+    },
+    {
+      "anon_code": "S-BV27P52E",
+      "display_name": "학교 S-BV27P52E",
+      "short_label": "A067",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 19.4,
+      "y": 158.3
+    },
+    {
+      "anon_code": "S-FXJHQ3MN",
+      "display_name": "학교 S-FXJHQ3MN",
+      "short_label": "A068",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -9.9,
+      "y": 215.0
+    },
+    {
+      "anon_code": "S-JCYSGUK2",
+      "display_name": "학교 S-JCYSGUK2",
+      "short_label": "A069",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": -37.8,
+      "y": 217.7
+    },
+    {
+      "anon_code": "S-9MHNRNT9",
+      "display_name": "학교 S-9MHNRNT9",
+      "short_label": "A070",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": -4.9,
+      "y": 164.9
+    },
+    {
+      "anon_code": "S-CPR749XV",
+      "display_name": "학교 S-CPR749XV",
+      "short_label": "A071",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": -63.8,
+      "y": 264.9
+    },
+    {
+      "anon_code": "S-ZTZBGBKU",
+      "display_name": "학교 S-ZTZBGBKU",
+      "short_label": "A072",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -53.3,
+      "y": 258.7
+    },
+    {
+      "anon_code": "S-RDJG3YNF",
+      "display_name": "학교 S-RDJG3YNF",
+      "short_label": "A073",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": -40.6,
+      "y": 263.0
+    },
+    {
+      "anon_code": "S-S36G8DBB",
+      "display_name": "학교 S-S36G8DBB",
+      "short_label": "A074",
+      "gu": "부평구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": -33.5,
+      "y": 173.4
+    },
+    {
+      "anon_code": "S-EBPM2Q26",
+      "display_name": "학교 S-EBPM2Q26",
+      "short_label": "A075",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -64.2,
+      "y": 279.0
+    },
+    {
+      "anon_code": "S-X98CF5DT",
+      "display_name": "학교 S-X98CF5DT",
+      "short_label": "A076",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -50.0,
+      "y": 173.0
+    },
+    {
+      "anon_code": "S-F8NJCCSK",
+      "display_name": "학교 S-F8NJCCSK",
+      "short_label": "A077",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -55.4,
+      "y": 221.1
+    },
+    {
+      "anon_code": "S-Y2KQCS4U",
+      "display_name": "학교 S-Y2KQCS4U",
+      "short_label": "A078",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": -22.8,
+      "y": 226.1
+    },
+    {
+      "anon_code": "S-CSJ9UVGZ",
+      "display_name": "학교 S-CSJ9UVGZ",
+      "short_label": "A079",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 6.4,
+      "y": 251.4
+    },
+    {
+      "anon_code": "S-L8UC3SBN",
+      "display_name": "학교 S-L8UC3SBN",
+      "short_label": "A080",
+      "gu": "부평구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 14.9,
+      "y": 200.6
+    },
+    {
+      "anon_code": "S-ZKMX5MY8",
+      "display_name": "학교 S-ZKMX5MY8",
+      "short_label": "A081",
+      "gu": "부평구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": -57.1,
+      "y": 234.5
+    },
+    {
+      "anon_code": "S-4GRNBZLW",
+      "display_name": "학교 S-4GRNBZLW",
+      "short_label": "A082",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -45.4,
+      "y": 166.5
+    },
+    {
+      "anon_code": "S-5ABMHMUX",
+      "display_name": "학교 S-5ABMHMUX",
+      "short_label": "A083",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 8.0,
+      "y": 276.4
+    },
+    {
+      "anon_code": "S-PLXU3TQQ",
+      "display_name": "학교 S-PLXU3TQQ",
+      "short_label": "A084",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 23.7,
+      "y": 256.8
+    },
+    {
+      "anon_code": "S-3BVCR4CT",
+      "display_name": "학교 S-3BVCR4CT",
+      "short_label": "A085",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 40.1,
+      "y": 248.6
+    },
+    {
+      "anon_code": "S-VKFCZTKU",
+      "display_name": "학교 S-VKFCZTKU",
+      "short_label": "A086",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": -21.3,
+      "y": 207.7
+    },
+    {
+      "anon_code": "S-YZAFKPXL",
+      "display_name": "학교 S-YZAFKPXL",
+      "short_label": "A087",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": -0.1,
+      "y": 272.0
+    },
+    {
+      "anon_code": "S-EF75FETE",
+      "display_name": "학교 S-EF75FETE",
+      "short_label": "A088",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": -50.5,
+      "y": 168.7
+    },
+    {
+      "anon_code": "S-JXFHW2G8",
+      "display_name": "학교 S-JXFHW2G8",
+      "short_label": "A089",
+      "gu": "부평구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": -39.0,
+      "y": 260.2
+    },
+    {
+      "anon_code": "S-8MQXZPDQ",
+      "display_name": "학교 S-8MQXZPDQ",
+      "short_label": "A090",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": -43.3,
+      "y": 239.7
+    },
+    {
+      "anon_code": "S-LYAYA3QU",
+      "display_name": "학교 S-LYAYA3QU",
+      "short_label": "A091",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": -34.5,
+      "y": 167.4
+    },
+    {
+      "anon_code": "S-XEZ3FSCB",
+      "display_name": "학교 S-XEZ3FSCB",
+      "short_label": "A092",
+      "gu": "부평구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": -3.6,
+      "y": 245.9
+    },
+    {
+      "anon_code": "S-57LZXWDS",
+      "display_name": "학교 S-57LZXWDS",
+      "short_label": "A093",
+      "gu": "부평구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": -48.9,
+      "y": 279.8
+    },
+    {
+      "anon_code": "S-K7KYRNPD",
+      "display_name": "학교 S-K7KYRNPD",
+      "short_label": "A094",
+      "gu": "부평구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 20.5,
+      "y": 273.4
+    },
+    {
+      "anon_code": "S-ZLXA5DT7",
+      "display_name": "학교 S-ZLXA5DT7",
+      "short_label": "A179",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 195.0,
+      "y": 235.1
+    },
+    {
+      "anon_code": "S-C4ERYPMQ",
+      "display_name": "학교 S-C4ERYPMQ",
+      "short_label": "A180",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 193.2,
+      "y": 178.9
+    },
+    {
+      "anon_code": "S-7M7VJ7LU",
+      "display_name": "학교 S-7M7VJ7LU",
+      "short_label": "A181",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 162.8,
+      "y": 180.4
+    },
+    {
+      "anon_code": "S-K9LURQPD",
+      "display_name": "학교 S-K9LURQPD",
+      "short_label": "A182",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 174.5,
+      "y": 248.7
+    },
+    {
+      "anon_code": "S-DXUYQJ5X",
+      "display_name": "학교 S-DXUYQJ5X",
+      "short_label": "A183",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 254.9,
+      "y": 224.6
+    },
+    {
+      "anon_code": "S-86VT7L9Y",
+      "display_name": "학교 S-86VT7L9Y",
+      "short_label": "A184",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 166.6,
+      "y": 168.3
+    },
+    {
+      "anon_code": "S-3X4M9W88",
+      "display_name": "학교 S-3X4M9W88",
+      "short_label": "A185",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 283.2,
+      "y": 256.2
+    },
+    {
+      "anon_code": "S-JDYCKFCX",
+      "display_name": "학교 S-JDYCKFCX",
+      "short_label": "A186",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 161.5,
+      "y": 210.3
+    },
+    {
+      "anon_code": "S-QLZ9LP4X",
+      "display_name": "학교 S-QLZ9LP4X",
+      "short_label": "A187",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 189.7,
+      "y": 209.9
+    },
+    {
+      "anon_code": "S-DMGBAJVQ",
+      "display_name": "학교 S-DMGBAJVQ",
+      "short_label": "A188",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 230.1,
+      "y": 179.5
+    },
+    {
+      "anon_code": "S-CPPJ5PW5",
+      "display_name": "학교 S-CPPJ5PW5",
+      "short_label": "A189",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 271.7,
+      "y": 196.8
+    },
+    {
+      "anon_code": "S-MXBEVFT7",
+      "display_name": "학교 S-MXBEVFT7",
+      "short_label": "A190",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 173.9,
+      "y": 231.1
+    },
+    {
+      "anon_code": "S-N5RC9MX5",
+      "display_name": "학교 S-N5RC9MX5",
+      "short_label": "A191",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 157.3,
+      "y": 229.4
+    },
+    {
+      "anon_code": "S-ZDYWSRKB",
+      "display_name": "학교 S-ZDYWSRKB",
+      "short_label": "A192",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 173.5,
+      "y": 265.4
+    },
+    {
+      "anon_code": "S-3LQE5BKA",
+      "display_name": "학교 S-3LQE5BKA",
+      "short_label": "A193",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 279.9,
+      "y": 255.4
+    },
+    {
+      "anon_code": "S-ZTDPPHQV",
+      "display_name": "학교 S-ZTDPPHQV",
+      "short_label": "A194",
+      "gu": "서구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 191.8,
+      "y": 242.8
+    },
+    {
+      "anon_code": "S-KTQKWGAW",
+      "display_name": "학교 S-KTQKWGAW",
+      "short_label": "A195",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 191.8,
+      "y": 281.6
+    },
+    {
+      "anon_code": "S-7QFKTTWT",
+      "display_name": "학교 S-7QFKTTWT",
+      "short_label": "A196",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 278.2,
+      "y": 249.6
+    },
+    {
+      "anon_code": "S-QYZCVAC9",
+      "display_name": "학교 S-QYZCVAC9",
+      "short_label": "A197",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 211.6,
+      "y": 257.6
+    },
+    {
+      "anon_code": "S-6MBRDUDL",
+      "display_name": "학교 S-6MBRDUDL",
+      "short_label": "A198",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 195.0,
+      "y": 174.2
+    },
+    {
+      "anon_code": "S-Y7LJ8PX3",
+      "display_name": "학교 S-Y7LJ8PX3",
+      "short_label": "A199",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 231.9,
+      "y": 256.0
+    },
+    {
+      "anon_code": "S-JLNNUNUQ",
+      "display_name": "학교 S-JLNNUNUQ",
+      "short_label": "A200",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 278.7,
+      "y": 250.7
+    },
+    {
+      "anon_code": "S-4Y5C7D86",
+      "display_name": "학교 S-4Y5C7D86",
+      "short_label": "A201",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 204.7,
+      "y": 266.2
+    },
+    {
+      "anon_code": "S-923J9QAW",
+      "display_name": "학교 S-923J9QAW",
+      "short_label": "A202",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 282.6,
+      "y": 197.7
+    },
+    {
+      "anon_code": "S-KFASJT9Z",
+      "display_name": "학교 S-KFASJT9Z",
+      "short_label": "A203",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 176.6,
+      "y": 218.8
+    },
+    {
+      "anon_code": "S-9XRMZKCD",
+      "display_name": "학교 S-9XRMZKCD",
+      "short_label": "A204",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 271.6,
+      "y": 235.6
+    },
+    {
+      "anon_code": "S-5FM89H6E",
+      "display_name": "학교 S-5FM89H6E",
+      "short_label": "A205",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 238.3,
+      "y": 192.4
+    },
+    {
+      "anon_code": "S-WA4N2YME",
+      "display_name": "학교 S-WA4N2YME",
+      "short_label": "A206",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 275.4,
+      "y": 263.5
+    },
+    {
+      "anon_code": "S-ABWVENSA",
+      "display_name": "학교 S-ABWVENSA",
+      "short_label": "A207",
+      "gu": "서구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 179.8,
+      "y": 228.5
+    },
+    {
+      "anon_code": "S-5D3DZYSL",
+      "display_name": "학교 S-5D3DZYSL",
+      "short_label": "A208",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 254.9,
+      "y": 201.3
+    },
+    {
+      "anon_code": "S-UECEL3YC",
+      "display_name": "학교 S-UECEL3YC",
+      "short_label": "A209",
+      "gu": "서구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 238.4,
+      "y": 177.4
+    },
+    {
+      "anon_code": "S-LFBAM8N4",
+      "display_name": "학교 S-LFBAM8N4",
+      "short_label": "A210",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 255.1,
+      "y": 162.7
+    },
+    {
+      "anon_code": "S-94BHTGFA",
+      "display_name": "학교 S-94BHTGFA",
+      "short_label": "A211",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 226.1,
+      "y": 171.3
+    },
+    {
+      "anon_code": "S-6F94YAND",
+      "display_name": "학교 S-6F94YAND",
+      "short_label": "A212",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 228.0,
+      "y": 252.6
+    },
+    {
+      "anon_code": "S-KY9AC5ZM",
+      "display_name": "학교 S-KY9AC5ZM",
+      "short_label": "A213",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 177.9,
+      "y": 205.2
+    },
+    {
+      "anon_code": "S-N4MEZ94J",
+      "display_name": "학교 S-N4MEZ94J",
+      "short_label": "A214",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 275.8,
+      "y": 234.0
+    },
+    {
+      "anon_code": "S-25XPLMJR",
+      "display_name": "학교 S-25XPLMJR",
+      "short_label": "A215",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 212.1,
+      "y": 179.0
+    },
+    {
+      "anon_code": "S-AB8DLLKJ",
+      "display_name": "학교 S-AB8DLLKJ",
+      "short_label": "A216",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 168.9,
+      "y": 234.0
+    },
+    {
+      "anon_code": "S-DWMMAJFD",
+      "display_name": "학교 S-DWMMAJFD",
+      "short_label": "A217",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 220.8,
+      "y": 162.6
+    },
+    {
+      "anon_code": "S-N32VZURH",
+      "display_name": "학교 S-N32VZURH",
+      "short_label": "A239",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 253.2,
+      "y": 278.5
+    },
+    {
+      "anon_code": "S-Q9LR6557",
+      "display_name": "학교 S-Q9LR6557",
+      "short_label": "A240",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 162.0,
+      "y": 280.5
+    },
+    {
+      "anon_code": "S-MH3V7PAQ",
+      "display_name": "학교 S-MH3V7PAQ",
+      "short_label": "A259",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 239.6,
+      "y": 236.4
+    },
+    {
+      "anon_code": "S-HY3XXQZT",
+      "display_name": "학교 S-HY3XXQZT",
+      "short_label": "A260",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 219.1,
+      "y": 283.7
+    },
+    {
+      "anon_code": "S-9N9VV23L",
+      "display_name": "학교 S-9N9VV23L",
+      "short_label": "A261",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 250.5,
+      "y": 264.2
+    },
+    {
+      "anon_code": "S-FWQPHGCE",
+      "display_name": "학교 S-FWQPHGCE",
+      "short_label": "A262",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 243.8,
+      "y": 189.1
+    },
+    {
+      "anon_code": "S-6XP6G3JA",
+      "display_name": "학교 S-6XP6G3JA",
+      "short_label": "A263",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 263.3,
+      "y": 261.5
+    },
+    {
+      "anon_code": "S-YC3BDNYP",
+      "display_name": "학교 S-YC3BDNYP",
+      "short_label": "A264",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 255.7,
+      "y": 161.7
+    },
+    {
+      "anon_code": "S-SWVZK4XB",
+      "display_name": "학교 S-SWVZK4XB",
+      "short_label": "A265",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 164.0,
+      "y": 259.2
+    },
+    {
+      "anon_code": "S-3KBY92TC",
+      "display_name": "학교 S-3KBY92TC",
+      "short_label": "A266",
+      "gu": "서구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 195.1,
+      "y": 214.1
+    },
+    {
+      "anon_code": "S-FCME322Z",
+      "display_name": "학교 S-FCME322Z",
+      "short_label": "A267",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 209.9,
+      "y": 155.1
+    },
+    {
+      "anon_code": "S-FZD728W6",
+      "display_name": "학교 S-FZD728W6",
+      "short_label": "A268",
+      "gu": "서구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 177.6,
+      "y": 175.1
+    },
+    {
+      "anon_code": "S-DBXC9ZGM",
+      "display_name": "학교 S-DBXC9ZGM",
+      "short_label": "A269",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 277.5,
+      "y": 212.1
+    },
+    {
+      "anon_code": "S-7F6ZVWJF",
+      "display_name": "학교 S-7F6ZVWJF",
+      "short_label": "A270",
+      "gu": "서구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 258.3,
+      "y": 245.8
+    },
+    {
+      "anon_code": "S-QG5L4EA5",
+      "display_name": "학교 S-QG5L4EA5",
+      "short_label": "A095",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 420.0,
+      "y": 280.0
+    },
+    {
+      "anon_code": "S-YBCBTNRE",
+      "display_name": "학교 S-YBCBTNRE",
+      "short_label": "A096",
+      "gu": "연수구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 494.9,
+      "y": 157.0
+    },
+    {
+      "anon_code": "S-UWUASD4D",
+      "display_name": "학교 S-UWUASD4D",
+      "short_label": "A097",
+      "gu": "연수구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 465.7,
+      "y": 237.6
+    },
+    {
+      "anon_code": "S-DN6ZXVDT",
+      "display_name": "학교 S-DN6ZXVDT",
+      "short_label": "A098",
+      "gu": "연수구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 476.3,
+      "y": 257.7
+    },
+    {
+      "anon_code": "S-ZMX9T4VQ",
+      "display_name": "학교 S-ZMX9T4VQ",
+      "short_label": "A099",
+      "gu": "연수구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 427.7,
+      "y": 236.6
+    },
+    {
+      "anon_code": "S-TU6FAPAA",
+      "display_name": "학교 S-TU6FAPAA",
+      "short_label": "A100",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 452.7,
+      "y": 164.4
+    },
+    {
+      "anon_code": "S-FQE34PF5",
+      "display_name": "학교 S-FQE34PF5",
+      "short_label": "A101",
+      "gu": "연수구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 473.2,
+      "y": 172.6
+    },
+    {
+      "anon_code": "S-XJCCGH6X",
+      "display_name": "학교 S-XJCCGH6X",
+      "short_label": "A102",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 440.4,
+      "y": 216.2
+    },
+    {
+      "anon_code": "S-Y64J5WN9",
+      "display_name": "학교 S-Y64J5WN9",
+      "short_label": "A103",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 433.5,
+      "y": 224.4
+    },
+    {
+      "anon_code": "S-ET2Z2R7V",
+      "display_name": "학교 S-ET2Z2R7V",
+      "short_label": "A104",
+      "gu": "연수구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 504.9,
+      "y": 219.9
+    },
+    {
+      "anon_code": "S-EAHHRES9",
+      "display_name": "학교 S-EAHHRES9",
+      "short_label": "A105",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 492.7,
+      "y": 244.3
+    },
+    {
+      "anon_code": "S-W98C2YAD",
+      "display_name": "학교 S-W98C2YAD",
+      "short_label": "A106",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 424.0,
+      "y": 240.3
+    },
+    {
+      "anon_code": "S-AJZCGP36",
+      "display_name": "학교 S-AJZCGP36",
+      "short_label": "A107",
+      "gu": "연수구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 478.5,
+      "y": 178.2
+    },
+    {
+      "anon_code": "S-5UB3AB6V",
+      "display_name": "학교 S-5UB3AB6V",
+      "short_label": "A108",
+      "gu": "연수구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 459.6,
+      "y": 194.0
+    },
+    {
+      "anon_code": "S-UDZXSDYN",
+      "display_name": "학교 S-UDZXSDYN",
+      "short_label": "A109",
+      "gu": "연수구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 435.5,
+      "y": 220.6
+    },
+    {
+      "anon_code": "S-E528FUNB",
+      "display_name": "학교 S-E528FUNB",
+      "short_label": "A110",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 486.6,
+      "y": 191.0
+    },
+    {
+      "anon_code": "S-2K3V8CMW",
+      "display_name": "학교 S-2K3V8CMW",
+      "short_label": "A111",
+      "gu": "연수구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 492.2,
+      "y": 250.3
+    },
+    {
+      "anon_code": "S-PYLJEB68",
+      "display_name": "학교 S-PYLJEB68",
+      "short_label": "A112",
+      "gu": "연수구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 392.4,
+      "y": 212.7
+    },
+    {
+      "anon_code": "S-WQ2MAP2D",
+      "display_name": "학교 S-WQ2MAP2D",
+      "short_label": "A113",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 483.3,
+      "y": 255.2
+    },
+    {
+      "anon_code": "S-YM5BQX8Q",
+      "display_name": "학교 S-YM5BQX8Q",
+      "short_label": "A114",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 432.4,
+      "y": 198.7
+    },
+    {
+      "anon_code": "S-23JTSVXJ",
+      "display_name": "학교 S-23JTSVXJ",
+      "short_label": "A115",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 450.5,
+      "y": 157.3
+    },
+    {
+      "anon_code": "S-2KPT959E",
+      "display_name": "학교 S-2KPT959E",
+      "short_label": "A116",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 479.0,
+      "y": 166.2
+    },
+    {
+      "anon_code": "S-SMN7HKPR",
+      "display_name": "학교 S-SMN7HKPR",
+      "short_label": "A242",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 487.2,
+      "y": 278.8
+    },
+    {
+      "anon_code": "S-VYV8U2NL",
+      "display_name": "학교 S-VYV8U2NL",
+      "short_label": "A246",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 436.4,
+      "y": 220.4
+    },
+    {
+      "anon_code": "S-GKX75Q84",
+      "display_name": "학교 S-GKX75Q84",
+      "short_label": "A247",
+      "gu": "연수구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 476.2,
+      "y": 216.2
+    },
+    {
+      "anon_code": "S-FW89ASQA",
+      "display_name": "학교 S-FW89ASQA",
+      "short_label": "A248",
+      "gu": "연수구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 449.2,
+      "y": 258.1
+    },
+    {
+      "anon_code": "S-MCEUT96C",
+      "display_name": "학교 S-MCEUT96C",
+      "short_label": "A249",
+      "gu": "연수구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 460.5,
+      "y": 175.5
+    },
+    {
+      "anon_code": "S-RD5RQHH5",
+      "display_name": "학교 S-RD5RQHH5",
+      "short_label": "A250",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 471.5,
+      "y": 175.9
+    },
+    {
+      "anon_code": "S-WMC4W2XE",
+      "display_name": "학교 S-WMC4W2XE",
+      "short_label": "A251",
+      "gu": "연수구",
+      "case_type": 2,
+      "case_policy_label": "우선 검토 대상",
+      "x": 417.2,
+      "y": 199.0
+    },
+    {
+      "anon_code": "S-WT9K3B97",
+      "display_name": "학교 S-WT9K3B97",
+      "short_label": "A252",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 483.9,
+      "y": 222.2
+    },
+    {
+      "anon_code": "S-FAUMNSM2",
+      "display_name": "학교 S-FAUMNSM2",
+      "short_label": "A253",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 481.1,
+      "y": 192.5
+    },
+    {
+      "anon_code": "S-J3KWD6SK",
+      "display_name": "학교 S-J3KWD6SK",
+      "short_label": "A254",
+      "gu": "연수구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 495.0,
+      "y": 179.0
+    },
+    {
+      "anon_code": "S-PQUZTJGF",
+      "display_name": "학교 S-PQUZTJGF",
+      "short_label": "A255",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 412.4,
+      "y": 229.3
+    },
+    {
+      "anon_code": "S-2WFMFWFH",
+      "display_name": "학교 S-2WFMFWFH",
+      "short_label": "A271",
+      "gu": "연수구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 420.2,
+      "y": 189.3
+    },
+    {
+      "anon_code": "S-HTZK97E4",
+      "display_name": "학교 S-HTZK97E4",
+      "short_label": "A043",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 633.3,
+      "y": 238.5
+    },
+    {
+      "anon_code": "S-R5P8S72A",
+      "display_name": "학교 S-R5P8S72A",
+      "short_label": "A044",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 666.8,
+      "y": 181.5
+    },
+    {
+      "anon_code": "S-RGNM32EK",
+      "display_name": "학교 S-RGNM32EK",
+      "short_label": "A045",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 652.1,
+      "y": 284.0
+    },
+    {
+      "anon_code": "S-2YX5KUYB",
+      "display_name": "학교 S-2YX5KUYB",
+      "short_label": "A046",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 636.1,
+      "y": 237.8
+    },
+    {
+      "anon_code": "S-ZEUWN373",
+      "display_name": "학교 S-ZEUWN373",
+      "short_label": "A047",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 717.7,
+      "y": 209.4
+    },
+    {
+      "anon_code": "S-TJHWBZAM",
+      "display_name": "학교 S-TJHWBZAM",
+      "short_label": "A048",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 712.2,
+      "y": 211.8
+    },
+    {
+      "anon_code": "S-QTZXADVF",
+      "display_name": "학교 S-QTZXADVF",
+      "short_label": "A049",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 724.4,
+      "y": 193.1
+    },
+    {
+      "anon_code": "S-LR6769S4",
+      "display_name": "학교 S-LR6769S4",
+      "short_label": "A050",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 631.5,
+      "y": 176.9
+    },
+    {
+      "anon_code": "S-QLVAN56C",
+      "display_name": "학교 S-QLVAN56C",
+      "short_label": "A051",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 685.8,
+      "y": 282.6
+    },
+    {
+      "anon_code": "S-FA7CFHSA",
+      "display_name": "학교 S-FA7CFHSA",
+      "short_label": "A052",
+      "gu": "옹진군",
+      "case_type": 99,
+      "case_policy_label": "별도 정책 필요",
+      "x": 646.9,
+      "y": 263.5
+    },
+    {
+      "anon_code": "S-KG6V54HE",
+      "display_name": "학교 S-KG6V54HE",
+      "short_label": "A001",
+      "gu": "중구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 901.9,
+      "y": 211.1
+    },
+    {
+      "anon_code": "S-PY6S2VPE",
+      "display_name": "학교 S-PY6S2VPE",
+      "short_label": "A002",
+      "gu": "중구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 844.9,
+      "y": 273.0
+    },
+    {
+      "anon_code": "S-LLL27LXS",
+      "display_name": "학교 S-LLL27LXS",
+      "short_label": "A003",
+      "gu": "중구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 824.6,
+      "y": 162.7
+    },
+    {
+      "anon_code": "S-HU6SQXG2",
+      "display_name": "학교 S-HU6SQXG2",
+      "short_label": "A004",
+      "gu": "중구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 914.5,
+      "y": 265.9
+    },
+    {
+      "anon_code": "S-BZX48BFW",
+      "display_name": "학교 S-BZX48BFW",
+      "short_label": "A005",
+      "gu": "중구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 834.1,
+      "y": 215.6
+    },
+    {
+      "anon_code": "S-F43AUELF",
+      "display_name": "학교 S-F43AUELF",
+      "short_label": "A006",
+      "gu": "중구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 852.7,
+      "y": 207.6
+    },
+    {
+      "anon_code": "S-95HAUXLS",
+      "display_name": "학교 S-95HAUXLS",
+      "short_label": "A007",
+      "gu": "중구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 819.8,
+      "y": 214.1
+    },
+    {
+      "anon_code": "S-9G9TL7MU",
+      "display_name": "학교 S-9G9TL7MU",
+      "short_label": "A008",
+      "gu": "중구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 883.6,
+      "y": 196.5
+    },
+    {
+      "anon_code": "S-EPYRA93Y",
+      "display_name": "학교 S-EPYRA93Y",
+      "short_label": "A009",
+      "gu": "중구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 888.3,
+      "y": 213.5
+    },
+    {
+      "anon_code": "S-LV3KK5JN",
+      "display_name": "학교 S-LV3KK5JN",
+      "short_label": "A010",
+      "gu": "중구",
+      "case_type": 3,
+      "case_policy_label": "모니터링 대상",
+      "x": 822.5,
+      "y": 259.9
+    },
+    {
+      "anon_code": "S-83X5U455",
+      "display_name": "학교 S-83X5U455",
+      "short_label": "A011",
+      "gu": "중구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 911.0,
+      "y": 267.2
+    },
+    {
+      "anon_code": "S-D4CZ28LZ",
+      "display_name": "학교 S-D4CZ28LZ",
+      "short_label": "A012",
+      "gu": "중구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 826.6,
+      "y": 273.3
+    },
+    {
+      "anon_code": "S-BKABU3B4",
+      "display_name": "학교 S-BKABU3B4",
+      "short_label": "A013",
+      "gu": "중구",
+      "case_type": 1,
+      "case_policy_label": "즉시 개선 대상",
+      "x": 816.4,
+      "y": 191.1
+    },
+    {
+      "anon_code": "S-7B4RKBJ6",
+      "display_name": "학교 S-7B4RKBJ6",
+      "short_label": "A241",
+      "gu": "중구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 915.5,
+      "y": 206.3
+    },
+    {
+      "anon_code": "S-JM5YUSSH",
+      "display_name": "학교 S-JM5YUSSH",
+      "short_label": "A258",
+      "gu": "중구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 900.1,
+      "y": 246.1
+    },
+    {
+      "anon_code": "S-5KZ7MATV",
+      "display_name": "학교 S-5KZ7MATV",
+      "short_label": "A272",
+      "gu": "중구",
+      "case_type": 4,
+      "case_policy_label": "유지·관리 대상",
+      "x": 916.8,
+      "y": 156.2
+    }
+  ]
+}
