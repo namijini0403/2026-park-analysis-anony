@@ -10,6 +10,16 @@ export type SyntheticMapPoint = {
   stage?: string;
 };
 
+export type SyntheticBarrier = {
+  label: string;
+  kind: "road_barrier";
+  x1_m: number;
+  y1_m: number;
+  x2_m: number;
+  y2_m: number;
+  crossing_count: number;
+};
+
 export type Candidate = {
   label: string;
   walkshed_beneficiary_2029: number;
@@ -61,6 +71,9 @@ export type School = {
   candidates: Candidate[];
   synthetic_map: {
     note: string;
+    radius_500m: number;
+    walk_500m_shape: Array<{ x_m: number; y_m: number }>;
+    barriers: SyntheticBarrier[];
     points: SyntheticMapPoint[];
   };
 };
@@ -103,4 +116,18 @@ export type AppSummaryPayload = {
   principles: string[];
   flow: string[];
   statistics_summary: StatisticsPayload["summary"];
+};
+
+export type MapIndexPayload = {
+  generated_at: string;
+  schools: Array<{
+    anon_code: string;
+    display_name: string;
+    short_label: string;
+    gu: string;
+    case_type: number;
+    case_policy_label: string;
+    x: number;
+    y: number;
+  }>;
 };

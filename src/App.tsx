@@ -1,7 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import type { AppSummaryPayload, Candidate, School, SchoolsPayload, StatisticsPayload, SyntheticMapPoint } from "./types";
+import type { AppSummaryPayload, Candidate, MapIndexPayload, School, SchoolsPayload, StatisticsPayload, SyntheticMapPoint } from "./types";
 
-type ViewMode = "overview" | "detail" | "simulation";
+type ViewMode = "map" | "statistics" | "detail" | "simulation";
+type LayerState = {
+  radius: boolean;
+  walk: boolean;
+  parks: boolean;
+  candidates: boolean;
+  redevelopment: boolean;
+  apartments: boolean;
+  barriers: boolean;
+};
 
 const CASE_COLORS: Record<number, string> = {
   1: "#dc2626",
@@ -53,8 +62,9 @@ export default function App() {
   const [schoolsPayload, setSchoolsPayload] = useState<SchoolsPayload | null>(null);
   const [statistics, setStatistics] = useState<StatisticsPayload | null>(null);
   const [appSummary, setAppSummary] = useState<AppSummaryPayload | null>(null);
+  const [mapIndex, setMapIndex] = useState<MapIndexPayload | null>(null);
   const [selectedCode, setSelectedCode] = useState<string>("");
-  const [view, setView] = useState<ViewMode>("overview");
+  const [view, setView] = useState<ViewMode>("map");
   const [showCover, setShowCover] = useState(true);
   const [showGuide, setShowGuide] = useState(false);
   const [query, setQuery] = useState("");
@@ -66,11 +76,13 @@ export default function App() {
       loadJson<SchoolsPayload>("./data/schools_anon.json"),
       loadJson<StatisticsPayload>("./data/statistics_anon.json"),
       loadJson<AppSummaryPayload>("./data/app_summary_anon.json"),
+      loadJson<MapIndexPayload>("./data/map_index_anon.json"),
     ])
-      .then(([schools, stats, summary]) => {
+      .then(([schools, stats, summary, index]) => {
         setSchoolsPayload(schools);
         setStatistics(stats);
         setAppSummary(summary);
+        setMapIndex(index);
         setSelectedCode(schools.schools[0]?.anon_code ?? "");
       })
       .catch((loadError) => setError(loadError instanceof Error ? loadError.message : "데이터 로딩 실패"));
@@ -100,7 +112,7 @@ export default function App() {
     return <div className="app-error">{error}</div>;
   }
 
-  if (!schoolsPayload || !statistics || !appSummary || !selectedSchool) {
+  if (!schoolsPayload || !statistics || !appSummary || !mapIndex || !selectedSchool) {
     return <div className="app-error">비식별 데이터를 불러오는 중입니다.</div>;
   }
 
@@ -111,7 +123,7 @@ export default function App() {
           summary={appSummary}
           onStart={() => {
             setShowCover(false);
-            setView("overview");
+            setView("map");
           }}
           onGuide={() => setShowGuide(true)}
           onReport={() => {
@@ -129,9 +141,10 @@ export default function App() {
         </div>
 
         <div className="tab-row" aria-label="화면 전환">
-          <button className={view === "overview" ? "active" : ""} onClick={() => setView("overview")}>전체</button>
+          <button className={view === "map" ? "active" : ""} onClick={() => setView("map")}>지도</button>
           <button className={view === "detail" ? "active" : ""} onClick={() => setView("detail")}>상세</button>
           <button className={view === "simulation" ? "active" : ""} onClick={() => setView("simulation")}>시뮬레이션</button>
+          <button className={view === "statistics" ? "active" : ""} onClick={() => setView("statistics")}>통계</button>
         </div>
         <button className="guide-button" type="button" onClick={() => setShowGuide(true)}>
           앱 요약 보기
@@ -173,7 +186,17 @@ export default function App() {
       </aside>
 
       <section className="content">
-        {view === "overview" ? (
+        {view === "map" ? (
+          <MapWorkspace
+            schools={schools}
+            mapIndex={mapIndex}
+            selectedSchool={selectedSchool}
+            selectedGu={selectedGu}
+            onSelect={(code) => setSelectedCode(code)}
+            onOpenDetail={() => setView("detail")}
+            onOpenSimulation={() => setView("simulation")}
+          />
+        ) : view === "statistics" ? (
           <Overview statistics={statistics} onSelect={(code) => { setSelectedCode(code); setView("detail"); }} />
         ) : view === "simulation" ? (
           <Simulation school={selectedSchool} />
@@ -182,6 +205,161 @@ export default function App() {
         )}
       </section>
     </main>
+  );
+}
+
+function MapWorkspace({
+  schools,
+  mapIndex,
+  selectedSchool,
+  selectedGu,
+  onSelect,
+  onOpenDetail,
+  onOpenSimulation,
+}: {
+  schools: School[];
+  mapIndex: MapIndexPayload;
+  selectedSchool: School;
+  selectedGu: string;
+  onSelect: (code: string) => void;
+  onOpenDetail: () => void;
+  onOpenSimulation: () => void;
+}) {
+  const [caseFilter, setCaseFilter] = useState("all");
+  const [layers, setLayers] = useState<LayerState>({
+    radius: true,
+    walk: true,
+    parks: true,
+    candidates: true,
+    redevelopment: true,
+    apartments: true,
+    barriers: true,
+  });
+
+  const rows = useMemo(() => {
+    return mapIndex.schools.filter((school) => {
+      const guMatch = selectedGu === "전체" || school.gu === selectedGu;
+      const caseMatch = caseFilter === "all" || String(school.case_type) === caseFilter;
+      return guMatch && caseMatch;
+    });
+  }, [caseFilter, mapIndex.schools, selectedGu]);
+
+  return (
+    <div className="map-layout">
+      <section className="map-surface">
+        <div className="map-toolbar">
+          <div>
+            <p className="eyebrow">Anonymized Map</p>
+            <h2>비식별 학교 지도</h2>
+          </div>
+          <div className="case-filter">
+            {[
+              ["all", "전체"],
+              ["1", "즉시"],
+              ["2", "우선"],
+              ["3", "모니터링"],
+              ["4", "양호"],
+              ["99", "별도"],
+            ].map(([key, label]) => (
+              <button key={key} className={caseFilter === key ? "active" : ""} onClick={() => setCaseFilter(key)}>
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <AbstractCityMap rows={rows} selectedCode={selectedSchool.anon_code} onSelect={onSelect} />
+        <div className="layer-controls">
+          {([
+            ["radius", "직선 500m"],
+            ["walk", "도보 500m"],
+            ["parks", "공원"],
+            ["candidates", "후보지"],
+            ["redevelopment", "재개발"],
+            ["apartments", "대단지"],
+            ["barriers", "단절요소"],
+          ] as const).map(([key, label]) => (
+            <button
+              key={key}
+              className={layers[key] ? "active" : ""}
+              type="button"
+              onClick={() => setLayers((previous) => ({ ...previous, [key]: !previous[key] }))}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <aside className="map-detail-panel">
+        <div className="panel-title-row">
+          <div>
+            <p className="eyebrow">{selectedSchool.gu} · {selectedSchool.short_label}</p>
+            <h3>{selectedSchool.display_name}</h3>
+          </div>
+          <span style={{ backgroundColor: CASE_COLORS[selectedSchool.case_type] ?? "#64748b" }}>
+            {selectedSchool.case_policy_label}
+          </span>
+        </div>
+        <SyntheticMap mapData={selectedSchool.synthetic_map} layers={layers} highlightCandidates />
+        <div className="map-metrics">
+          <span>공원 {formatDecimal(selectedSchool.metrics.nearest_park_dist_m)}m</span>
+          <span>녹지 {formatDecimal(selectedSchool.metrics.green_ratio)}%</span>
+          <span>후보지 {selectedSchool.candidates.length}곳</span>
+        </div>
+        <div className="panel-actions">
+          <button type="button" onClick={onOpenDetail}>상세 리포트</button>
+          <button type="button" onClick={onOpenSimulation}>시뮬레이션</button>
+        </div>
+      </aside>
+    </div>
+  );
+}
+
+function AbstractCityMap({
+  rows,
+  selectedCode,
+  onSelect,
+}: {
+  rows: MapIndexPayload["schools"];
+  selectedCode: string;
+  onSelect: (code: string) => void;
+}) {
+  const maxX = Math.max(1, ...rows.map((row) => row.x));
+  const maxY = Math.max(1, ...rows.map((row) => row.y));
+  const toX = (value: number) => 52 + (value / maxX) * 696;
+  const toY = (value: number) => 52 + (value / maxY) * 436;
+  return (
+    <svg className="city-map" viewBox="0 0 800 540" role="img" aria-label="비식별 학교 전체 지도">
+      <rect width="800" height="540" rx="18" fill="#081421" />
+      <g opacity="0.2">
+        {Array.from({ length: 11 }).map((_, index) => (
+          <line key={`v-${index}`} x1={60 + index * 68} y1="40" x2={60 + index * 68} y2="500" stroke="#e2e8f0" />
+        ))}
+        {Array.from({ length: 7 }).map((_, index) => (
+          <line key={`h-${index}`} x1="40" y1={58 + index * 68} x2="760" y2={58 + index * 68} stroke="#e2e8f0" />
+        ))}
+      </g>
+      {rows.map((row) => {
+        const active = row.anon_code === selectedCode;
+        return (
+          <g key={row.anon_code} onClick={() => onSelect(row.anon_code)} className="city-point">
+            <circle
+              cx={toX(row.x)}
+              cy={toY(row.y)}
+              r={active ? 11 : 7}
+              fill={CASE_COLORS[row.case_type] ?? "#64748b"}
+              stroke={active ? "#fff" : "rgba(255,255,255,0.45)"}
+              strokeWidth={active ? 3 : 1}
+            />
+            {active ? (
+              <text x={toX(row.x) + 14} y={toY(row.y) + 4} fill="#f8fafc" fontSize="12" fontWeight="800">
+                {row.short_label}
+              </text>
+            ) : null}
+          </g>
+        );
+      })}
+    </svg>
   );
 }
 
@@ -329,7 +507,7 @@ function Detail({ school }: { school: School }) {
       <section className="two-column">
         <article className="panel-card">
           <h3>학교별 도식지도</h3>
-          <SyntheticMap points={school.synthetic_map.points} />
+          <SyntheticMap mapData={school.synthetic_map} />
           <p className="note">{school.synthetic_map.note}</p>
         </article>
         <article className="panel-card">
@@ -366,7 +544,7 @@ function Simulation({ school }: { school: School }) {
       <section className="two-column">
         <article className="panel-card">
           <h3>후보지 도식지도</h3>
-          <SyntheticMap points={school.synthetic_map.points} highlightCandidates />
+          <SyntheticMap mapData={school.synthetic_map} highlightCandidates />
         </article>
         <article className="panel-card">
           <h3>추천 후보</h3>
@@ -397,10 +575,34 @@ function Kpi({ title, value, tone = "default" }: { title: string; value: string;
   );
 }
 
-function SyntheticMap({ points, highlightCandidates = false }: { points: SyntheticMapPoint[]; highlightCandidates?: boolean }) {
+function SyntheticMap({
+  mapData,
+  highlightCandidates = false,
+  layers = {
+    radius: true,
+    walk: true,
+    parks: true,
+    candidates: true,
+    redevelopment: true,
+    apartments: true,
+    barriers: true,
+  },
+}: {
+  mapData: School["synthetic_map"];
+  highlightCandidates?: boolean;
+  layers?: LayerState;
+}) {
+  const points = mapData.points.filter((point) => {
+    if (point.kind === "park") return layers.parks;
+    if (point.kind === "candidate") return layers.candidates;
+    if (point.kind === "redevelopment") return layers.redevelopment;
+    if (point.kind === "apartment") return layers.apartments;
+    return true;
+  });
   const extent = Math.max(700, ...points.map((point) => Math.max(Math.abs(point.x_m), Math.abs(point.y_m)))) * 1.25;
   const toSvg = (value: number) => 300 + (value / extent) * 250;
   const candidates = points.filter((point) => point.kind === "candidate");
+  const walkPath = mapData.walk_500m_shape.map((point) => `${toSvg(point.x_m)},${toSvg(-point.y_m)}`).join(" ");
 
   return (
     <div className="synthetic-map">
@@ -412,9 +614,23 @@ function SyntheticMap({ points, highlightCandidates = false }: { points: Synthet
         </defs>
         <rect width="600" height="600" rx="18" fill="#f8fafc" />
         <rect width="600" height="600" fill="url(#grid)" />
-        {[150, 300, 450].map((r) => (
+        {layers.radius ? <circle cx="300" cy="300" r={toSvg(mapData.radius_500m) - 300} fill="none" stroke="#2563eb" strokeWidth="2.5" strokeDasharray="8 8" /> : null}
+        {layers.walk && walkPath ? <polygon points={walkPath} fill="rgba(16,185,129,0.16)" stroke="#10b981" strokeWidth="3" /> : null}
+        {[150, 300].map((r) => (
           <circle key={r} cx="300" cy="300" r={r / 2} fill="none" stroke="#cbd5e1" strokeDasharray="6 8" />
         ))}
+        {layers.barriers ? mapData.barriers.map((barrier) => (
+          <line
+            key={barrier.label}
+            x1={toSvg(barrier.x1_m)}
+            y1={toSvg(-barrier.y1_m)}
+            x2={toSvg(barrier.x2_m)}
+            y2={toSvg(-barrier.y2_m)}
+            stroke="#f97316"
+            strokeWidth="7"
+            strokeLinecap="round"
+          />
+        )) : null}
         {highlightCandidates && candidates.map((point) => (
           <line
             key={`route-${point.label}`}
