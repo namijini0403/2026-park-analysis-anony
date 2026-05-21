@@ -283,8 +283,10 @@ export default function App() {
     return <div className="app-error">비식별 데이터를 불러오는 중입니다.</div>;
   }
 
+  const shellClassName = view === "map" ? "app-shell map-mode" : "app-shell page-mode";
+
   return (
-    <main className="app-shell">
+    <main className={shellClassName}>
       {showCover ? (
         <IntroCover
           summary={appSummary}
@@ -335,6 +337,30 @@ export default function App() {
           />
         </label>
 
+        {view === "map" ? (
+          <div className="sidebar-selected-card">
+            <div className="detail-head">
+              <div>
+                <p className="eyebrow">{selectedSchool.gu} · {selectedSchool.short_label}</p>
+                <h2 className="detail-name">{selectedSchool.display_name}</h2>
+                <p className="detail-subtitle">{selectedSchool.case_status_label}</p>
+              </div>
+              <span className="detail-badge" style={{ borderColor: CASE_COLORS[selectedSchool.case_type] ?? "#64748b" }}>
+                {selectedSchool.case_policy_label}
+              </span>
+            </div>
+            <div className="detail-metric-grid">
+              <span>공원 {formatDecimal(selectedSchool.metrics.nearest_park_dist_m)}m</span>
+              <span>녹지 {formatDecimal(selectedSchool.metrics.green_ratio)}%</span>
+              <span>후보지 {selectedSchool.candidates.length}곳</span>
+            </div>
+            <div className="panel-actions">
+              <button type="button" onClick={() => setView("detail")}>상세 리포트</button>
+              <button type="button" onClick={() => setView("simulation")}>시뮬레이션</button>
+            </div>
+          </div>
+        ) : null}
+
         <div className="school-list">
           {filteredSchools.slice(0, 80).map((school) => (
             <button
@@ -352,7 +378,7 @@ export default function App() {
         </div>
       </aside>
 
-      <section className="content">
+      <section className={view === "map" ? "content map-content" : "content page-content"}>
         {view === "map" ? (
           <MapWorkspace
             schools={schools}
