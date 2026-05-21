@@ -1896,7 +1896,90 @@ button {
 .page-mode .report-card {
   border-color: #e2e8f0;
   border-radius: 16px;
+  background: #ffffff;
+  color: #0f172a;
   box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
+}
+
+.page-mode .kpi-card strong,
+.page-mode .district-card strong,
+.page-mode .panel-card strong,
+.page-mode .report-card strong,
+.page-mode .panel-card h3,
+.page-mode .report-card h3,
+.page-mode .candidate-card strong,
+.page-mode .detail-head span,
+.page-mode .knn-card-head strong,
+.page-mode .knn-mini-card > strong {
+  color: #0f172a;
+}
+
+.page-mode .kpi-card p,
+.page-mode .district-card p,
+.page-mode .panel-card p,
+.page-mode .report-card p,
+.page-mode .candidate-card p,
+.page-mode .filter-option small,
+.page-mode .weight-option small,
+.page-mode .top-list small,
+.page-mode .city-top-list small,
+.page-mode .note {
+  color: #64748b;
+}
+
+.page-mode .panel-title-row span,
+.page-mode .candidate-heading span,
+.page-mode .detail-head strong,
+.page-mode .card-head span {
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.page-mode .badge-row span {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+}
+
+.page-mode .badge-row span:first-child {
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.page-mode .metric-line,
+.page-mode .policy-flow div,
+.page-mode .filter-option,
+.page-mode .weight-option,
+.page-mode .candidate-card,
+.page-mode .detail-head,
+.page-mode .similarity-item,
+.page-mode .knn-card,
+.page-mode .knn-mini-card,
+.page-mode .top-list button,
+.page-mode .city-top-list button {
+  border-color: #e2e8f0;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.page-mode .candidate-card.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.page-mode .score-pills span,
+.page-mode .reason-list span,
+.page-mode .knn-pill,
+.page-mode .knn-empty {
+  color: #334155;
+}
+
+.page-mode .rank-badge,
+.page-mode .primary-action,
+.page-mode .mode-toggle button.active {
+  color: #ffffff;
 }
 
 .page-mode .report-grid {
