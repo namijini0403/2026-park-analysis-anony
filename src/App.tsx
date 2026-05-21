@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import type { WheelEvent } from "react";
 import type { AppSummaryPayload, Candidate, MapIndexPayload, School, SchoolsPayload, StatisticsPayload, SyntheticMapPoint } from "./types";
 
 type ViewMode = "map" | "statistics" | "detail" | "simulation";
@@ -516,12 +517,19 @@ function AbstractCityMap({
   const viewY = Math.min(Math.max(center.y - viewHeight / 2, 0), 540 - viewHeight);
   const viewBox = `${viewX} ${viewY} ${viewWidth} ${viewHeight}`;
   const markerScale = 1 / zoom;
+  const changeZoom = (delta: number) => {
+    setZoom((value) => Math.min(4, Math.max(1, Number((value + delta).toFixed(2)))));
+  };
+  const handleWheelZoom = (event: WheelEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    changeZoom(event.deltaY < 0 ? 0.25 : -0.25);
+  };
 
   return (
-    <div className="city-map-wrap">
+    <div className="city-map-wrap" onWheel={handleWheelZoom}>
       <div className="zoom-controls" aria-label="전체 지도 확대 축소">
-        <button type="button" onClick={() => setZoom((value) => Math.min(4, Number((value + 0.5).toFixed(1))))}>+</button>
-        <button type="button" onClick={() => setZoom((value) => Math.max(1, Number((value - 0.5).toFixed(1))))}>-</button>
+        <button type="button" onClick={() => changeZoom(0.5)}>+</button>
+        <button type="button" onClick={() => changeZoom(-0.5)}>-</button>
         <button type="button" onClick={() => setZoom(1)}>{zoom.toFixed(1)}x</button>
       </div>
       <svg className="city-map" viewBox={viewBox} role="img" aria-label="비식별 학교 전체 지도">
@@ -879,17 +887,7 @@ function Detail({ school, onOpenSimulation }: { school: School; onOpenSimulation
           <SyntheticMap mapData={school.synthetic_map} />
           <p className="note">{school.synthetic_map.note}</p>
         </article>
-        <article className="panel-card">
-          <h3>KNN 유사학교 비교</h3>
-          <div className="compare-list">
-            {school.similar_schools.length ? school.similar_schools.map((peer) => (
-              <div key={peer.anon_code}>
-                <strong>{peer.rank}. {peer.display_name}</strong>
-                <span>{peer.gu} · 공원 {formatDecimal(peer.nearest_park_dist_m)}m · 녹지 {formatDecimal(peer.green_ratio)}%</span>
-              </div>
-            )) : <p className="note">표시 가능한 비식별 유사학교가 없습니다.</p>}
-          </div>
-        </article>
+        <SimilarSchoolsSection school={school} />
       </section>
 
       <section className="two-column">
@@ -919,6 +917,103 @@ function Detail({ school, onOpenSimulation }: { school: School; onOpenSimulation
           </button>
         </article>
       </section>
+    </div>
+  );
+}
+
+function getSimilarityPercent(distance: number) {
+  return Math.max(1, Math.min(99, Math.round(100 / (1 + distance))));
+}
+
+function SimilarSchoolsSection({ school }: { school: School }) {
+  const peers = school.similar_schools;
+
+  return (
+    <article className="panel-card knn-panel">
+      <div className="panel-title-row">
+        <div>
+          <p className="eyebrow">Benchmark</p>
+          <h3>KNN 유사학교 비교</h3>
+        </div>
+        <span className="subtle-badge">유사학교 {peers.length}개</span>
+      </div>
+      {peers.length ? (
+        <div className="knn-grid">
+          <div className="knn-card">
+            <div className="knn-card-head">
+              <strong>유사학교 {peers.length}개</strong>
+              <span>공간 특성 기반 유사도</span>
+            </div>
+            <div className="similarity-list">
+              {peers.map((peer) => (
+                <SimilarityBar
+                  key={peer.anon_code}
+                  label={`${peer.rank}. ${peer.display_name}`}
+                  districtName={peer.gu}
+                  percent={getSimilarityPercent(peer.distance)}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="knn-side">
+            <KnnTextCard title="공통점" items={school.similarity_common_points} empty="집계된 공통점 없음" />
+            <KnnTextCard title="상대 강점" items={school.relative_strengths} empty="두드러진 상대 강점 없음" tone="green" />
+            <KnnTextCard title="상대 약점" items={school.relative_weaknesses} empty="집계된 상대 약점 없음" tone="red" />
+          </div>
+        </div>
+      ) : (
+        <p className="note">표시 가능한 비식별 유사학교가 없습니다.</p>
+      )}
+    </article>
+  );
+}
+
+function SimilarityBar({
+  label,
+  districtName,
+  percent,
+}: {
+  label: string;
+  districtName: string;
+  percent: number;
+}) {
+  return (
+    <div className="similarity-item">
+      <div className="similarity-head">
+        <div>
+          <strong>{label}</strong>
+          <span>{districtName}</span>
+        </div>
+        <em>{percent}%</em>
+      </div>
+      <div className="similarity-bar-track">
+        <i style={{ width: `${percent}%` }} />
+      </div>
+    </div>
+  );
+}
+
+function KnnTextCard({
+  title,
+  items,
+  empty,
+  tone = "default",
+}: {
+  title: string;
+  items: string[];
+  empty: string;
+  tone?: "default" | "green" | "red";
+}) {
+  return (
+    <div className="knn-mini-card">
+      <strong>{title}</strong>
+      <div className="knn-pill-row">
+        {items.length ? items.map((item) => (
+          <span className={`knn-pill ${tone}`} key={item}>{item}</span>
+        )) : (
+          <span className="knn-empty">{empty}</span>
+        )}
+      </div>
     </div>
   );
 }

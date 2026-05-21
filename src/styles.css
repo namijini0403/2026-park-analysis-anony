@@ -420,6 +420,7 @@ button {
   overflow: hidden;
   border-radius: 14px;
   background: #081421;
+  overscroll-behavior: contain;
 }
 
 .city-map {
@@ -480,6 +481,11 @@ button {
   color: #fff;
   font-size: 12px;
   font-weight: 900;
+}
+
+.panel-title-row .subtle-badge {
+  background: #f1f5f9;
+  color: #334155;
 }
 
 .map-metrics span {
@@ -733,6 +739,145 @@ button {
   border-radius: 12px;
   padding: 12px;
   background: #f8fafc;
+}
+
+.knn-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.knn-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.knn-card,
+.knn-mini-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  padding: 14px;
+}
+
+.knn-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.knn-card-head strong,
+.knn-mini-card > strong {
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.knn-card-head span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.similarity-list,
+.knn-side,
+.knn-pill-row {
+  display: grid;
+  gap: 10px;
+}
+
+.similarity-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 11px;
+  background: #f8fafc;
+}
+
+.similarity-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.similarity-head strong,
+.similarity-head span {
+  display: block;
+}
+
+.similarity-head strong {
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.similarity-head span {
+  margin-top: 2px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.similarity-head em {
+  color: #1d4ed8;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.similarity-bar-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e2e8f0;
+}
+
+.similarity-bar-track i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2563eb, #16a34a);
+}
+
+.knn-mini-card {
+  min-height: 94px;
+}
+
+.knn-pill-row {
+  margin-top: 10px;
+}
+
+.knn-pill,
+.knn-empty {
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.knn-pill {
+  background: #eef2ff;
+  color: #3730a3;
+}
+
+.knn-pill.green {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.knn-pill.red {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.knn-empty {
+  background: #f8fafc;
+  color: #64748b;
 }
 
 .policy-card {
@@ -1310,6 +1455,7 @@ button {
   .kpi-grid,
   .report-grid,
   .two-column,
+  .knn-grid,
   .map-layout,
   .simulation-grid,
   .statistics-grid {

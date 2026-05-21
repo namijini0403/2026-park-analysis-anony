@@ -233,6 +233,10 @@ def parse_linked_names(value: Any) -> list[str]:
     return sorted(set(match.strip() for match in re.findall(r"'([^']+)'", text) if match.strip()))
 
 
+def split_pipe_text(value: Any) -> list[str]:
+    return [part.strip() for part in str(value or "").split("|") if part.strip()]
+
+
 def case_policy(case_type: Any) -> str:
     key = safe_int(case_type)
     return {
@@ -449,6 +453,7 @@ def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any], dict[
                     "anon_code": peer_mapping["anon_code"],
                     "display_name": peer_mapping["display_name"],
                     "gu": str(similar.get(f"similar_school_{rank}_gu") or ""),
+                    "distance": rounded(similar.get(f"similar_school_{rank}_distance"), 4),
                     "nearest_park_dist_m": rounded(similar.get(f"similar_school_{rank}_nearest_park_dist_m"), 1),
                     "green_ratio": rounded(similar.get(f"similar_school_{rank}_iso_green_ratio"), 2),
                     "playground_count": safe_int(similar.get(f"similar_school_{rank}_iso_playground_count")),
@@ -478,6 +483,9 @@ def build_school_payloads() -> tuple[list[dict[str, Any]], dict[str, Any], dict[
             },
             "trend": trends,
             "similar_schools": similar_schools,
+            "similarity_common_points": split_pipe_text(similar.get("common_points") or similar.get("common_traits")),
+            "relative_strengths": split_pipe_text(similar.get("relative_strengths")),
+            "relative_weaknesses": split_pipe_text(similar.get("relative_weaknesses")),
             "candidates": school_candidates,
             "synthetic_map": {
                 "note": "실제 좌표가 아닌 학교 중심 상대거리 도식입니다. 학교별 고정 난수 회전/반전을 적용했습니다.",
@@ -564,6 +572,9 @@ def build_split_payloads(
                 "metrics": school["metrics"],
                 "trend": school["trend"],
                 "similar_schools": school["similar_schools"],
+                "similarity_common_points": school["similarity_common_points"],
+                "relative_strengths": school["relative_strengths"],
+                "relative_weaknesses": school["relative_weaknesses"],
                 "interpretation": {
                     "current_gap": "공원 접근, 녹지 비율, 놀이터 수를 분리해 검토합니다.",
                     "future_demand": "현재 학생 수와 2029/2031 잠재 수요를 함께 봅니다.",

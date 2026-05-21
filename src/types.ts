@@ -42,6 +42,7 @@ export type SimilarSchool = {
   anon_code: string;
   display_name: string;
   gu: string;
+  distance: number;
   nearest_park_dist_m: number;
   green_ratio: number;
   playground_count: number;
@@ -68,6 +69,9 @@ export type School = {
   };
   trend: Array<{ year: number; students: number }>;
   similar_schools: SimilarSchool[];
+  similarity_common_points: string[];
+  relative_strengths: string[];
+  relative_weaknesses: string[];
   candidates: Candidate[];
   synthetic_map: {
     note: string;
