@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import type { PointerEvent as ReactPointerEvent, WheelEvent } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent, PointerEvent as ReactPointerEvent, WheelEvent } from "react";
 import type { AppSummaryPayload, Candidate, MapIndexPayload, School, SchoolsPayload, StatisticsPayload, SyntheticMapPoint } from "./types";
 
 type ViewMode = "map" | "statistics" | "detail" | "simulation";
@@ -529,6 +529,7 @@ function AbstractCityMap({
   const [zoom, setZoom] = useState(1);
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
   const [dragAnchor, setDragAnchor] = useState<{ clientX: number; clientY: number; panX: number; panY: number } | null>(null);
+  const dragDistanceRef = useRef(0);
   const toX = (value: number) => Math.min(760, Math.max(40, value));
   const toY = (value: number) => Math.min(500, Math.max(40, value));
   const selectedRow = rows.find((row) => row.anon_code === selectedCode);
@@ -558,6 +559,7 @@ function AbstractCityMap({
   };
   const handleMapPointerDown = (event: ReactPointerEvent<SVGSVGElement>) => {
     if (event.button !== 0) return;
+    dragDistanceRef.current = 0;
     event.currentTarget.setPointerCapture(event.pointerId);
     setDragAnchor({ clientX: event.clientX, clientY: event.clientY, panX: panOffset.x, panY: panOffset.y });
   };
@@ -566,6 +568,7 @@ function AbstractCityMap({
     const bounds = event.currentTarget.getBoundingClientRect();
     const dx = ((event.clientX - dragAnchor.clientX) * viewWidth) / bounds.width;
     const dy = ((event.clientY - dragAnchor.clientY) * viewHeight) / bounds.height;
+    dragDistanceRef.current = Math.max(dragDistanceRef.current, Math.hypot(event.clientX - dragAnchor.clientX, event.clientY - dragAnchor.clientY));
     setPanOffset({ x: dragAnchor.panX - dx, y: dragAnchor.panY - dy });
   };
   const handleMapPointerUp = (event: ReactPointerEvent<SVGSVGElement>) => {
@@ -573,6 +576,26 @@ function AbstractCityMap({
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
     setDragAnchor(null);
+  };
+  const handlePointPointerDown = (event: ReactPointerEvent<SVGGElement>) => {
+    event.stopPropagation();
+    dragDistanceRef.current = 0;
+    setDragAnchor(null);
+  };
+  const handleMapClick = (event: ReactMouseEvent<SVGSVGElement>) => {
+    if (dragDistanceRef.current > 5) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const clickX = event.clientX;
+    const clickY = event.clientY;
+    const nearest = rows.reduce<{ code: string; distance: number } | null>((best, row) => {
+      const screenX = bounds.left + ((toX(row.x) - viewX) / viewWidth) * bounds.width;
+      const screenY = bounds.top + ((toY(row.y) - viewY) / viewHeight) * bounds.height;
+      const distance = Math.hypot(screenX - clickX, screenY - clickY);
+      return !best || distance < best.distance ? { code: row.anon_code, distance } : best;
+    }, null);
+    if (nearest && nearest.distance <= 28) {
+      onSelect(nearest.code);
+    }
   };
 
   return (
@@ -591,6 +614,7 @@ function AbstractCityMap({
         onPointerMove={handleMapPointerMove}
         onPointerUp={handleMapPointerUp}
         onPointerCancel={handleMapPointerUp}
+        onClick={handleMapClick}
       >
         <rect width="800" height="540" rx="18" fill="#081421" />
         <g opacity="0.2">
@@ -606,7 +630,11 @@ function AbstractCityMap({
           const x = toX(row.x);
           const y = toY(row.y);
           return (
-            <g key={row.anon_code} onClick={() => onSelect(row.anon_code)} className="city-point">
+            <g
+              key={row.anon_code}
+              onPointerDown={handlePointPointerDown}
+              className="city-point"
+            >
               <circle
                 cx={x}
                 cy={y}
@@ -614,9 +642,17 @@ function AbstractCityMap({
                 fill={CASE_COLORS[row.case_type] ?? "#64748b"}
                 stroke={active ? "#fff" : "rgba(255,255,255,0.45)"}
                 strokeWidth={(active ? 3 : 1) * markerScale}
+                onPointerDown={handlePointPointerDown}
               />
               {active ? (
-                <text x={x + 14 * markerScale} y={y + 4 * markerScale} fill="#f8fafc" fontSize={12 * markerScale} fontWeight="800">
+                <text
+                  x={x + 14 * markerScale}
+                  y={y + 4 * markerScale}
+                  fill="#f8fafc"
+                  fontSize={12 * markerScale}
+                  fontWeight="800"
+                  onPointerDown={handlePointPointerDown}
+                >
                   {row.short_label}
                 </text>
               ) : null}
