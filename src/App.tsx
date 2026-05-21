@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { WheelEvent } from "react";
+import type { PointerEvent as ReactPointerEvent, WheelEvent } from "react";
 import type { AppSummaryPayload, Candidate, MapIndexPayload, School, SchoolsPayload, StatisticsPayload, SyntheticMapPoint } from "./types";
 
 type ViewMode = "map" | "statistics" | "detail" | "simulation";
@@ -527,6 +527,8 @@ function AbstractCityMap({
   onSelect: (code: string) => void;
 }) {
   const [zoom, setZoom] = useState(1);
+  const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
+  const [dragAnchor, setDragAnchor] = useState<{ clientX: number; clientY: number; panX: number; panY: number } | null>(null);
   const toX = (value: number) => Math.min(760, Math.max(40, value));
   const toY = (value: number) => Math.min(500, Math.max(40, value));
   const selectedRow = rows.find((row) => row.anon_code === selectedCode);
@@ -539,8 +541,12 @@ function AbstractCityMap({
   const center = selectedRow ? { x: toX(selectedRow.x), y: toY(selectedRow.y) } : fallbackCenter;
   const viewWidth = 800 / zoom;
   const viewHeight = 540 / zoom;
-  const viewX = Math.min(Math.max(center.x - viewWidth / 2, 0), 800 - viewWidth);
-  const viewY = Math.min(Math.max(center.y - viewHeight / 2, 0), 540 - viewHeight);
+  const panSlackX = 260;
+  const panSlackY = 90;
+  const clampViewX = (value: number) => Math.min(Math.max(value, -panSlackX), Math.max(0, 800 - viewWidth) + panSlackX);
+  const clampViewY = (value: number) => Math.min(Math.max(value, -panSlackY), Math.max(0, 540 - viewHeight) + panSlackY);
+  const viewX = clampViewX(center.x - viewWidth / 2 + panOffset.x);
+  const viewY = clampViewY(center.y - viewHeight / 2 + panOffset.y);
   const viewBox = `${viewX} ${viewY} ${viewWidth} ${viewHeight}`;
   const markerScale = 1 / zoom;
   const changeZoom = (delta: number) => {
@@ -550,15 +556,42 @@ function AbstractCityMap({
     event.preventDefault();
     changeZoom(event.deltaY < 0 ? 0.25 : -0.25);
   };
+  const handleMapPointerDown = (event: ReactPointerEvent<SVGSVGElement>) => {
+    if (event.button !== 0) return;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setDragAnchor({ clientX: event.clientX, clientY: event.clientY, panX: panOffset.x, panY: panOffset.y });
+  };
+  const handleMapPointerMove = (event: ReactPointerEvent<SVGSVGElement>) => {
+    if (!dragAnchor) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const dx = ((event.clientX - dragAnchor.clientX) * viewWidth) / bounds.width;
+    const dy = ((event.clientY - dragAnchor.clientY) * viewHeight) / bounds.height;
+    setPanOffset({ x: dragAnchor.panX - dx, y: dragAnchor.panY - dy });
+  };
+  const handleMapPointerUp = (event: ReactPointerEvent<SVGSVGElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    setDragAnchor(null);
+  };
 
   return (
     <div className="city-map-wrap" onWheel={handleWheelZoom}>
       <div className="zoom-controls" aria-label="전체 지도 확대 축소">
         <button type="button" onClick={() => changeZoom(0.5)}>+</button>
         <button type="button" onClick={() => changeZoom(-0.5)}>-</button>
-        <button type="button" onClick={() => setZoom(1)}>{zoom.toFixed(1)}x</button>
+        <button type="button" onClick={() => { setZoom(1); setPanOffset({ x: 0, y: 0 }); }}>{zoom.toFixed(1)}x</button>
       </div>
-      <svg className="city-map" viewBox={viewBox} role="img" aria-label="비식별 학교 전체 지도">
+      <svg
+        className={dragAnchor ? "city-map dragging" : "city-map"}
+        viewBox={viewBox}
+        role="img"
+        aria-label="비식별 학교 전체 지도"
+        onPointerDown={handleMapPointerDown}
+        onPointerMove={handleMapPointerMove}
+        onPointerUp={handleMapPointerUp}
+        onPointerCancel={handleMapPointerUp}
+      >
         <rect width="800" height="540" rx="18" fill="#081421" />
         <g opacity="0.2">
           {Array.from({ length: 11 }).map((_, index) => (

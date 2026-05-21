@@ -428,6 +428,13 @@ button {
   height: 100%;
   min-height: inherit;
   display: block;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.city-map.dragging {
+  cursor: grabbing;
 }
 
 .zoom-controls {
