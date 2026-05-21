@@ -925,14 +925,61 @@ function Detail({ school, onOpenSimulation }: { school: School; onOpenSimulation
   const topCandidate = [...school.candidates].sort((left, right) => getCandidateScore(right) - getCandidateScore(left))[0];
 
   return (
-    <div className="page-grid">
-      <section className="hero-band compact">
-        <p className="eyebrow">{school.gu} · {school.short_label}</p>
-        <h2>{school.display_name}</h2>
-        <div className="badge-row">
-          <span style={{ backgroundColor: CASE_COLORS[school.case_type] ?? "#64748b" }}>{school.case_policy_label}</span>
-          <span>{school.case_status_label}</span>
+    <div className="page-grid detail-report">
+      <section className="hero-band compact detail-report-hero">
+        <div className="report-title-block">
+          <p className="eyebrow">School Detail Report</p>
+          <h2>{school.display_name}</h2>
+          <p className="report-lead">
+            현재 생활권 격차, 미래 수요, 접근 마찰, KNN 비교군을 한 화면에서 연결해 정책 검토 순서를 제안합니다.
+          </p>
+          <div className="badge-row">
+            <span style={{ backgroundColor: CASE_COLORS[school.case_type] ?? "#64748b" }}>{school.case_policy_label}</span>
+            <span>{school.case_status_label}</span>
+            <span>{school.gu} · {school.short_label}</span>
+          </div>
         </div>
+        <div className="report-hero-metrics" aria-label="핵심 요약">
+          <div>
+            <span>최근접 공원</span>
+            <strong>{metricLabel(metrics.nearest_park_dist_m, "m")}</strong>
+          </div>
+          <div>
+            <span>2029 잠재 수요</span>
+            <strong>{metricLabel(metrics.potential_demand_2029, "명")}</strong>
+          </div>
+          <div>
+            <span>후보지</span>
+            <strong>{candidateCount}곳</strong>
+          </div>
+        </div>
+      </section>
+
+      <section className="report-profile-grid" aria-label="상세 리포트 요약">
+        <article className="profile-card">
+          <p className="eyebrow">Profile</p>
+          <h3>진단 대상</h3>
+          <div className="profile-row"><span>비식별 코드</span><strong>{school.display_name}</strong></div>
+          <div className="profile-row"><span>구 단위</span><strong>{school.gu}</strong></div>
+          <div className="profile-row"><span>정책 상태</span><strong>{school.case_status_label}</strong></div>
+        </article>
+        <article className="profile-card">
+          <p className="eyebrow">Living Area</p>
+          <h3>생활권 현황</h3>
+          <div className="profile-row"><span>활동규모 공원</span><strong>{metrics.functional_park_count_500m}개</strong></div>
+          <div className="profile-row"><span>도보권 놀이터</span><strong>{metrics.playground_count_500m}개</strong></div>
+          <div className="profile-row"><span>녹지 비율</span><strong>{formatDecimal(metrics.green_ratio)}%</strong></div>
+        </article>
+        <article className="profile-card action-card">
+          <p className="eyebrow">Next Action</p>
+          <h3>검토 액션</h3>
+          <p>
+            후보지 추천은 자동 결정이 아니라 현장 검토 전 비교 신호입니다. 필터와 가중치를 조정해 같은 학교의 대안을 비교합니다.
+          </p>
+          <button className="primary-action" type="button" onClick={onOpenSimulation}>
+            후보지 시뮬레이션 열기
+          </button>
+        </article>
       </section>
 
       <section className="kpi-grid">
@@ -994,14 +1041,16 @@ function Detail({ school, onOpenSimulation }: { school: School; onOpenSimulation
           <SyntheticMap mapData={school.synthetic_map} />
           <p className="note">{school.synthetic_map.note}</p>
         </article>
-        <SimilarSchoolsSection school={school} />
-      </section>
-
-      <section className="two-column">
         <article className="panel-card">
+          <p className="eyebrow">Trend</p>
           <h3>학생 수 추세</h3>
           <TrendBar trend={school.trend} />
         </article>
+      </section>
+
+      <SimilarSchoolsSection school={school} />
+
+      <section className="report-action-row">
         <article className="panel-card policy-card">
           <p className="eyebrow">Policy Interpretation</p>
           <h3>정책 판단 흐름</h3>
@@ -1034,6 +1083,9 @@ function getSimilarityPercent(distance: number) {
 
 function SimilarSchoolsSection({ school }: { school: School }) {
   const peers = school.similar_schools;
+  const avgPark = peers.length ? peers.reduce((sum, peer) => sum + peer.nearest_park_dist_m, 0) / peers.length : 0;
+  const avgGreen = peers.length ? peers.reduce((sum, peer) => sum + peer.green_ratio, 0) / peers.length : 0;
+  const avgPlayground = peers.length ? peers.reduce((sum, peer) => sum + peer.playground_count, 0) / peers.length : 0;
 
   return (
     <article className="panel-card knn-panel">
@@ -1048,8 +1100,14 @@ function SimilarSchoolsSection({ school }: { school: School }) {
         <div className="knn-grid">
           <div className="knn-card">
             <div className="knn-card-head">
-              <strong>유사학교 {peers.length}개</strong>
-              <span>공간 특성 기반 유사도</span>
+              <strong>KNN 비교군 및 현재 위치</strong>
+              <span>좋은 방향은 왼쪽 위</span>
+            </div>
+            <KnnPositionChart school={school} peers={peers} avgPark={avgPark} avgGreen={avgGreen} />
+            <div className="knn-average-grid">
+              <span>비교군 평균 공원 <strong>{formatNumber(avgPark)}m</strong></span>
+              <span>녹지 <strong>{formatDecimal(avgGreen)}%</strong></span>
+              <span>놀이터 <strong>{formatDecimal(avgPlayground)}개</strong></span>
             </div>
             <div className="similarity-list">
               {peers.map((peer) => (
@@ -1072,6 +1130,86 @@ function SimilarSchoolsSection({ school }: { school: School }) {
         <p className="note">표시 가능한 비식별 유사학교가 없습니다.</p>
       )}
     </article>
+  );
+}
+
+function KnnPositionChart({
+  school,
+  peers,
+  avgPark,
+  avgGreen,
+}: {
+  school: School;
+  peers: School["similar_schools"];
+  avgPark: number;
+  avgGreen: number;
+}) {
+  const metrics = school.metrics;
+  const width = 760;
+  const height = 420;
+  const margin = { top: 28, right: 28, bottom: 52, left: 62 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const maxPark = Math.max(1200, metrics.nearest_park_dist_m, avgPark, ...peers.map((peer) => peer.nearest_park_dist_m));
+  const maxGreen = Math.max(24, metrics.green_ratio, avgGreen, ...peers.map((peer) => peer.green_ratio));
+  const xMax = Math.ceil(maxPark / 300) * 300;
+  const yMax = Math.ceil(maxGreen / 5) * 5;
+  const parkThreshold = 500;
+  const greenThreshold = 5;
+  const scaleX = (value: number) => margin.left + (Math.min(value, xMax) / xMax) * chartWidth;
+  const scaleY = (value: number) => margin.top + chartHeight - (Math.min(value, yMax) / yMax) * chartHeight;
+  const xTicks = [0, Math.round(xMax * 0.25), Math.round(xMax * 0.5), Math.round(xMax * 0.75), xMax];
+  const yTicks = [0, Math.round(yMax * 0.25), Math.round(yMax * 0.5), Math.round(yMax * 0.75), yMax];
+
+  return (
+    <div className="knn-position-chart">
+      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="KNN 유사학교 위치 그래프">
+        <rect width={width} height={height} fill="#050b14" />
+        <rect x={margin.left} y={margin.top} width={Math.max(0, scaleX(parkThreshold) - margin.left)} height={Math.max(0, scaleY(greenThreshold) - margin.top)} fill="rgba(16, 185, 129, 0.12)" />
+        <rect x={scaleX(parkThreshold)} y={margin.top} width={Math.max(0, margin.left + chartWidth - scaleX(parkThreshold))} height={Math.max(0, scaleY(greenThreshold) - margin.top)} fill="rgba(251, 191, 36, 0.09)" />
+        <rect x={margin.left} y={scaleY(greenThreshold)} width={Math.max(0, scaleX(parkThreshold) - margin.left)} height={Math.max(0, margin.top + chartHeight - scaleY(greenThreshold))} fill="rgba(251, 191, 36, 0.08)" />
+        <rect x={scaleX(parkThreshold)} y={scaleY(greenThreshold)} width={Math.max(0, margin.left + chartWidth - scaleX(parkThreshold))} height={Math.max(0, margin.top + chartHeight - scaleY(greenThreshold))} fill="rgba(248, 113, 113, 0.12)" />
+        {xTicks.map((tick) => (
+          <g key={`x-${tick}`}>
+            <line x1={scaleX(tick)} x2={scaleX(tick)} y1={margin.top} y2={margin.top + chartHeight} stroke="rgba(148, 163, 184, 0.2)" strokeDasharray="3 3" />
+            <text x={scaleX(tick)} y={height - 18} textAnchor="middle" fontSize="11" fill="#94a3b8">{formatNumber(tick)}</text>
+          </g>
+        ))}
+        {yTicks.map((tick) => (
+          <g key={`y-${tick}`}>
+            <line x1={margin.left} x2={margin.left + chartWidth} y1={scaleY(tick)} y2={scaleY(tick)} stroke="rgba(148, 163, 184, 0.2)" strokeDasharray="3 3" />
+            <text x={margin.left - 12} y={scaleY(tick) + 4} textAnchor="end" fontSize="11" fill="#94a3b8">{tick}</text>
+          </g>
+        ))}
+        <line x1={scaleX(parkThreshold)} x2={scaleX(parkThreshold)} y1={margin.top} y2={margin.top + chartHeight} stroke="rgba(255,255,255,0.35)" strokeDasharray="6 5" />
+        <line x1={margin.left} x2={margin.left + chartWidth} y1={scaleY(greenThreshold)} y2={scaleY(greenThreshold)} stroke="rgba(255,255,255,0.35)" strokeDasharray="6 5" />
+        <text x={scaleX(parkThreshold) + 8} y={height - 34} fontSize="11" fontWeight="700" fill="#cbd5e1">500m 판단선</text>
+        <text x={margin.left + 8} y={scaleY(greenThreshold) - 10} fontSize="11" fontWeight="700" fill="#cbd5e1">녹지 5%</text>
+        <text x={margin.left + 10} y={margin.top + 18} fontSize="12" fontWeight="800" fill="#6ee7b7">생활환경 양호</text>
+        <text x={margin.left + chartWidth - 120} y={margin.top + 18} fontSize="12" fontWeight="800" fill="#facc15">공원 접근 불리</text>
+        <text x={margin.left + 10} y={margin.top + chartHeight - 12} fontSize="12" fontWeight="800" fill="#facc15">녹지 부족</text>
+        <text x={margin.left + chartWidth - 76} y={margin.top + chartHeight - 12} fontSize="12" fontWeight="800" fill="#fca5a5">이중 취약</text>
+        {peers.map((peer) => (
+          <g key={peer.anon_code}>
+            <circle cx={scaleX(peer.nearest_park_dist_m)} cy={scaleY(peer.green_ratio)} r={12} fill="#475569" stroke="#ffffff" strokeWidth={2.5} />
+            <text x={scaleX(peer.nearest_park_dist_m)} y={scaleY(peer.green_ratio) + 4} textAnchor="middle" fontSize="9" fontWeight="800" fill="#f8fafc">
+              K{peer.rank}
+            </text>
+          </g>
+        ))}
+        <g>
+          <circle cx={scaleX(metrics.nearest_park_dist_m)} cy={scaleY(metrics.green_ratio)} r={17} fill="#ef4444" opacity={0.2} />
+          <circle cx={scaleX(metrics.nearest_park_dist_m)} cy={scaleY(metrics.green_ratio)} r={10} fill="#dc2626" stroke="#ffffff" strokeWidth={3} />
+          <text x={scaleX(metrics.nearest_park_dist_m) + 15} y={scaleY(metrics.green_ratio) - 12} fontSize="11" fontWeight="800" fill="#fecaca">현재 학교</text>
+        </g>
+        <g>
+          <path d={`M ${scaleX(avgPark)} ${scaleY(avgGreen) - 11} L ${scaleX(avgPark) + 11} ${scaleY(avgGreen)} L ${scaleX(avgPark)} ${scaleY(avgGreen) + 11} L ${scaleX(avgPark) - 11} ${scaleY(avgGreen)} Z`} fill="#38bdf8" stroke="#ffffff" strokeWidth={2.5} />
+          <text x={scaleX(avgPark) + 15} y={scaleY(avgGreen) + 4} fontSize="11" fontWeight="800" fill="#bae6fd">비교군 평균</text>
+        </g>
+        <text x={margin.left + chartWidth / 2} y={height - 2} textAnchor="middle" fontSize="12" fill="#94a3b8">최근접 공원 거리 (m)</text>
+        <text transform={`translate(18 ${margin.top + chartHeight / 2}) rotate(-90)`} textAnchor="middle" fontSize="12" fill="#94a3b8">녹지 비율 (%)</text>
+      </svg>
+    </div>
   );
 }
 

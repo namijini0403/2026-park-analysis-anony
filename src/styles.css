@@ -2055,6 +2055,267 @@ button {
   padding: 22px;
 }
 
+.page-mode .content.page-content:has(.detail-report) {
+  width: min(1380px, 100%);
+  min-height: calc(100vh - 56px);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(16, 185, 129, 0.12), transparent 28%),
+    linear-gradient(180deg, #081421 0%, #050b14 100%);
+}
+
+.page-mode .detail-report {
+  color: #f8fafc;
+}
+
+.page-mode .detail-report-hero,
+.page-mode .detail-report .profile-card,
+.page-mode .detail-report .panel-card,
+.page-mode .detail-report .report-card,
+.page-mode .detail-report .knn-card,
+.page-mode .detail-report .knn-mini-card {
+  border-color: rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(8, 20, 33, 0.98)),
+    #081421;
+  color: #f8fafc;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+}
+
+.page-mode .detail-report-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 24px;
+  align-items: stretch;
+  border-radius: 22px;
+  padding: 30px;
+}
+
+.page-mode .detail-report .eyebrow {
+  color: #6ee7b7;
+}
+
+.page-mode .detail-report h2,
+.page-mode .detail-report h3,
+.page-mode .detail-report strong {
+  color: #ffffff;
+}
+
+.page-mode .detail-report h2 {
+  margin-bottom: 12px;
+}
+
+.page-mode .report-lead {
+  max-width: 760px;
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.page-mode .report-title-block {
+  display: grid;
+  align-content: center;
+  gap: 14px;
+}
+
+.page-mode .report-hero-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.page-mode .report-hero-metrics div,
+.page-mode .detail-report .profile-row,
+.page-mode .detail-report .metric-line,
+.page-mode .detail-report .policy-flow div {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: rgba(5, 11, 20, 0.72);
+}
+
+.page-mode .report-hero-metrics div {
+  padding: 17px;
+}
+
+.page-mode .report-hero-metrics span,
+.page-mode .detail-report .profile-row span,
+.page-mode .detail-report .metric-line span,
+.page-mode .detail-report .policy-flow span,
+.page-mode .detail-report .report-note,
+.page-mode .detail-report .note,
+.page-mode .detail-report .panel-card p,
+.page-mode .detail-report .report-card p {
+  color: #94a3b8;
+}
+
+.page-mode .report-hero-metrics strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.page-mode .report-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.page-mode .detail-report .profile-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.page-mode .detail-report .profile-card h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.page-mode .detail-report .profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 12px;
+}
+
+.page-mode .detail-report .profile-row strong {
+  text-align: right;
+}
+
+.page-mode .detail-report .action-card p:not(.eyebrow) {
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.page-mode .detail-report .kpi-card {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(8, 20, 33, 0.96);
+  color: #f8fafc;
+}
+
+.page-mode .detail-report .kpi-card p,
+.page-mode .detail-report .knn-card-head span,
+.page-mode .detail-report .similarity-head span {
+  color: #94a3b8;
+}
+
+.page-mode .detail-report .kpi-card strong {
+  color: #ffffff;
+}
+
+.page-mode .detail-report .report-card {
+  border-left-width: 5px;
+}
+
+.page-mode .detail-report .demand-compare div {
+  border: 1px solid rgba(37, 99, 235, 0.24);
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.page-mode .detail-report .demand-compare span {
+  color: #93c5fd;
+}
+
+.page-mode .detail-report .synthetic-map svg {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #050b14;
+}
+
+.page-mode .detail-report .legend span {
+  color: #cbd5e1;
+}
+
+.page-mode .detail-report .knn-grid {
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+}
+
+.page-mode .detail-report .report-action-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.page-mode .detail-report .report-action-row .primary-action {
+  width: min(420px, 100%);
+}
+
+.page-mode .detail-report .knn-position-chart {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background: #050b14;
+}
+
+.page-mode .detail-report .knn-position-chart svg {
+  display: block;
+  width: 100%;
+  min-height: 320px;
+}
+
+.page-mode .detail-report .knn-average-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.page-mode .detail-report .knn-average-grid span,
+.page-mode .detail-report .similarity-item {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(5, 11, 20, 0.72);
+  color: #cbd5e1;
+}
+
+.page-mode .detail-report .knn-average-grid span {
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.page-mode .detail-report .similarity-item {
+  padding: 12px;
+}
+
+.page-mode .detail-report .similarity-head strong {
+  color: #f8fafc;
+}
+
+.page-mode .detail-report .similarity-head em {
+  color: #6ee7b7;
+}
+
+.page-mode .detail-report .similarity-bar-track {
+  background: rgba(148, 163, 184, 0.18);
+}
+
+.page-mode .detail-report .knn-pill,
+.page-mode .detail-report .knn-empty {
+  background: rgba(37, 99, 235, 0.16);
+  color: #dbeafe;
+}
+
+.page-mode .detail-report .knn-pill.green {
+  background: rgba(16, 185, 129, 0.16);
+  color: #bbf7d0;
+}
+
+.page-mode .detail-report .knn-pill.red {
+  background: rgba(248, 113, 113, 0.16);
+  color: #fecaca;
+}
+
+.page-mode .detail-report .primary-action {
+  background: linear-gradient(135deg, #059669, #2563eb);
+  color: #ffffff;
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.2);
+}
+
 /* Final map-mode contrast guard: keep the first-screen school card dark. */
 .map-mode .sidebar-selected-card {
   border-color: rgba(16, 185, 129, 0.22) !important;
@@ -2121,11 +2382,18 @@ button {
 
   .kpi-grid,
   .report-grid,
+  .report-profile-grid,
   .two-column,
   .knn-grid,
   .map-layout,
   .simulation-grid,
   .statistics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-mode .detail-report-hero,
+  .page-mode .detail-report .knn-grid,
+  .page-mode .detail-report .knn-average-grid {
     grid-template-columns: 1fr;
   }
 
