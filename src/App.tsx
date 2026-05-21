@@ -301,7 +301,17 @@ export default function App() {
           }}
         />
       ) : null}
-      {showGuide ? <GuideModal summary={appSummary} onClose={() => setShowGuide(false)} /> : null}
+      {showGuide ? (
+        <GuideModal
+          summary={appSummary}
+          onClose={() => setShowGuide(false)}
+          onGo={(nextView) => {
+            setView(nextView);
+            setShowGuide(false);
+            setShowCover(false);
+          }}
+        />
+      ) : null}
       {view === "map" ? (
         <div className="top-action-stack" aria-label="상단 바로가기">
           <button className="top-action-button primary" type="button" onClick={() => setView("detail")}>학교 진단</button>
@@ -715,6 +725,12 @@ function IntroCover({
             <span className="node candidate">B</span>
             <span className="node barrier" />
           </div>
+          <div className="intro-mini-steps">
+            <span>지도</span>
+            <span>상세</span>
+            <span>시뮬레이션</span>
+            <span>통계</span>
+          </div>
           <p>도식지도는 실제 지도가 아니라 학교 중심 상대거리만 보여줍니다.</p>
         </div>
       </div>
@@ -722,13 +738,31 @@ function IntroCover({
   );
 }
 
-function GuideModal({ summary, onClose }: { summary: AppSummaryPayload; onClose: () => void }) {
+function GuideModal({
+  summary,
+  onClose,
+  onGo,
+}: {
+  summary: AppSummaryPayload;
+  onClose: () => void;
+  onGo: (view: ViewMode) => void;
+}) {
   return (
     <div className="guide-overlay" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
       <section className="guide-dialog">
         <button className="close-button" type="button" onClick={onClose} aria-label="닫기">×</button>
-        <p className="eyebrow">Policy Flow</p>
-        <h2 id="guideTitle">비식별 정책지원 흐름</h2>
+        <div className="guide-header">
+          <div>
+            <p className="eyebrow">Policy Flow</p>
+            <h2 id="guideTitle">비식별 정책지원 흐름</h2>
+            <p>학교명, 실제 좌표, 실제 시설명 없이도 정책 판단에 필요한 순서를 따라갈 수 있도록 구성했습니다.</p>
+          </div>
+          <div className="guide-header-stat">
+            <span>공개 데이터</span>
+            <strong>JSON only</strong>
+            <small>원본·매핑 파일 제외</small>
+          </div>
+        </div>
         <div className="guide-flow">
           {summary.flow.map((item, index) => (
             <article key={item}>
@@ -736,6 +770,24 @@ function GuideModal({ summary, onClose }: { summary: AppSummaryPayload; onClose:
               <strong>{item}</strong>
             </article>
           ))}
+        </div>
+        <div className="guide-nav-grid" aria-label="주요 화면 이동">
+          <button type="button" onClick={() => onGo("map")}>
+            <strong>지도</strong>
+            <span>전체 분포와 학교별 상대거리 도식 확인</span>
+          </button>
+          <button type="button" onClick={() => onGo("detail")}>
+            <strong>상세 리포트</strong>
+            <span>현재 격차, 미래 수요, KNN 비교 확인</span>
+          </button>
+          <button type="button" onClick={() => onGo("simulation")}>
+            <strong>시뮬레이션</strong>
+            <span>후보지 필터와 가중치 조정</span>
+          </button>
+          <button type="button" onClick={() => onGo("statistics")}>
+            <strong>전체 통계</strong>
+            <span>구별 압력과 Top 학교 비교</span>
+          </button>
         </div>
         <div className="principle-grid">
           {summary.principles.map((item) => (

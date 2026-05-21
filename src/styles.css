@@ -1312,6 +1312,25 @@ button {
   word-break: keep-all;
 }
 
+.intro-mini-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  width: 100%;
+}
+
+.intro-mini-steps span {
+  min-height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 8px 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #dbeafe;
+  font-size: 12px;
+  font-weight: 900;
+  text-align: center;
+}
+
 .visual-map {
   position: relative;
   width: min(280px, 70vw);
@@ -1393,6 +1412,48 @@ button {
   line-height: 1.12;
 }
 
+.guide-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.32fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 22px;
+}
+
+.guide-header h2 {
+  margin-bottom: 10px;
+}
+
+.guide-header p:not(.eyebrow) {
+  max-width: 760px;
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.guide-header-stat {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 18px;
+  background: rgba(5, 11, 20, 0.58);
+}
+
+.guide-header-stat span,
+.guide-header-stat small {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.guide-header-stat strong {
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1;
+}
+
 .close-button {
   position: absolute;
   top: 16px;
@@ -1436,6 +1497,46 @@ button {
   background: #10b981;
   color: #052e24;
   font-weight: 900;
+}
+
+.guide-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.guide-nav-grid button {
+  min-height: 112px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 15px;
+  background: rgba(16, 27, 45, 0.9);
+  color: #f8fafc;
+  text-align: left;
+}
+
+.guide-nav-grid button:hover {
+  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.guide-nav-grid strong,
+.guide-nav-grid span {
+  display: block;
+}
+
+.guide-nav-grid strong {
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.guide-nav-grid span {
+  margin-top: 9px;
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.55;
 }
 
 .principle-grid {
@@ -2816,6 +2917,9 @@ button {
   }
 
   .intro-shell,
+  .intro-mini-steps,
+  .guide-header,
+  .guide-nav-grid,
   .guide-stats,
   .demand-bars {
     grid-template-columns: 1fr;
