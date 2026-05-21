@@ -2316,6 +2316,206 @@ button {
   box-shadow: 0 14px 28px rgba(37, 99, 235, 0.2);
 }
 
+.page-mode .content.page-content:has(.simulation-workspace) {
+  width: min(1380px, 100%);
+  min-height: calc(100vh - 56px);
+  background:
+    radial-gradient(circle at 14% 0%, rgba(37, 99, 235, 0.14), transparent 30%),
+    linear-gradient(180deg, #081421 0%, #050b14 100%);
+}
+
+.page-mode .simulation-workspace {
+  color: #f8fafc;
+}
+
+.page-mode .simulation-workspace .simulation-hero,
+.page-mode .simulation-workspace .panel-card,
+.page-mode .simulation-metric-strip div {
+  border-color: rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(8, 20, 33, 0.98)),
+    #081421;
+  color: #f8fafc;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+}
+
+.page-mode .simulation-workspace .simulation-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 24px;
+  align-items: stretch;
+  border-radius: 22px;
+  padding: 30px;
+}
+
+.page-mode .simulation-workspace .simulation-hero h2,
+.page-mode .simulation-workspace h3,
+.page-mode .simulation-workspace strong {
+  color: #ffffff;
+}
+
+.page-mode .simulation-workspace .simulation-hero p:not(.eyebrow),
+.page-mode .simulation-workspace .panel-card p,
+.page-mode .simulation-workspace .note,
+.page-mode .simulation-workspace .policy-flow span,
+.page-mode .simulation-workspace .filter-option small,
+.page-mode .simulation-workspace .weight-option small,
+.page-mode .simulation-workspace .candidate-card p,
+.page-mode .simulation-workspace .candidate-card small {
+  color: #cbd5e1;
+}
+
+.page-mode .simulation-workspace .eyebrow {
+  color: #93c5fd;
+}
+
+.page-mode .simulation-hero-summary,
+.page-mode .simulation-metric-strip {
+  display: grid;
+  gap: 12px;
+}
+
+.page-mode .simulation-hero-summary div,
+.page-mode .simulation-metric-strip div {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px;
+  background: rgba(5, 11, 20, 0.72);
+}
+
+.page-mode .simulation-hero-summary span,
+.page-mode .simulation-metric-strip span {
+  display: block;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.page-mode .simulation-hero-summary strong,
+.page-mode .simulation-metric-strip strong {
+  display: block;
+  margin-top: 7px;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.page-mode .simulation-map-section {
+  display: grid;
+}
+
+.page-mode .simulation-map-card {
+  display: grid;
+  gap: 16px;
+}
+
+.page-mode .simulation-map-card .synthetic-map svg {
+  max-height: 620px;
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #050b14;
+}
+
+.page-mode .simulation-workspace .legend span {
+  color: #cbd5e1;
+}
+
+.page-mode .simulation-setup-grid {
+  grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1.1fr);
+}
+
+.page-mode .simulation-results-grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  align-items: start;
+}
+
+.page-mode .simulation-metric-strip {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.page-mode .simulation-workspace .mode-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 11, 20, 0.78);
+}
+
+.page-mode .simulation-workspace .mode-toggle button {
+  color: #cbd5e1;
+}
+
+.page-mode .simulation-workspace .mode-toggle button.active {
+  background: linear-gradient(135deg, #064e3b, #10b981);
+  color: #ffffff;
+}
+
+.page-mode .simulation-workspace .simulation-note,
+.page-mode .simulation-workspace .filter-option,
+.page-mode .simulation-workspace .weight-option,
+.page-mode .simulation-workspace .candidate-card,
+.page-mode .simulation-workspace .detail-head,
+.page-mode .simulation-workspace .metric-line,
+.page-mode .simulation-workspace .policy-flow div {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 11, 20, 0.72);
+  color: #f8fafc;
+}
+
+.page-mode .simulation-workspace .simulation-note strong {
+  color: #6ee7b7;
+}
+
+.page-mode .simulation-workspace .simulation-note span,
+.page-mode .simulation-workspace .weight-option label,
+.page-mode .simulation-workspace .metric-line span {
+  color: #cbd5e1;
+}
+
+.page-mode .simulation-workspace .weight-option input[type="range"] {
+  accent-color: #10b981;
+}
+
+.page-mode .simulation-workspace .candidate-list {
+  display: grid;
+  gap: 12px;
+}
+
+.page-mode .simulation-workspace .candidate-card {
+  grid-template-columns: auto minmax(0, 1fr);
+  text-align: left;
+}
+
+.page-mode .simulation-workspace .candidate-card:first-child {
+  border-color: rgba(16, 185, 129, 0.44);
+  background:
+    linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(37, 99, 235, 0.12)),
+    rgba(5, 11, 20, 0.82);
+}
+
+.page-mode .simulation-workspace .candidate-card.selected {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.16);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.16);
+}
+
+.page-mode .simulation-workspace .candidate-heading span,
+.page-mode .simulation-workspace .score-pills span,
+.page-mode .simulation-workspace .reason-list span {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(16, 27, 45, 0.96);
+  color: #dbeafe;
+}
+
+.page-mode .simulation-workspace .rank-badge {
+  background: linear-gradient(135deg, #2563eb, #10b981);
+  color: #ffffff;
+}
+
+.page-mode .simulation-workspace .detail-head span {
+  color: #dbeafe;
+}
+
+.page-mode .simulation-workspace .primary-action {
+  background: linear-gradient(135deg, #059669, #2563eb);
+  color: #ffffff;
+}
+
 /* Final map-mode contrast guard: keep the first-screen school card dark. */
 .map-mode .sidebar-selected-card {
   border-color: rgba(16, 185, 129, 0.22) !important;
@@ -2392,6 +2592,8 @@ button {
   }
 
   .page-mode .detail-report-hero,
+  .page-mode .simulation-workspace .simulation-hero,
+  .page-mode .simulation-metric-strip,
   .page-mode .detail-report .knn-grid,
   .page-mode .detail-report .knn-average-grid {
     grid-template-columns: 1fr;

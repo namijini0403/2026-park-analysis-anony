@@ -1325,14 +1325,39 @@ function Simulation({ school }: { school: School }) {
   };
 
   return (
-    <div className="page-grid">
-      <section className="hero-band compact">
-        <p className="eyebrow">{school.display_name}</p>
-        <h2>후보지 시뮬레이션</h2>
-        <p>후보지는 실제 좌표 대신 학교 중심 상대거리와 보행 부담만 표시합니다.</p>
+    <div className="page-grid simulation-workspace">
+      <section className="hero-band compact simulation-hero">
+        <div>
+          <p className="eyebrow">Human-in-the-loop Simulation</p>
+          <h2>{school.display_name}</h2>
+          <p>후보지는 실제 좌표 대신 학교 중심 상대거리와 보행 부담만 표시합니다. 자동 추천은 결정이 아니라 비교 후보를 좁히는 보조 신호입니다.</p>
+          <div className="badge-row">
+            <span style={{ backgroundColor: CASE_COLORS[school.case_type] ?? "#64748b" }}>{school.case_policy_label}</span>
+            <span>{school.case_status_label}</span>
+            <span>{school.gu} · {school.short_label}</span>
+          </div>
+        </div>
+        <div className="simulation-hero-summary">
+          <div><span>전체 후보</span><strong>{school.candidates.length}곳</strong></div>
+          <div><span>현재 표시</span><strong>{displayedCandidates.length}곳</strong></div>
+          <div><span>선택 모드</span><strong>{mode === "ai" ? "AI 추천" : "직접 설정"}</strong></div>
+        </div>
       </section>
 
-      <section className="simulation-grid">
+      <section className="simulation-map-section">
+        <article className="panel-card simulation-map-card">
+          <div className="panel-title-row">
+            <div>
+              <p className="eyebrow">Route Map</p>
+              <h3>후보지 경로 도식지도</h3>
+            </div>
+            <span>학교 중심 상대거리</span>
+          </div>
+          <SyntheticMap mapData={school.synthetic_map} highlightCandidates selectedCandidateLabel={selectedCandidate?.label} />
+        </article>
+      </section>
+
+      <section className="simulation-grid simulation-setup-grid">
         <article className="panel-card simulation-controls">
           <div className="mode-toggle" role="group" aria-label="시뮬레이션 모드">
             <button className={mode === "ai" ? "active" : ""} type="button" onClick={applyAiMode}>AI 추천</button>
@@ -1392,13 +1417,34 @@ function Simulation({ school }: { school: School }) {
           </div>
         </article>
 
-        <article className="panel-card">
-          <h3>후보지 도식지도</h3>
-          <SyntheticMap mapData={school.synthetic_map} highlightCandidates selectedCandidateLabel={selectedCandidate?.label} />
+        <article className="panel-card simulation-explain-card">
+          <p className="eyebrow">Decision Support</p>
+          <h3>추천 결과 읽는 법</h3>
+          <div className="policy-flow">
+            <div>
+              <strong>1. 후보 위치</strong>
+              <span>지도에서 학교와 후보지의 상대거리, 단절요소, 기존 공원과의 관계를 먼저 봅니다.</span>
+            </div>
+            <div>
+              <strong>2. 조건 조정</strong>
+              <span>간선도로, 재개발, 실행가능성 조건을 바꿔 남는 후보가 어떻게 달라지는지 확인합니다.</span>
+            </div>
+            <div>
+              <strong>3. 후보 상세</strong>
+              <span>수요, 학교 거리, 기존 공원 거리, 단절요소를 함께 보고 현장 검토 대상을 좁힙니다.</span>
+            </div>
+          </div>
         </article>
       </section>
 
-      <section className="simulation-grid">
+      <section className="simulation-metric-strip" aria-label="시뮬레이션 요약">
+        <div><span>필터 적용 전</span><strong>{school.candidates.length}곳</strong></div>
+        <div><span>{mode === "ai" ? "AI 추천 후보" : "조건 통과 후보"}</span><strong>{displayedCandidates.length}곳</strong></div>
+        <div><span>수요/접근/공백</span><strong>{Math.round(normalizedWeights.benefit * 100)}/{Math.round(normalizedWeights.route * 100)}/{Math.round(normalizedWeights.parkGap * 100)}</strong></div>
+        <div><span>선택 후보</span><strong>{selectedCandidate?.label ?? "없음"}</strong></div>
+      </section>
+
+      <section className="simulation-grid simulation-results-grid">
         <article className="panel-card">
           <div className="panel-title-row">
             <h3>{mode === "ai" ? "AI 추천 후보" : "후보 순위"}</h3>
