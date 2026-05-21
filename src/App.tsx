@@ -768,6 +768,23 @@ function Overview({
   const selectedDistrict = statistics.districts.find((district) => district.gu === selectedGu) ?? statistics.districts[0];
   const maxPressure = Math.max(...statistics.districts.map((district) => district.urgent_count * 1.4 + district.priority_count), 1);
   const maxDemand = Math.max(...statistics.districts.map((district) => district.top_priority.reduce((sum, school) => sum + school.potential_demand_2029, 0)), 1);
+  const caseSummary = [1, 2, 3, 4, 99].map((caseType) => ({
+    caseType,
+    label: caseType === 1 ? "즉시 개선" : caseType === 2 ? "우선 검토" : caseType === 3 ? "모니터링" : caseType === 4 ? "유지·관리" : "별도 정책",
+    count: schools.filter((school) => school.case_type === caseType).length,
+    color: CASE_COLORS[caseType],
+  }));
+  const cityBestSchool = [...schools].sort((left, right) => {
+    const leftScore =
+      (left.metrics.nearest_park_dist_m <= 500 ? 1 : 0) * 2 +
+      left.metrics.green_ratio * 0.2 +
+      left.metrics.playground_count_500m * 0.8;
+    const rightScore =
+      (right.metrics.nearest_park_dist_m <= 500 ? 1 : 0) * 2 +
+      right.metrics.green_ratio * 0.2 +
+      right.metrics.playground_count_500m * 0.8;
+    return rightScore - leftScore;
+  })[0];
   const cityTopSchools = [...schools]
     .sort((left, right) => {
       const leftClass = left.case_type === 1 ? 0 : left.case_type === 2 ? 1 : left.case_type === 3 ? 2 : 3;
@@ -777,11 +794,18 @@ function Overview({
     .slice(0, 10);
 
   return (
-    <div className="page-grid">
-      <section className="hero-band">
-        <p className="eyebrow">City Overview</p>
-        <h2>비식별 학교 단위 환경 격차 요약</h2>
-        <p>구 단위 통계와 비식별 학교 코드를 통해 정책 우선순위를 검토합니다.</p>
+    <div className="page-grid statistics-workspace">
+      <section className="hero-band statistics-hero">
+        <div>
+          <p className="eyebrow">City Overview</p>
+          <h2>비식별 학교 전체 통계 리포트</h2>
+          <p>시 전체 우선 지원 흐름을 먼저 보고, 이어서 구별 상위 학교와 비식별 상세 리포트로 내려가는 구조입니다.</p>
+        </div>
+        <div className="statistics-hero-aside">
+          <span>분석 단위</span>
+          <strong>{formatNumber(statistics.summary.school_count)}개교</strong>
+          <small>{formatNumber(statistics.summary.district_count)}개 구·군 · 학교명 비공개</small>
+        </div>
       </section>
 
       <section className="kpi-grid">
@@ -790,6 +814,15 @@ function Overview({
         <Kpi title="즉시 개선" value={metricLabel(statistics.summary.urgent_count, "개교")} tone="danger" />
         <Kpi title="우선 검토" value={metricLabel(statistics.summary.priority_count, "개교")} />
         <Kpi title="2029 잠재 수요" value={metricLabel(statistics.summary.potential_demand_2029, "명")} />
+      </section>
+
+      <section className="case-summary-grid" aria-label="case 분포">
+        {caseSummary.map((item) => (
+          <article key={item.caseType} className="case-summary-card">
+            <div><i style={{ backgroundColor: item.color }} /><span>{item.label}</span></div>
+            <strong>{formatNumber(item.count)}개교</strong>
+          </article>
+        ))}
       </section>
 
       <section className="statistics-grid">
@@ -824,11 +857,33 @@ function Overview({
         <article className="panel-card">
           <div className="panel-title-row">
             <div>
-              <p className="eyebrow">District Mix</p>
-              <h3>구별 2029 잠재 수요</h3>
+              <p className="eyebrow">City Best</p>
+              <h3>생활환경 기준학교</h3>
             </div>
-            <span>Top 학교 합계 기준</span>
+            <span>벤치마크</span>
           </div>
+          {cityBestSchool ? (
+            <div className="best-school-card">
+              <p>{cityBestSchool.gu}</p>
+              <h4>{cityBestSchool.display_name}</h4>
+              <div className="best-metric-grid">
+                <span>공원 <strong>{formatDecimal(cityBestSchool.metrics.nearest_park_dist_m)}m</strong></span>
+                <span>녹지 <strong>{formatDecimal(cityBestSchool.metrics.green_ratio)}%</strong></span>
+                <span>놀이터 <strong>{cityBestSchool.metrics.playground_count_500m}개</strong></span>
+              </div>
+            </div>
+          ) : null}
+        </article>
+      </section>
+
+      <section className="panel-card">
+        <div className="panel-title-row">
+          <div>
+            <p className="eyebrow">District Demand</p>
+            <h3>구별 2029 잠재 수요</h3>
+          </div>
+          <span>Top 학교 합계 기준</span>
+        </div>
           <div className="demand-bars">
             {statistics.districts.map((district) => {
               const demand = district.top_priority.reduce((sum, school) => sum + school.potential_demand_2029, 0);
@@ -846,7 +901,19 @@ function Overview({
               );
             })}
           </div>
-        </article>
+      </section>
+
+      <section className="district-chip-row" aria-label="구 선택">
+        {statistics.districts.map((district) => (
+          <button
+            className={selectedDistrict?.gu === district.gu ? "active" : ""}
+            key={district.gu}
+            type="button"
+            onClick={() => onSelectGu(district.gu)}
+          >
+            {district.gu}
+          </button>
+        ))}
       </section>
 
       {selectedDistrict ? (

@@ -2516,6 +2516,211 @@ button {
   color: #ffffff;
 }
 
+.page-mode .content.page-content:has(.statistics-workspace) {
+  width: min(1380px, 100%);
+  min-height: calc(100vh - 56px);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(16, 185, 129, 0.12), transparent 30%),
+    linear-gradient(180deg, #081421 0%, #050b14 100%);
+}
+
+.page-mode .statistics-workspace {
+  color: #f8fafc;
+}
+
+.page-mode .statistics-workspace .statistics-hero,
+.page-mode .statistics-workspace .panel-card,
+.page-mode .statistics-workspace .kpi-card,
+.page-mode .case-summary-card,
+.page-mode .statistics-hero-aside {
+  border-color: rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(8, 20, 33, 0.98)),
+    #081421;
+  color: #f8fafc;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+}
+
+.page-mode .statistics-workspace .statistics-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 24px;
+  align-items: stretch;
+  border-radius: 22px;
+  padding: 30px;
+}
+
+.page-mode .statistics-workspace .statistics-hero h2,
+.page-mode .statistics-workspace h3,
+.page-mode .statistics-workspace h4,
+.page-mode .statistics-workspace strong {
+  color: #ffffff;
+}
+
+.page-mode .statistics-workspace .statistics-hero p:not(.eyebrow),
+.page-mode .statistics-workspace .panel-card p,
+.page-mode .statistics-workspace .kpi-card p,
+.page-mode .statistics-workspace .note,
+.page-mode .statistics-workspace .top-list small,
+.page-mode .statistics-workspace .city-top-list small {
+  color: #cbd5e1;
+}
+
+.page-mode .statistics-workspace .eyebrow {
+  color: #6ee7b7;
+}
+
+.page-mode .statistics-hero-aside {
+  display: grid;
+  align-content: center;
+  gap: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.page-mode .statistics-hero-aside span,
+.page-mode .statistics-hero-aside small {
+  color: #94a3b8;
+  font-weight: 800;
+}
+
+.page-mode .statistics-hero-aside strong {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.page-mode .case-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.page-mode .case-summary-card {
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.page-mode .case-summary-card div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.page-mode .case-summary-card i {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.page-mode .case-summary-card strong {
+  font-size: 24px;
+}
+
+.page-mode .statistics-workspace .pressure-row,
+.page-mode .statistics-workspace .top-list button,
+.page-mode .statistics-workspace .city-top-list button,
+.page-mode .statistics-workspace .metric-line,
+.page-mode .district-chip-row button,
+.page-mode .best-school-card,
+.page-mode .best-metric-grid span {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 11, 20, 0.72);
+  color: #f8fafc;
+}
+
+.page-mode .statistics-workspace .pressure-row.active,
+.page-mode .district-chip-row button.active {
+  border-color: rgba(16, 185, 129, 0.48);
+  background: rgba(16, 185, 129, 0.16);
+}
+
+.page-mode .statistics-workspace .pressure-row i {
+  background: linear-gradient(90deg, #f97316, #10b981);
+}
+
+.page-mode .statistics-workspace .demand-bars {
+  min-height: 320px;
+}
+
+.page-mode .statistics-workspace .demand-bar {
+  color: #cbd5e1;
+}
+
+.page-mode .statistics-workspace .demand-bar i {
+  background: linear-gradient(180deg, #38bdf8, #2563eb);
+}
+
+.page-mode .statistics-workspace .demand-bar.active i {
+  background: linear-gradient(180deg, #6ee7b7, #10b981);
+}
+
+.page-mode .statistics-workspace .demand-bar strong {
+  color: #94a3b8;
+}
+
+.page-mode .district-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.page-mode .district-chip-row button {
+  min-height: 38px;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 900;
+}
+
+.page-mode .best-school-card {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.page-mode .best-school-card p {
+  margin: 0;
+}
+
+.page-mode .best-school-card h4 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.page-mode .best-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.page-mode .best-metric-grid span {
+  border-radius: 14px;
+  padding: 10px;
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.page-mode .best-metric-grid strong {
+  display: block;
+  margin-top: 4px;
+}
+
+.page-mode .statistics-workspace .city-top-list em,
+.page-mode .statistics-workspace .panel-title-row span {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(37, 99, 235, 0.16);
+  color: #dbeafe;
+}
+
 /* Final map-mode contrast guard: keep the first-screen school card dark. */
 .map-mode .sidebar-selected-card {
   border-color: rgba(16, 185, 129, 0.22) !important;
@@ -2593,7 +2798,10 @@ button {
 
   .page-mode .detail-report-hero,
   .page-mode .simulation-workspace .simulation-hero,
+  .page-mode .statistics-workspace .statistics-hero,
   .page-mode .simulation-metric-strip,
+  .page-mode .case-summary-grid,
+  .page-mode .best-metric-grid,
   .page-mode .detail-report .knn-grid,
   .page-mode .detail-report .knn-average-grid {
     grid-template-columns: 1fr;
