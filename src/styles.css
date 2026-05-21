@@ -2055,6 +2055,60 @@ button {
   padding: 22px;
 }
 
+/* Final map-mode contrast guard: keep the first-screen school card dark. */
+.map-mode .sidebar-selected-card {
+  border-color: rgba(16, 185, 129, 0.22) !important;
+  background: rgba(5, 11, 20, 0.78) !important;
+  color: #f8fafc !important;
+  box-shadow:
+    inset 3px 0 0 rgba(16, 185, 129, 0.82),
+    0 14px 28px rgba(2, 6, 23, 0.22) !important;
+}
+
+.map-mode .sidebar-selected-card .detail-head {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  background: transparent !important;
+  color: #f8fafc !important;
+}
+
+.map-mode .sidebar-selected-card .detail-name,
+.map-mode .sidebar-selected-card .detail-subtitle,
+.map-mode .sidebar-selected-card .panel-section-title,
+.map-mode .sidebar-selected-card .eyebrow {
+  background: transparent !important;
+}
+
+.map-mode .sidebar-selected-card .detail-name {
+  color: #a7f3d0 !important;
+}
+
+.map-mode .sidebar-selected-card .detail-subtitle {
+  color: #94a3b8 !important;
+}
+
+.map-mode .sidebar-selected-card .detail-badge {
+  background: rgba(16, 185, 129, 0.14) !important;
+  color: #f8fafc !important;
+}
+
+.map-mode .sidebar-selected-card .detail-metric-grid span {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(16, 27, 45, 0.96) !important;
+  color: #f8fafc !important;
+}
+
+.map-mode .sidebar-selected-card .panel-actions button {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(16, 27, 45, 0.96) !important;
+  color: #f8fafc !important;
+}
+
+.map-mode .sidebar-selected-card .panel-actions button:first-child {
+  border-color: rgba(16, 185, 129, 0.38) !important;
+  background: rgba(16, 185, 129, 0.16) !important;
+  color: #a7f3d0 !important;
+}
+
 @media (max-width: 980px) {
   .app-shell {
     grid-template-columns: 1fr;
