@@ -1596,6 +1596,42 @@ button {
   font-weight: 700;
 }
 
+.map-mode .top-action-stack {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  z-index: 28;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  width: min(560px, calc(100vw - 40px));
+}
+
+.map-mode .top-action-button {
+  min-height: 44px;
+  min-width: 92px;
+  padding: 11px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: var(--map-surface);
+  color: var(--map-text);
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 18px 38px rgba(2, 6, 23, 0.18);
+}
+
+.map-mode .top-action-button.primary {
+  border-color: rgba(16, 185, 129, 0.42);
+  background: var(--map-accent);
+  color: #052e24;
+}
+
+.map-mode .top-action-button.secondary:hover {
+  border-color: rgba(16, 185, 129, 0.32);
+  background: var(--map-surface-muted);
+}
+
 .map-mode .zoom-controls {
   top: 18px;
   left: 400px;
@@ -1639,6 +1675,11 @@ button {
   text-transform: uppercase;
 }
 
+.map-mode .layer-controls button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 .map-mode .sidebar {
   position: absolute;
   top: 86px;
@@ -1679,6 +1720,11 @@ button {
   margin-right: 18px;
 }
 
+.map-mode .tab-row,
+.map-mode .guide-button {
+  display: none;
+}
+
 .map-mode .tab-row {
   margin-top: 18px;
   margin-bottom: 14px;
@@ -1707,6 +1753,24 @@ button {
 
 .map-mode .control-label {
   color: var(--map-secondary);
+}
+
+.map-mode .panel-section-title {
+  margin: 16px 18px 8px;
+  color: var(--map-secondary);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.map-mode .panel-section-title.in-card {
+  margin: 0;
+  color: var(--map-accent);
+}
+
+.map-mode .panel-section-title.school-list-title {
+  margin-top: 14px;
 }
 
 .map-mode .sidebar-selected-card {

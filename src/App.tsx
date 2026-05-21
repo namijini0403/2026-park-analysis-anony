@@ -302,11 +302,19 @@ export default function App() {
         />
       ) : null}
       {showGuide ? <GuideModal summary={appSummary} onClose={() => setShowGuide(false)} /> : null}
+      {view === "map" ? (
+        <div className="top-action-stack" aria-label="상단 바로가기">
+          <button className="top-action-button primary" type="button" onClick={() => setView("detail")}>학교 진단</button>
+          <button className="top-action-button secondary" type="button" onClick={() => setView("simulation")}>시뮬레이션</button>
+          <button className="top-action-button secondary" type="button" onClick={() => setView("statistics")}>전체 통계</button>
+          <button className="top-action-button secondary" type="button" onClick={() => setShowGuide(true)}>사용설명서</button>
+        </div>
+      ) : null}
       <aside className="sidebar">
         <div className="brand-block">
-          <p className="eyebrow">Anonymized Submission</p>
-          <h1>학교 야외활동 환경 정책지원</h1>
-          <p>실명·실좌표·실시설명을 제거한 제출용 의사결정 지원 앱입니다.</p>
+          <p className="eyebrow">Incheon Outdoor Equity</p>
+          <h1>반경 너머, 도달 가능성으로</h1>
+          <p>비식별 학교 단위로 도보 접근성·환경 격차·미래 수요를 진단합니다.</p>
         </div>
 
         <div className="tab-row" aria-label="화면 전환">
@@ -319,6 +327,7 @@ export default function App() {
           앱 요약 보기
         </button>
 
+        {view === "map" ? <h2 className="panel-section-title">구 선택</h2> : null}
         <label className="control-label">
           구 선택
           <select value={selectedGu} onChange={(event) => setSelectedGu(event.target.value)}>
@@ -328,6 +337,7 @@ export default function App() {
           </select>
         </label>
 
+        {view === "map" ? <h2 className="panel-section-title">학교 검색</h2> : null}
         <label className="control-label">
           비식별 코드 검색
           <input
@@ -339,6 +349,7 @@ export default function App() {
 
         {view === "map" ? (
           <div className="sidebar-selected-card">
+            <h2 className="panel-section-title in-card">학교 상세</h2>
             <div className="detail-head">
               <div>
                 <p className="eyebrow">{selectedSchool.gu} · {selectedSchool.short_label}</p>
@@ -361,6 +372,7 @@ export default function App() {
           </div>
         ) : null}
 
+        {view === "map" ? <h2 className="panel-section-title school-list-title">학교 목록</h2> : null}
         <div className="school-list">
           {filteredSchools.slice(0, 80).map((school) => (
             <button
@@ -449,7 +461,7 @@ function MapWorkspace({
         <div className="map-toolbar">
           <div>
             <p className="eyebrow">Anonymized Map</p>
-            <h2>비식별 학교 지도</h2>
+            <h2>학교 검색</h2>
           </div>
           <div className="case-filter">
             {[
@@ -472,13 +484,13 @@ function MapWorkspace({
         <AbstractCityMap rows={rows} selectedCode={selectedSchool.anon_code} onSelect={onSelect} />
         <div className="layer-controls">
           {([
-            ["radius", "직선 500m"],
-            ["walk", "도보 500m"],
-            ["parks", "공원"],
-            ["candidates", "후보지"],
-            ["redevelopment", "재개발"],
-            ["apartments", "대단지"],
-            ["barriers", "단절요소"],
+            ["walk", "🚶 실제 도보이동 500m"],
+            ["radius", "⭕ 직선거리 500m"],
+            ["parks", "🌳 공원·놀이터"],
+            ["redevelopment", "🏗️ 재개발"],
+            ["candidates", "📍 후보지"],
+            ["apartments", "🏢 대단지"],
+            ["barriers", "🚧 단절요소"],
           ] as const).map(([key, label]) => (
             <button
               key={key}
